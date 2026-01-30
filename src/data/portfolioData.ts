@@ -5,7 +5,7 @@ import nlpchallengeImg from "@/components/photos/nlpchallenge.png";
 import srganImg from "@/components/photos/SRGAN.png";
 
 export const personalInfo = {
-    name: "Rafi Ahmed",
+    name: "Raafi Riyaz",
     displayName: "Raafi Riyaz",
     currentRole: "Machine Learning Engineer",
     currentCompany: "Mercor",
