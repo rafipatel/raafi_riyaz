@@ -42,7 +42,7 @@ export const personalDetails = [
 ];
 
 export const aboutMe = {
-    name: "Rafi Ahmed",
+    name: "Rafi Riyaz",
     jobRole: "AI/ML Engineer",
     experience: "2 years",
     address: "London, United Kingdom",
