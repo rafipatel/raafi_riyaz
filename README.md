@@ -1,6 +1,6 @@
 # Portfolio Website
 
-A modern, responsive portfolio website built with cutting-edge web technologies. This project showcases professional work, projects, and skills with an elegant, high-performance design.
+A modern, responsive portfolio website built with cutting-edge web technologies. This project showcases professional work, projects, and skills with an elegant, high-performance design, with your own free personal AI assistant.
 
 ## Overview
 
