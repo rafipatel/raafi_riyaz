@@ -12,6 +12,8 @@ This portfolio website is a demonstration of full-stack web development capabili
 - **Type-Safe**: Built with TypeScript for robust, maintainable code
 - **Styling**: Tailwind CSS for utility-first, scalable styling with Shadcn UI components
 
+- - **📊 Google Analytics Integration**: Real-time visitor insights with detailed analytics dashboard showing page visits, user engagement, and geographic distribution by country
+
 ## Tech Stack
 
 - **Frontend Framework**: React with Vite for blazing-fast development
@@ -20,6 +22,22 @@ This portfolio website is a demonstration of full-stack web development capabili
 - **UI Components**: Shadcn UI
 - **Build Tool**: Vite
 - **Package Manager**: Bun
+
+- ## 📊 Analytics & Insights
+
+This portfolio includes integrated Google Analytics that provides real-time visitor tracking and comprehensive insights:
+
+### Visitor Metrics
+- **Active Users**: Track concurrent visitors on the portfolio
+- **User Growth**: Monitor growth trends over 90-day periods
+- **Geographic Distribution**: See visitor distribution across 60+ countries
+
+### Key Metrics Tracked
+- **1.4K Active Users** with 660%+ growth in the last 90 days
+- **Top Traffic Sources**: India (494 users), United States (238 users), United Kingdom (63 users)
+- **Real-time Dashboard**: Live analytics showing user engagement and page visit patterns
+
+The analytics dashboard helps understand how visitors interact with the portfolio and which content resonates most with the audience worldwide.
 
 ## Getting Started
 
