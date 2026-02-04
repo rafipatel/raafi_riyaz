@@ -466,6 +466,4 @@ This portfolio includes support for Pollen API integration for advanced features
 
 ---
 
-**Built with ❤️ by Rafi Patel**
-
-**Built with ❤️ by Rafi Patel**
+**Built with ❤️ by Raafi Riyaz**
