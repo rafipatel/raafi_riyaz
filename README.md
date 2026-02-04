@@ -7,7 +7,7 @@ A modern, responsive portfolio website built with cutting-edge web technologies.
 ### Latest Features & Improvements
 
 - **🔐 Pollen API Integration**: Added support for Pollen API with secure credential management
-  - GitHub Actions secret: `POLLEN_API_KEY_SECONDARY`
+  - GitHub Actions secret: `VITE_POLLEN_API_KEY_SECONDARY`
   - Environment-based configuration for secure deployments
   - See [Pollen API Configuration](#pollen-api-configuration) section for setup
 
@@ -447,14 +447,14 @@ This portfolio includes support for Pollen API integration for advanced features
 2. **Store as GitHub Actions Secret**:
    - Go to repository **Settings > Secrets and variables > Actions**
    - Click **New repository secret**
-   - Name: `POLLEN_API_KEY_SECONDARY`
+   - Name: `VITE_POLLEN_API_KEY_SECONDARY`
    - Value: Paste your Pollen API key
 
 3. **Local Development**:
    - Copy `.env.example` to `.env.local`
    - Add your Pollen API key:
      ```
-     POLLEN_API_KEY_SECONDARY=sk_your_key_here
+     VITE_POLLEN_API_KEY_SECONDARY=sk_your_key_here
      ```
 
 ### Security Considerations
