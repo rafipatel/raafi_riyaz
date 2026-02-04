@@ -2,6 +2,28 @@
 
 A modern, responsive portfolio website built with cutting-edge web technologies. This project showcases professional work, projects, and skills with an elegant, high-performance design, with your own free personal AI assistant.
 
+## 🆕 Recent Updates (February 2026)
+
+### Latest Features & Improvements
+
+- **🔐 Pollen API Integration**: Added support for Pollen API with secure credential management
+  - GitHub Actions secret: `POLLEN_API_KEY_SECONDARY`
+  - Environment-based configuration for secure deployments
+  - See [Pollen API Configuration](#pollen-api-configuration) section for setup
+
+- **📊 Enhanced Analytics Setup**: Refactored Google Analytics configuration
+  - Moved gtag snippet from hardcoded HTML to environment variables
+  - Uses `VITE_GTAG_ID` for build-time injection
+  - No measurement IDs in version control - forker-friendly setup
+  - See [Configuration for Forkers](#configuration-for-forkers) section
+
+- **🛠️ Improved Development Workflow**: Better environment management
+  - Updated `.env.example` with all required API keys
+  - Clear documentation for local and production setups
+  - GitHub environment variables for CI/CD pipelines
+
+
+
 ## Overview
 
 This portfolio website is a demonstration of full-stack web development capabilities, featuring:
