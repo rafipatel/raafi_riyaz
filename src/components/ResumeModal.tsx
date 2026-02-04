@@ -19,7 +19,7 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
         <DialogHeader className="p-6 pb-4 border-b border-border/50">
           <div className="flex items-center justify-between mr-8">
             <DialogTitle className="text-2xl font-bold gradient-text">
-              Resume - Rafi Riyaz Patel
+              Resume - Raafi Riyaz
             </DialogTitle>
             <Button
               size="sm"

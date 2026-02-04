@@ -48,7 +48,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <a href="#home" className="text-xl font-bold gradient-text">
-            Rafi Riyaz Patel
+            Raafi Riyaz
           </a>
 
           <div className="hidden md:flex items-center space-x-8">
