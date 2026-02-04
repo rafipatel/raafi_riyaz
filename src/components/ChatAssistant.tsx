@@ -128,6 +128,9 @@ const ChatAssistant = () => {
                                 <div className="relative z-10">
                                     <p className="text-xs font-medium text-foreground/90 leading-relaxed">
                                         ✨ Discover why <span className="text-primary font-bold bg-primary/10 px-1 py-0.5 rounded">Raafi</span> is the perfect fit for your team!
+                                        <span className="block mt-1.5 text-muted-foreground/80 font-normal italic">
+                                            (Try Sending Job Description)
+                                        </span>
                                     </p>
                                 </div>
 
