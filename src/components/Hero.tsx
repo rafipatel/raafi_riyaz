@@ -13,7 +13,11 @@ const HuggingFaceIcon = () => (
   </svg>
 );
 
-const Hero = () => {
+interface HeroProps {
+  onViewResume: () => void;
+}
+
+const Hero = ({ onViewResume }: HeroProps) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -159,12 +163,10 @@ const Hero = () => {
                 size="lg"
                 variant="outline"
                 className="border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground dark:border-secondary-dark dark:text-secondary-dark dark:hover:bg-secondary-dark/80 dark:hover:text-secondary-foreground"
-                asChild
+                onClick={onViewResume}
               >
-                <a href={socialLinks.cv} target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  <Download className="mr-2 h-5 w-5" />
-                  View CV
-                </a>
+                <Download className="mr-2 h-5 w-5" />
+                View CV
               </Button>
             </MagneticButton>
 

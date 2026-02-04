@@ -21,7 +21,7 @@ const Index = () => {
       <AnimatedBackground />
       <Navigation />
       <SourceCodeBadge />
-      <Hero />
+      <Hero onViewResume={() => setIsResumeModalOpen(true)} />
       <About />
       <Resume onViewResume={() => setIsResumeModalOpen(true)} />
       <Achievements />
