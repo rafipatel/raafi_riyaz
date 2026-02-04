@@ -411,4 +411,39 @@ curl -X POST $VITE_RAFA_API_URL/chat \260
 
 ---
 
+## Pollen API Configuration
+
+This portfolio includes support for Pollen API integration for advanced features.
+
+### Setup
+
+1. **Get Your Pollen API Key**:
+   - Sign up at [Pollen API](https://pollen.io/)
+   - Generate an API key from your dashboard
+   - Your key will be in the format `sk_...`
+
+2. **Store as GitHub Actions Secret**:
+   - Go to repository **Settings > Secrets and variables > Actions**
+   - Click **New repository secret**
+   - Name: `POLLEN_API_KEY_SECONDARY`
+   - Value: Paste your Pollen API key
+
+3. **Local Development**:
+   - Copy `.env.example` to `.env.local`
+   - Add your Pollen API key:
+     ```
+     POLLEN_API_KEY_SECONDARY=sk_your_key_here
+     ```
+
+### Security Considerations
+
+- **Never commit secrets**: The `.env.local` file is in `.gitignore` and should never be committed
+- **Use GitHub Secrets for CI/CD**: Store sensitive keys as GitHub Actions secrets, not in code
+- **Rotate keys regularly**: Periodically update your Pollen API keys for security
+- **Scope permissions**: Use API keys with minimal required permissions
+
+---
+
+**Built with ❤️ by Rafi Patel**
+
 **Built with ❤️ by Rafi Patel**
