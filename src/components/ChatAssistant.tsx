@@ -63,8 +63,10 @@ const ChatAssistant = () => {
             const response = await chatService.sendMessage(messageToSend);
             const assistantMessage: ChatMessage = {
                 role: "assistant",
-                content: response,
+                content: response.content,
                 timestamp: new Date(),
+                provider: response.provider,
+                model: response.model
             };
             setMessages((prev) => [...prev, assistantMessage]);
         } catch (error) {
@@ -264,7 +266,28 @@ const ChatAssistant = () => {
                                                 }`}
                                         >
                                             <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
-                                                {message.content}
+                                                {(() => {
+                                                    const content = message.content;
+                                                    const urlRegex = /(https?:\/\/[^\s]+)/g;
+                                                    const parts = content.split(urlRegex);
+
+                                                    return parts.map((part, i) => {
+                                                        if (part.match(urlRegex)) {
+                                                            return (
+                                                                <a
+                                                                    key={i}
+                                                                    href={part}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    className="underline underline-offset-2 hover:text-primary transition-colors font-medium break-all"
+                                                                >
+                                                                    {part}
+                                                                </a>
+                                                            );
+                                                        }
+                                                        return part;
+                                                    });
+                                                })()}
                                             </p>
                                         </div>
                                     </motion.div>
@@ -341,7 +364,13 @@ const ChatAssistant = () => {
                                     </Button>
                                 </div>
                                 <p className="text-xs text-muted-foreground mt-2 text-center">
-                                    Powered by Groq • Llama 3.3 70B
+                                    Powered by {(() => {
+                                        const lastAssistantMessage = [...messages].reverse().find(m => m.role === "assistant" && m.provider);
+                                        if (lastAssistantMessage) {
+                                            return `${lastAssistantMessage.provider} • ${lastAssistantMessage.model}`;
+                                        }
+                                        return "Pollinations AI • Amazon Nova Micro";
+                                    })()}
                                 </p>
                             </div>
                         </div>

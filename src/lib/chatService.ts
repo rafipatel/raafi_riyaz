@@ -1,17 +1,28 @@
 import Groq from "groq-sdk";
 import { GROQ_CONFIG } from "./groqConfig";
+import { POLLEN_CONFIG } from "./pollenConfig";
 import { getSystemPrompt } from "./knowledge";
 
 export interface ChatMessage {
     role: "user" | "assistant";
     content: string;
     timestamp: Date;
+    provider?: string;
+    model?: string;
+}
+
+export interface ChatResponse {
+    content: string;
+    provider: string;
+    model: string;
 }
 
 class ChatService {
     private groq: Groq | null = null;
     private conversationHistory: ChatMessage[] = [];
     private initializationPromise: Promise<void> | null = null;
+    private lastProvider: string = "Groq";
+    private lastModel: string = GROQ_CONFIG.model;
 
     constructor() {
         // Initialization happens on first request
@@ -63,10 +74,35 @@ class ChatService {
         return this.groq;
     }
 
-    async sendMessage(userMessage: string): Promise<string> {
-        try {
-            const groqClient = await this.getGroqClient();
+    private async sendPollenMessage(messages: any[]): Promise<string> {
+        if (!POLLEN_CONFIG.apiKey) {
+            throw new Error("Pollinations API key not configured");
+        }
 
+        const response = await fetch(POLLEN_CONFIG.apiUrl, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${POLLEN_CONFIG.apiKey}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                model: POLLEN_CONFIG.model,
+                messages: messages,
+                temperature: POLLEN_CONFIG.temperature,
+            }),
+        });
+
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error(`Pollinations API error: ${response.status} ${error}`);
+        }
+
+        const data = await response.json();
+        return data.choices[0]?.message?.content || "";
+    }
+
+    async sendMessage(userMessage: string): Promise<ChatResponse> {
+        try {
             // Add user message to history
             this.conversationHistory.push({
                 role: "user",
@@ -74,11 +110,11 @@ class ChatService {
                 timestamp: new Date(),
             });
 
-            // Keep only last 10 messages for context (to avoid token limits)
+            // Keep only last 10 messages for context
             const recentHistory = this.conversationHistory.slice(-10);
 
-            // Prepare messages for Groq API
-            const messages: Array<{ role: string; content: string }> = [
+            // Prepare messages
+            const messages = [
                 {
                     role: "system",
                     content: getSystemPrompt(),
@@ -89,30 +125,65 @@ class ChatService {
                 })),
             ];
 
-            // Call Groq API
-            const chatCompletion = await groqClient.chat.completions.create({
-                messages: messages as any,
-                model: GROQ_CONFIG.model,
-                temperature: GROQ_CONFIG.temperature,
-                max_tokens: GROQ_CONFIG.maxTokens,
-                top_p: GROQ_CONFIG.topP,
-            });
+            let assistantMessage = "";
+            let provider = "Pollinations AI";
+            let model = POLLEN_CONFIG.model;
 
-            const assistantMessage = chatCompletion.choices[0]?.message?.content || "I apologize, I couldn't generate a response. Please try again.";
+            try {
+                // Try Pollinations AI first
+                assistantMessage = await this.sendPollenMessage(messages);
+                this.lastProvider = provider;
+                this.lastModel = model;
+            } catch (pollenError) {
+                console.error("Pollinations AI failed, falling back to Groq:", pollenError);
+
+                // Fallback to Groq
+                const groqClient = await this.getGroqClient();
+                const chatCompletion = await groqClient.chat.completions.create({
+                    messages: messages as any,
+                    model: GROQ_CONFIG.model,
+                    temperature: GROQ_CONFIG.temperature,
+                    max_tokens: GROQ_CONFIG.maxTokens,
+                    top_p: GROQ_CONFIG.topP,
+                });
+
+                assistantMessage = chatCompletion.choices[0]?.message?.content || "";
+                provider = "Groq";
+                model = GROQ_CONFIG.model;
+                this.lastProvider = provider;
+                this.lastModel = model;
+            }
+
+            if (!assistantMessage) {
+                throw new Error("No response generated from any provider");
+            }
 
             // Add assistant response to history
             this.conversationHistory.push({
                 role: "assistant",
                 content: assistantMessage,
                 timestamp: new Date(),
+                provider,
+                model
             });
 
-            return assistantMessage;
+            return {
+                content: assistantMessage,
+                provider,
+                model
+            };
         } catch (error) {
-            console.error("Error calling Groq API:", error);
+            console.error("All AI providers failed:", error);
             const msg = error instanceof Error ? error.message : "Unknown error";
             throw new Error(`Failed to get response from AI: ${msg}`);
         }
+    }
+
+    getLastProviderInfo() {
+        return {
+            provider: this.lastProvider,
+            model: this.lastModel
+        };
     }
 
     clearHistory() {

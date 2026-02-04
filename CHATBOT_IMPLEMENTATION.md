@@ -2,7 +2,9 @@
 
 ## ✅ Successfully Implemented
 
-I've successfully integrated a premium AI-powered chatbot into your portfolio using Groq's API with Llama 3.3 70B model.
+I've successfully integrated a premium AI-powered chatbot into your portfolio using a dual-provider architecture:
+- **Primary**: Pollinations.ai with the **Amazon Nova Micro (nova-fast)** model.
+- **Fallback**: Groq's API with the **Llama 3.3 70B** model.
 
 ---
 
@@ -14,16 +16,20 @@ I've successfully integrated a premium AI-powered chatbot into your portfolio us
 - System prompt that guides the AI to act as your personal assistant
 - Professional, friendly, and concise communication style
 
-### 2. **Groq API Configuration** (`src/lib/groqConfig.ts`)
-- API key: `your_groq_api_key`
-- Model: `llama-3.3-70b-versatile` (fast, high-quality responses)
-- Temperature: 0.7 (balanced creativity and accuracy)
-- Max tokens: 500 (concise responses)
+### 2. **AI Provider Configuration**
+- **Primary (Pollinations.ai)**:
+    - Model: `nova-fast` (Amazon Nova Micro)
+    - API: `https://gen.pollinations.ai/v1/chat/completions`
+- **Fallback (Groq API)**:
+    - Model: `llama-3.3-70b-versatile` (fast, high-quality responses)
+    - Temperature: 0.7 (balanced creativity and accuracy)
+    - Max tokens: 500 (concise responses)
 
 ### 3. **Chat Service** (`src/lib/chatService.ts`)
-- Handles communication with Groq API
+- Handles communication with both Pollinations.ai and Groq API
+- **Automatic Fallback**: If Pollinations fails, it seamlessly switches to Groq
 - Maintains conversation history (last 10 messages for context)
-- Error handling and retry logic
+- Error handling and logging for both providers
 - Singleton pattern for consistent state
 
 ### 4. **Chat UI Component** (`src/components/ChatAssistant.tsx`)
@@ -34,6 +40,7 @@ I've successfully integrated a premium AI-powered chatbot into your portfolio us
   - Auto-scrolling to latest messages
   - Typing indicators
   - Welcome message on first open
+  - **Provider Badge**: Dynamically displays which AI model is currently responding (e.g., "Pollinations AI • Amazon Nova Micro")
   - Professional gradient header
   - Responsive design (works on mobile)
   - Dark mode compatible
@@ -77,8 +84,12 @@ Tested successfully:
 
 **For production deployment**, you should:
 1. Create a `.env.local` file (already gitignored)
-2. Add: `VITE_GROQ_API_KEY=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`
-3. The code already supports reading from environment variables
+2. Add: 
+   ```env
+   VITE_POLLEN_API_KEY_SECONDARY=your_pollinations_key
+   VITE_GROQ_API_KEY=your_groq_key
+   ```
+3. The code supports reading from environment variables (using `import.meta.env`)
 4. **Better approach**: Create a backend API proxy to hide the key completely
 
 ---

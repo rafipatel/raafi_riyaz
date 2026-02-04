@@ -2,9 +2,9 @@
 <html lang="en">
 
 <head>
-<!-- Google Analytics - Inject via build process or environment variable
+  <!-- Google Analytics - Inject via build process or environment variable
      Replace VITE_GTAG_ID with your own Google Analytics measurement ID -->
-    <script>
+  <script>
     // Inject Google Analytics from environment variable
     const gtagId = import.meta.env.VITE_GTAG_ID;
     if (gtagId) {
@@ -21,7 +21,7 @@
       gtag('config', gtagId);
     }
   </script>
-    <meta charset="UTF-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Raafi Riyaz - AI/ML Engineer & Research Scientist</title>
   <meta name="description"
@@ -41,23 +41,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 </head>
-    <script>
-    // Inject Google Analytics from environment variable
-    const gtagId = import.meta.env.VITE_GTAG_ID;
-    if (gtagId) {
-      // Create and load gtag script
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`;
-      document.head.appendChild(script);
-
-      // Initialize dataLayer
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', gtagId);
-    }
-  </script>
 
 <body>
   <div id="root"></div>

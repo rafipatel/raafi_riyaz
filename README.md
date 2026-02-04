@@ -242,17 +242,18 @@ Visit the live portfolio: [https://rafipatel.github.io/rafi/](https://rafipatel.
 
 For issues, questions, or suggestions, please open an issue on GitHub.
 
-## RAFA: AI Profile Assistant with Groq
+## RAFA: AI Profile Assistant with Pollinations.ai & Groq
 
-**RAFA** is an AI-powered assistant system that uses **Groq's lightning-fast LLM inference** to answer questions about the portfolio owner's profile and expertise.
+**RAFA** is an AI-powered assistant system that uses **Pollinations.ai** as its primary provider (Amazon Nova Micro model) and **Groq's lightning-fast LLM inference** as a fallback to answer questions about the portfolio owner's profile and expertise.
 
 ### Architecture & Deployment
 
-RAFA operates independently from this portfolio website:
+RAFA operates with a dual-provider robustness:
 
-- **Frontend**: This portfolio website (React + Vite) is deployed on **GitHub Pages** as a static site
-- **AI Backend**: RAFA runs separately using **Groq API** for high-speed LLM inference
-- **Communication**: The portfolio can integrate API calls to RAFA when deployed on a full-stack platform with backend support
+- **Primary Provider**: **Pollinations.ai** using the `nova-fast` (Amazon Nova Micro) model.
+- **Fallback Provider**: **Groq API** using the `llama-3.3-70b-versatile` model.
+- **Frontend**: This portfolio website (React + Vite) is deployed on **GitHub Pages** as a static site.
+- **Dynamic Feedback**: The UI dynamically displays which model and provider is currently powering the conversation.
 
 ### Groq Integration
 
@@ -327,8 +328,12 @@ GROQ_API_KEY=<your-groq-api-key>
 
 ```bash
 cp .env.example .env.local
-# Edit .env.local and add your Render backend URL
+# Edit .env.local and add your API keys
+VITE_POLLEN_API_KEY_SECONDARY=your_pollinations_api_key
+VITE_GROQ_API_KEY=your_groq_api_key
 ```
+
+**Note**: The Pollinations API key is used as the primary driver for text completions, with Groq acting as a high-performance fallback if the primary service is unavailable or rate-limited.
 
 **Note**: `.env.local` is in `.gitignore` and should never be committed to version control.
 
@@ -337,25 +342,22 @@ cp .env.example .env.local
 - Uses `llama-3.3-70b-versatile` model (free tier available)
 - Requires signing up at console.groq.com
 
-#### Backend Architecture
+#### Backend & API Architecture
 
 ```
 Portfolio (Frontend - GitHub Pages)
     |
-    | HTTPS Request
-    v
-Render FastAPI Service (groq-proxy)
-    |
-    | API Call + GROQ_API_KEY
-    v
-Groq LLM API (llama-3.3-70b-versatile)
-    |
-    | LLM Response
-    v
-Render Service → Backend Response
-    |
-    v
-Portfolio (Displays Response)
+    |---[ Try Primary: Pollinations AI (nova-fast) ]
+    |       |
+    |       |--- Success: Display Response (Pollinations AI)
+    |       |
+    |       |--- Failure: Log Error & Trigger Fallback
+    |               |
+    |               v
+    |---[ Fallback: Groq LLM API (llama-3.3-70b-versatile) ]
+            |
+            |--- Success: Display Response (Groq)
+            |--- Failure: Display User-facing Error
 ```
 
 #### How to Deploy Your Own RAFA Backend
