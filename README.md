@@ -51,12 +51,33 @@ Example (Google Analytics 4):
 
 ```
 
-Steps:
-1.   Create a Google Analytics (GA4) property
-2.   Copy your Measurement ID (G-XXXXXXXXXX)
-3.   Paste the snippet into your website’s <head> and deploy 🚀
+### Configuration for Forkers
 
-This way it clearly shows how simple it is, reinforces free + minimal effort, and adds credibility for technical readers (especially recruiters and founders).
+**Important**: If you fork this repository, you need to replace the Google Analytics measurement ID with your own:
+
+1. **Get Your Measurement ID**:
+   - Go to [Google Analytics](https://analytics.google.com/)
+   - Create a new GA4 property or use an existing one
+   - Copy your Measurement ID (format: `G-XXXXXXXXXX`)
+
+2. **Add to Environment Variables**:
+   - Copy `.env.example` to `.env.local`:
+     ```bash
+     cp .env.example .env.local
+     ```
+   - Edit `.env.local` and replace the placeholder:
+     ```
+     VITE_GTAG_ID=G-YOUR_MEASUREMENT_ID_HERE
+     ```
+
+3. **Deploy**:
+   - The analytics script will be automatically injected during build
+   - No hardcoded IDs in the repository
+   - Each fork can use its own analytics setup
+
+> **Note**: The `.env.local` file is in `.gitignore` - never commit your analytics ID to version control!
+
+founders).
 
 
 The analytics dashboard helps understand how visitors interact with the portfolio and which content resonates most with the audience worldwide.
