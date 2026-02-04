@@ -40,6 +40,9 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+        env:
+          VITE_POLLEN_API_KEY_SECONDARY: ${{ vars.VITE_POLLEN_API_KEY_SECONDARY }}
+          VITE_GTAG_ID: ${{ vars.VITE_GTAG_ID }}
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

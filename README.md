@@ -12,9 +12,6 @@ A modern, responsive portfolio website built with cutting-edge web technologies.
   - See [Pollen API Configuration](#pollen-api-configuration) section for setup
 
 - **📊 Enhanced Analytics Setup**: Refactored Google Analytics configuration
-  - Moved gtag snippet from hardcoded HTML to environment variables
-  - Uses `VITE_GTAG_ID` for build-time injection
-  - No measurement IDs in version control - forker-friendly setup
   - See [Configuration for Forkers](#configuration-for-forkers) section
 
 - **🛠️ Improved Development Workflow**: Better environment management
@@ -444,11 +441,12 @@ This portfolio includes support for Pollen API integration for advanced features
    - Generate an API key from your dashboard
    - Your key will be in the format `sk_...`
 
-2. **Store as GitHub Actions Secret**:
-   - Go to repository **Settings > Secrets and variables > Actions**
-   - Click **New repository secret**
-   - Name: `VITE_POLLEN_API_KEY_SECONDARY`
-   - Value: Paste your Pollen API key
+2. **Store as Environment Variables**:
+   - Go to repository **Settings > Environments**
+   - Click on the **github-pages** environment (or create it)
+   - Under **Environment variables**, add **both**:
+     - `VITE_POLLEN_API_KEY_SECONDARY`
+     - `VITE_GTAG_ID` (for Analytics)
 
 3. **Local Development**:
    - Copy `.env.example` to `.env.local`
