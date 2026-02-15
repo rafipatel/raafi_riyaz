@@ -64,7 +64,13 @@ export const experiences = [
         company: "Mercor",
         link: "https://www.mercor.com/",
         points: [
-            "### Rubrics Academy Fellow",
+            "### Software Engineering Efficiency (Project SWE Benchmark)",
+            "Evaluated human developer performance on real-world software engineering tasks using only official Python documentation to create high-quality benchmarks for AI models.",
+            "Replicated pre-GPT development environment to measure true, documentation-driven coding efficiency for AI model training data.",
+            "### Terminal Efficiency v2 (Project TE Benchmark)",
+            "Contributed to benchmark creation by solving real-world software engineering tasks using only official documentation, replicating pre-GPT development workflows.",
+            "Generated high-quality human performance data used to train and evaluate AI models deployed to millions of users worldwide.",
+            "### Rubrics Academy Fellow (Project Rubric)",
             "Focused on complex prompt reasoning and technical problem-solving through first-principles architectural design with strict constraint on using AI tools.",
             "Engaged in rigorous technical challenges focused on first-principles reasoning and human-led architectural design with strict constraint on using AI tools.",
             "### Machine Learning Engineer (Project Launchpad)",
@@ -75,6 +81,7 @@ export const experiences = [
             "### Machine Learning Engineer (Project Vulcan)",
             "Collaborated with Meta to extend OpenAI’s MLE-bench into a more comprehensive benchmark by transforming Kaggle competitions into reproducible, Docker-based evaluation tasks.",
             "Extended MLE-bench with recent NeurIPS, ICML, and ICLR datasets across computer vision, NLP, time-series, and tabular domains to reflect modern ML challenges.",
+
         ],
     },
 
@@ -294,10 +301,17 @@ export const openSourceContributions = [
         link: "https://github.com/TMElyralab/MuseTalk/pull/394",
     },
     {
+        title: "Medium Technical Blog",
+        role: "Author",
+        date: "Feb 2026",
+        description: "Published a technical article on **recovering model architecture and fine-tuning PyTorch models from weights alone**",
+        link: "https://medium.com/@rafipatel3562/recovering-model-architecture-and-fine-tuning-a-pytorch-model-from-weights-alone-ca3f653f3b8a",
+    },
+    {
         title: "Guest Speaker at JMI University",
         role: "Guest Speaker",
         date: "Jan 2025",
-        description: "Introduction to RL session for final-year BTech students with Bytes Classes.",
+        description: "**Introduction to RL** session for final-year BTech students in collaboration with Bytes Classes.",
         link: "https://www.linkedin.com/posts/raafi-riyaz-bb2954202_grateful-to-have-recently-delivered-a-activity-7262204530212106243-eMVD",
     },
     {
