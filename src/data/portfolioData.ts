@@ -65,8 +65,8 @@ export const experiences = [
         link: "https://www.mercor.com/",
         points: [
             "### Software Engineering Efficiency (Project SWE Benchmark)",
-            "Evaluated human developer performance on real-world software engineering tasks using only official Python documentation to create high-quality benchmarks for AI models.",
-            "Replicated pre-GPT development environment to measure true, documentation-driven coding efficiency for AI model training data.",
+            "Selected to evaluate human developer performance on real-world software engineering tasks using only official Python documentation to create high-quality benchmarks for AI models.",
+            "Replication of pre-GPT development environment to measure true, documentation-driven coding efficiency for AI model training data.",
             "### Terminal Efficiency v2 (Project TE Benchmark)",
             "Contributed to benchmark creation by solving real-world software engineering tasks using only official documentation, replicating pre-GPT development workflows.",
             "Generated high-quality human performance data used to train and evaluate AI models deployed to millions of users worldwide.",
