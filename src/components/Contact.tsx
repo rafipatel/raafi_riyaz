@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, Linkedin, Github } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import InteractiveElement from "@/components/InteractiveElement";
 
+
 const Contact = () => {
   const { ref, isInView } = useScrollReveal();
 
@@ -44,17 +45,17 @@ const Contact = () => {
       link: "https://github.com/rafipatel",
     },
     {
-    icon: () => <span className="text-2xl">🤗</span>, // Emoji for Hugging Face
-    label: "Hugging Face",
-    link: "https://huggingface.co/Rafii",
-  },
+      icon: () => <span className="text-2xl">🤗</span>, // Emoji for Hugging Face
+      label: "Hugging Face",
+      link: "https://huggingface.co/Rafii",
+    },
   ];
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,hsla(173_80%_40%/0.1),transparent_70%)]" />
-      
+
       <div className="container mx-auto px-4 relative z-10" ref={ref}>
         <motion.div
           initial={scrollVariants.floatUp.initial}
@@ -78,31 +79,31 @@ const Contact = () => {
                 <motion.div
                   initial={scrollVariants.assemble.initial}
                   animate={isInView ? scrollVariants.assemble.animate : {}}
-                  transition={{ 
-                    duration: 0.9, 
+                  transition={{
+                    duration: 0.9,
                     delay: index * 0.15,
                     ease: [0.22, 1, 0.36, 1]
                   }}
                   className="glass p-8 rounded-2xl text-center group h-full"
                 >
-                <motion.div 
-                  className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:animate-glow-pulse"
-                  whileHover={{ scale: 1.15, rotate: 10 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Icon className="w-8 h-8 text-primary" />
-                </motion.div>
-                <h3 className="text-xl font-bold mb-3 text-foreground">{info.title}</h3>
-                {info.link ? (
-                  <a
-                    href={info.link}
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                  <motion.div
+                    className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:animate-glow-pulse"
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    {info.value}
-                  </a>
-                ) : (
-                  <p className="text-muted-foreground">{info.value}</p>
-                )}
+                    <Icon className="w-8 h-8 text-primary" />
+                  </motion.div>
+                  <h3 className="text-xl font-bold mb-3 text-foreground">{info.title}</h3>
+                  {info.link ? (
+                    <a
+                      href={info.link}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {info.value}
+                    </a>
+                  ) : (
+                    <p className="text-muted-foreground">{info.value}</p>
+                  )}
                 </motion.div>
               </InteractiveElement>
             );
@@ -134,8 +135,8 @@ const Contact = () => {
                   <motion.div
                     initial={{ opacity: 0, scale: 0, rotate: -180 }}
                     animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-                    transition={{ 
-                      duration: 0.7, 
+                    transition={{
+                      duration: 0.7,
                       delay: 0.6 + index * 0.1,
                       ease: [0.22, 1, 0.36, 1]
                     }}
