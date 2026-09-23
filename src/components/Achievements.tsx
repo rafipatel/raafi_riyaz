@@ -8,6 +8,13 @@ const Achievements = () => {
 
   const achievements = [
     {
+      icon: Trophy,
+      title: "RL Fellowship at General Reasoning",
+      date: "March 2026",
+      description: "Offered the Reinforcement Learning Fellowship at General Reasoning, led by Meta Llama's reasoning lead and the founder of Papers with Code, working on RL research and long-horizon reasoning systems.",
+      link: "https://gr.inc",
+    },
+    {
       icon: Target,
       title: "AI UK 2025 Invitation",
       date: "March 2025",
