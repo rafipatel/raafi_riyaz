@@ -359,17 +359,6 @@ export const currentlyWorkingOn: CurrentItemData[] = [
         type: "working",
     },
     {
-        iconName: "brain",
-        title: "RL Fellowship",
-        subtitle: "General Reasoning (gr.inc)",
-        description:
-            "Selected for the Reinforcement Learning Fellowship at General Reasoning, a startup led by Ross Taylor — Meta Llama's reasoning lead and founder of Papers with Code. GR works on advancing RL research and building next-generation reasoning systems over long-horizon tasks.",
-        badges: ["Reinforcement Learning", "Fellowship", "Research"],
-        link: "https://gr.inc",
-        accentColor: "10 80% 55%",
-        type: "fellowship",
-    },
-    {
         iconName: "clapperboard",
         title: "VideoVoice",
         subtitle: "AI Video Translation & Voice Cloning",
