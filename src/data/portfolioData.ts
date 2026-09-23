@@ -350,12 +350,13 @@ export interface CurrentItemData {
 export const currentlyWorkingOn: CurrentItemData[] = [
     {
         iconName: "building-2",
-        title: "Tensium — RL Environment Engineer",
-        subtitle: "Long-horizon RL environments for frontier labs",
+        title: "Mercor & Tensium — ML/RL Engineer",
+        subtitle: "Frontier-model benchmarks and long-horizon RL environments",
         description:
-            "Creating long-horizon reinforcement-learning environments in Harbour format with 70–150 causal steps, engineered against oracle leakage, reward hacking and shortcut solutions, with an automated PR-triggered QA pipeline that replaces manual soundness review.",
-        badges: ["Reinforcement Learning", "RL Environments", "HUD", "GitHub Actions"],
-        accentColor: "150 65% 42%",
+            "At Tensium, creating long-horizon reinforcement-learning environments with 70–150 causal steps, engineered against reward hacking and shortcut solutions, with an automated PR-triggered QA pipeline. At Mercor, contributing to Meta AI's expansion of OpenAI's MLE-bench, building high-quality ML benchmarks across computer vision, NLP, and time-series domains.",
+        badges: ["Reinforcement Learning", "RL Environments", "MLE-bench", "Benchmarks", "H100 GPUs"],
+        link: "https://www.mercor.com/",
+        accentColor: "217 91% 60%",
         type: "working",
     },
     {
@@ -390,17 +391,6 @@ export const currentlyWorkingOn: CurrentItemData[] = [
         link: "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
         accentColor: "270 70% 55%",
         type: "reading",
-    },
-    {
-        iconName: "building-2",
-        title: "Mercor — ML Engineer",
-        subtitle: "Meta AI Research Collaboration",
-        description:
-            "Contributing to Meta AI's expansion of OpenAI's MLE-bench, building high-quality ML benchmarks across computer vision, NLP, and time-series domains.",
-        badges: ["Meta AI", "Benchmarks", "H100 GPUs", "Research"],
-        link: "https://www.mercor.com/",
-        accentColor: "217 91% 60%",
-        type: "working",
     },
 ];
 
