@@ -7,18 +7,18 @@ import srganImg from "@/components/photos/SRGAN.png";
 export const personalInfo = {
     name: "Raafi Riyaz",
     displayName: "Raafi Riyaz",
-    currentRole: "Machine Learning Engineer",
-    currentCompany: "Mercor",
+    currentRole: "RL Environment Engineer",
+    currentCompany: "Tensium",
     location: "London, United Kingdom",
     totalExperience: "Nearly 2 years",
     projectsCompleted: "25+",
     greeting: "Hello!",
 };
 
-export const roles = ["ML Engineer", "AI Engineer", "Data Scientist"];
+export const roles = ["RL Environment Engineer", "ML Engineer", "AI Engineer", "Data Scientist"];
 
 export const tagline = {
-    primary: "MSc AI from London | Machine Learning Engineer @ Mercor",
+    primary: "MSc AI from London | RL Environment Engineer @ Tensium",
     secondary: "With over 2 years of experience",
 };
 
@@ -43,7 +43,7 @@ export const personalDetails = [
 
 export const aboutMe = {
     name: "Rafi Riyaz",
-    jobRole: "AI/ML Engineer",
+    jobRole: "RL Environment Engineer",
     experience: "2 years",
     address: "London, United Kingdom",
     bio: `MSc Artificial Intelligence graduate from City, University of London, selected for a prestigious ML internship in Lung Cancer Research using UK Cancer Research’s TracerX data.
@@ -58,6 +58,17 @@ While I enjoy AI broadly, my primary interests lie in Research AI and Medical AI
 };
 
 export const experiences = [
+    {
+        date: "Apr 2026 - Present",
+        title: "RL Environment Engineer",
+        company: "Tensium",
+        points: [
+            "Created long-horizon reinforcement-learning environments in Harbour format with 70–150 causal steps for frontier labs, maintaining a 25% pass@8 performance gap between weaker and frontier models to ensure meaningful task discrimination.",
+            "Used the HUD platform to design, debug, and analyze RL environments, engineering tasks resistant to oracle leakage, reward hacking, public-data overfitting, and shortcut-based solutions while targeting challenging long-horizon reasoning and coding behavior.",
+            "Built an automated PR-triggered long-horizon RL QA pipeline with GitHub Actions and an internal harness, running isolated environment/grader checks and surfacing automated pass/block verdicts to replace manual soundness review.",
+            "Reviewed and successfully delivered 4 tasks in a 20-hour sprint.",
+        ],
+    },
     {
         date: "Oct 2025 - Present",
         title: "Machine Learning Engineer",
@@ -98,7 +109,7 @@ export const experiences = [
         ],
     },
     {
-        date: "Mar 2025 - Present",
+        date: "Mar 2025 - Nov 2025",
         title: "Founding ML Research Engineer",
         company: "Curify-AI",
         link: "https://www.curify-ai.com/en/about",
@@ -338,15 +349,15 @@ export interface CurrentItemData {
 
 export const currentlyWorkingOn: CurrentItemData[] = [
     {
-        iconName: "brain",
-        title: "RL Fellowship",
-        subtitle: "General Reasoning (gr.inc)",
+        iconName: "building-2",
+        title: "Mercor & Tensium — ML/RL Engineer",
+        subtitle: "Frontier-model benchmarks and long-horizon RL environments",
         description:
-            "Selected for the Reinforcement Learning Fellowship at General Reasoning, a startup led by Ross Taylor — Meta Llama's reasoning lead and founder of Papers with Code. GR works on advancing RL research and building next-generation reasoning systems over long-horizon tasks.",
-        badges: ["Reinforcement Learning", "Fellowship", "Research"],
-        link: "https://gr.inc",
-        accentColor: "10 80% 55%",
-        type: "fellowship",
+            "At Tensium, creating long-horizon reinforcement-learning environments with 70–150 causal steps, engineered against reward hacking and shortcut solutions, with an automated PR-triggered QA pipeline. At Mercor, contributing to Meta AI's expansion of OpenAI's MLE-bench, building high-quality ML benchmarks across computer vision, NLP, and time-series domains.",
+        badges: ["Reinforcement Learning", "RL Environments", "MLE-bench", "Benchmarks", "H100 GPUs"],
+        link: "https://www.mercor.com/",
+        accentColor: "217 91% 60%",
+        type: "working",
     },
     {
         iconName: "clapperboard",
@@ -380,17 +391,6 @@ export const currentlyWorkingOn: CurrentItemData[] = [
         link: "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
         accentColor: "270 70% 55%",
         type: "reading",
-    },
-    {
-        iconName: "building-2",
-        title: "Mercor — ML Engineer",
-        subtitle: "Meta AI Research Collaboration",
-        description:
-            "Contributing to Meta AI's expansion of OpenAI's MLE-bench, building high-quality ML benchmarks across computer vision, NLP, and time-series domains.",
-        badges: ["Meta AI", "Benchmarks", "H100 GPUs", "Research"],
-        link: "https://www.mercor.com/",
-        accentColor: "217 91% 60%",
-        type: "working",
     },
 ];
 
