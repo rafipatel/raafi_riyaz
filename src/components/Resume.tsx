@@ -28,7 +28,7 @@ const Resume = ({ onViewResume }: ResumeProps) => {
             My <span className="gradient-text">Resume</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            With nearly 2 years of experience in developing and deploying AI solutions. Specializing in machine learning, computer vision, and NLP.
+            With over 4 years of experience in developing and deploying AI solutions. Specializing in machine learning, computer vision, and NLP.
           </p>
         </motion.div>
 

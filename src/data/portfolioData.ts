@@ -10,7 +10,7 @@ export const personalInfo = {
     currentRole: "RL Environment Engineer",
     currentCompany: "Tensium",
     location: "London, United Kingdom",
-    totalExperience: "Nearly 2 years",
+    totalExperience: "4+ years",
     projectsCompleted: "25+",
     greeting: "Hello!",
 };
@@ -19,7 +19,7 @@ export const roles = ["RL Environment Engineer", "ML Engineer", "AI Engineer", "
 
 export const tagline = {
     primary: "MSc AI from London | RL Environment Engineer @ Tensium",
-    secondary: "With over 2 years of experience",
+    secondary: "With over 4 years of experience",
 };
 
 export const skills = [
@@ -44,11 +44,11 @@ export const personalDetails = [
 export const aboutMe = {
     name: "Rafi Riyaz",
     jobRole: "RL Environment Engineer",
-    experience: "2 years",
+    experience: "4 years",
     address: "London, United Kingdom",
     bio: `MSc Artificial Intelligence graduate from City, University of London, selected for a prestigious ML internship in Lung Cancer Research using UK Cancer Research’s TracerX data.
 
-Nearly 2 years of hands-on experience across AI research and production, with roles at Mercor, Curify-AI, Webomates, and ResoluteAI. I’ve built and deployed real-world ML systems spanning medical AI, computer vision, NLP, and large-scale benchmarks.
+Over 4 years of hands-on experience across AI research and production, with roles at Mercor, Curify-AI, Webomates, and ResoluteAI. I’ve built and deployed real-world ML systems spanning medical AI, computer vision, NLP, and large-scale benchmarks.
 
 Co-founded Feedhire, an AI-powered global job discovery platform using NLP and open-source LLMs, scaled to 1,000+ users across multiple countries.
 
