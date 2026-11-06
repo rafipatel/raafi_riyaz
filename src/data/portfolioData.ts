@@ -54,6 +54,8 @@ Co-founded Feedhire, an AI-powered global job discovery platform using NLP and o
 
 Strong in Python, PyTorch, TensorFlow, and cloud-based ML, with a research-first mindset and experience building production systems.
 
+Currently learning RL and studying scaling laws for agents at CAMEL / Eigent AI, a small research lab in London.
+
 While I enjoy AI broadly, my primary interests lie in Research AI and Medical AI, where I aim to create meaningful, high-impact solutions.`,
 };
 
@@ -401,3 +403,68 @@ export const currentTypeLabels: Record<CurrentItemType, string> = {
     scaling: "Scaling",
     working: "Working at",
 };
+
+// What Raafi is focused on right now (shown in the hero and the agent trajectory).
+export const currentStatus = {
+    focus: "Learning RL and studying scaling laws for agents",
+    org: "CAMEL / Eigent AI",
+    orgNote: "a small research lab in London",
+    link: "https://www.camel-ai.org/",
+};
+
+export const hackathon = {
+    title: "4th place at the MongoDB Hackathon",
+    youtubeId: "sYy8DrTpudk",
+    url: "https://youtu.be/sYy8DrTpudk",
+};
+
+export interface ProudItem {
+    title: string;
+    date?: string;
+    detail: string;
+    link?: string;
+}
+
+// The achievements Raafi is proudest of, in his own order.
+export const proudFeatured: ProudItem[] = [
+    {
+        title: "4th place, MongoDB Hackathon",
+        detail: "Placed 4th as the only solo developer among 150 people competing in teams, in an 8-hour build.",
+        link: "#best",
+    },
+    {
+        title: "RL Fellow, General Reasoning",
+        date: "Mar 2026",
+        detail: "Landed the RL fellowship at General Reasoning, the startup led by Ross Taylor, working on RL research and long-horizon reasoning.",
+        link: "https://gr.inc",
+    },
+    {
+        title: "Shortlisted, Anthropic RL Safety Research Programme",
+        detail: "Shortlisted for Anthropic's research programme on reinforcement-learning safety.",
+    },
+    {
+        title: "Technical AI Safety, BlueDot Impact",
+        date: "May 2026",
+        detail: "Completed BlueDot's application-based course on alignment and control.",
+    },
+];
+
+export const proudMore: ProudItem[] = [
+    {
+        title: "Invited to AI UK 2025 by Harmony",
+        date: "Mar 2025",
+        detail: "Presented how I fine-tuned language models for Harmony's psychology-survey dataset at The Alan Turing Institute's national showcase.",
+        link: "https://www.turing.ac.uk/ai-uk",
+    },
+    {
+        title: "2nd rank, Harmony × UCL fine-tuning challenge",
+        date: "Jan 2025",
+        detail: "Fine-tuned the language model behind Harmony's production matching tool, with researchers from UCL and Ulster University.",
+        link: "https://harmonydata.ac.uk/matching-challenge-winner-announcement/",
+    },
+    {
+        title: "ML research internship, City, University of London",
+        date: "Jul 2024",
+        detail: "Selected to apply machine learning to lung-cancer survival prediction on TracerX data.",
+    },
+];

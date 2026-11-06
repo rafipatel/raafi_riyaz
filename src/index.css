@@ -49,6 +49,31 @@ All colors MUST be HSL.
     --shadow-glow: 0 0 60px hsla(173 80% 60% / 0.3);
     --shadow-card: 0 8px 32px hsla(0 0% 0% / 0.4);
     --shadow-elegant: 0 20px 60px -15px hsla(173 80% 60% / 0.4);
+
+    /* Rollout theme (dark) */
+    --ro-bg: #07080A;
+    --ro-surface: #0E1013;
+    --ro-inset: #07080A;
+    --ro-line: #1E2127;
+    --ro-line2: #2A2E36;
+    --ro-fg: #F2F3F5;
+    --ro-body: #B7BBC3;
+    --ro-muted: #8C919A;
+    --ro-acc: #4F7DFF;
+    --ro-acc-text: #5C8BFF;
+    --ro-acc-ink: #050A1F;
+    --ro-pass: #2DD4BF;
+    --ro-fail: #FB7185;
+    --ro-track: #15181D;
+    --ro-running: #3B3F4A;
+    --ro-think-bg: #1A1C22;
+    --ro-think-fg: #C9CCD3;
+    --ro-tool-bg: #121C38;
+    --ro-tool-fg: #7FA3FF;
+    --ro-check-bg: #2A1E12;
+    --ro-check-fg: #FBBF77;
+    --ro-pass-bg: #0E2A27;
+    --ro-fail-bg: #2A1218;
   }
 
   .light {
@@ -91,6 +116,31 @@ All colors MUST be HSL.
     --shadow-glow: 0 0 60px hsla(173 80% 60% / 0.2);
     --shadow-card: 0 8px 32px hsla(0 0% 0% / 0.1);
     --shadow-elegant: 0 20px 60px -15px hsla(173 80% 60% / 0.3);
+
+    /* Rollout theme (light) */
+    --ro-bg: #FAFAF9;
+    --ro-surface: #FFFFFF;
+    --ro-inset: #F4F4F5;
+    --ro-line: #E4E4E7;
+    --ro-line2: #D4D4D8;
+    --ro-fg: #0B0B0F;
+    --ro-body: #3F3F46;
+    --ro-muted: #52525B;
+    --ro-acc: #1D4ED8;
+    --ro-acc-text: #1D4ED8;
+    --ro-acc-ink: #FFFFFF;
+    --ro-pass: #0F766E;
+    --ro-fail: #BE123C;
+    --ro-track: #EEEEF0;
+    --ro-running: #A1A1AA;
+    --ro-think-bg: #F4F4F5;
+    --ro-think-fg: #3F3F46;
+    --ro-tool-bg: #DBE7FF;
+    --ro-tool-fg: #1E3A8A;
+    --ro-check-bg: #FEF3C7;
+    --ro-check-fg: #92400E;
+    --ro-pass-bg: #CCFBF1;
+    --ro-fail-bg: #FFE4E6;
   }
 }
 
@@ -101,21 +151,12 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    cursor: none;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   html {
     scroll-behavior: smooth;
-  }
-
-  * {
-    cursor: none;
-  }
-
-  a, button {
-    cursor: none !important;
   }
 }
 
