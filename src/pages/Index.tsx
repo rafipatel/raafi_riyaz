@@ -8,13 +8,6 @@ import { currentStatus, hackathon, proudFeatured, proudMore, socialLinks } from 
 
 const pill = "inline-flex min-h-[44px] items-center rounded-full border border-ro-line2 px-[18px] text-[15px] hover:border-ro-acc";
 
-const STATS = [
-  { value: "70–150", text: "causal steps per task, built in Harbour format on HUD for frontier labs." },
-  { value: "25%", text: "pass@8 gap kept between weaker and frontier models, so tasks actually discriminate.", accent: true },
-  { value: "0", text: "tolerated shortcuts: oracle leakage, reward hacking and public-data overfitting are designed out." },
-  { value: "30+", text: "merged PRs extending OpenAI's MLE-bench with Meta AI Research, at Mercor." },
-];
-
 const ThemeButton = () => {
   const { theme, setTheme } = useTheme();
   const resolved =
@@ -71,7 +64,6 @@ const Index = () => {
           raafi
         </a>
         <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px]">
-          <a href="#tasks" className="text-ro-muted hover:text-ro-fg">Tasks</a>
           <a href="#best" className="text-ro-muted hover:text-ro-fg">Best rollout</a>
           <a href="#rewards" className="text-ro-muted hover:text-ro-fg">Rewards</a>
           <button type="button" onClick={openCv} className="min-h-[40px] rounded-full border border-ro-line2 px-3.5 hover:border-ro-acc">CV</button>
@@ -121,15 +113,6 @@ const Index = () => {
             replayKey={replayKey}
             onReplay={() => setReplayKey((k) => k + 1)}
           />
-        </section>
-
-        <section id="tasks" className="mx-auto grid max-w-[1240px] scroll-mt-20 grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-8 border-t border-ro-line px-4 py-12 sm:px-8">
-          {STATS.map((s) => (
-            <div key={s.value} className="flex flex-col gap-2">
-              <span className={`text-[56px] font-bold leading-none tracking-[-0.03em] ${s.accent ? "text-ro-acc-text" : ""}`}>{s.value}</span>
-              <span className="text-base leading-normal text-ro-body">{s.text}</span>
-            </div>
-          ))}
         </section>
 
         <BestRollout />

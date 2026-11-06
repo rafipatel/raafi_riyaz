@@ -79,14 +79,18 @@ const AgentPanel = ({ selection, onSelect, replayKey, onReplay }: Props) => {
 
   return (
     <div className="min-w-0 flex-[1_1_580px] overflow-hidden rounded-2xl border border-ro-line bg-ro-surface">
-      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-ro-line px-4 py-3 font-mono text-xs">
-        <span>
-          {traj.id} · task=<span className="text-ro-acc-text">{traj.task}</span>
-        </span>
-        <span className="flex items-center gap-2">
-          <span className="text-ro-muted">model={traj.model}</span>
-          <span className={`rounded px-2 py-0.5 ${chip.cls}`}>{chip.label}</span>
-        </span>
+      <div className="flex flex-col gap-2 border-b border-ro-line px-4 py-3">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 font-mono text-xs">
+          <span className="text-ro-muted">{traj.id}</span>
+          <span className="flex items-center gap-2">
+            <span className="text-ro-muted">model={traj.model}</span>
+            <span className={`rounded px-2 py-0.5 ${chip.cls}`}>{chip.label}</span>
+          </span>
+        </div>
+        <p className="flex gap-2 text-[15px] leading-snug">
+          <span className="shrink-0 font-mono text-xs leading-[22px] text-ro-acc-text">task</span>
+          <span>{traj.task}</span>
+        </p>
       </div>
       <div className="flex items-center gap-3 border-b border-ro-line px-4 py-2 font-mono text-xs">
         <span className="shrink-0 text-ro-muted">return</span>
@@ -182,7 +186,7 @@ const AgentPanel = ({ selection, onSelect, replayKey, onReplay }: Props) => {
           </button>
           {selection !== "hire" && (
             <button type="button" onClick={() => run("hire")} className={`${smallBtn} border-ro-line2 text-ro-acc-text hover:border-ro-acc`}>
-              ← hire_rl_engineer
+              ← back to the real run
             </button>
           )}
         </div>

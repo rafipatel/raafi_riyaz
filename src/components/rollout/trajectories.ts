@@ -44,7 +44,7 @@ const json = (value: unknown) => JSON.stringify(value, null, 2);
 
 const HIRE: Trajectory = {
   id: "rollout_0004",
-  task: "hire_rl_engineer",
+  task: "What is the evidence that Raafi is a good RL engineer?",
   model: "frontier-agent",
   pass: true,
   final: "PASS",
@@ -121,7 +121,7 @@ const HIRE: Trajectory = {
 
 const VISITOR: Trajectory = {
   id: "rollout_you",
-  task: "hire_rl_engineer",
+  task: "What is the evidence that Raafi is a good RL engineer?",
   model: "visitor",
   pass: false,
   final: "BLOCKED",
