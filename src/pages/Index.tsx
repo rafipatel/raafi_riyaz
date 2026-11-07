@@ -5,6 +5,13 @@ import ResumeModal from "@/components/ResumeModal";
 import AgentPanel from "@/components/rollout/AgentPanel";
 import BootIntro, { shouldBoot } from "@/components/rollout/BootIntro";
 import Observed from "@/components/rollout/Observed";
+import Ventures from "@/components/sections/Ventures";
+import Experience from "@/components/sections/Experience";
+import Projects from "@/components/sections/Projects";
+import Writing from "@/components/sections/Writing";
+import About from "@/components/sections/About";
+import { contact, ventures } from "@/data/siteContent";
+import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
 import { ScrollHUD, useScrollEpisode } from "@/components/rollout/ScrollTrajectory";
 import type { Selection } from "@/components/rollout/trajectories";
 import { useTheme } from "@/components/ThemeProvider";
@@ -100,7 +107,7 @@ const BestRollout = () => {
       <div className="flex flex-col gap-3">
         <span className="font-mono text-xs text-ro-acc-text">best rollout</span>
         <h2 className="text-4xl font-bold leading-none tracking-[-0.03em] sm:text-[44px]">{hackathon.title}</h2>
-        <p className="text-[17px] leading-relaxed text-ro-body">The only solo developer among 150 people competing in teams. One shot, 8 hours hard clock, a working demo at the end. Watch the full build.</p>
+        <p className="text-[17px] leading-relaxed text-ro-body">A $15,000 hackathon, and I was the only solo developer among 150 people competing in teams. One shot, 8 hours hard clock, a working demo at the end. Watch the full build.</p>
         <a href={hackathon.url} target="_blank" rel="noopener noreferrer" className="font-mono text-[13px] text-ro-muted hover:text-ro-fg">
           open on youtube ↗
         </a>
@@ -129,12 +136,15 @@ const Index = () => {
         animate={booting ? { opacity: 0, y: -10 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
         className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-4 sm:px-8">
-        <a href="#top" className="font-mono text-sm">
-          raafi
+        <a href="#top" className="text-[17px] font-bold tracking-[-0.01em]">
+          Raafi Riyaz
         </a>
         <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px]">
-          <a href="#best" className="text-ro-muted hover:text-ro-fg">Best rollout</a>
-          <a href="#rewards" className="text-ro-muted hover:text-ro-fg">Rewards</a>
+          <a href="#experience" className="hidden text-ro-muted hover:text-ro-fg sm:inline">Work</a>
+          <a href="#building" className="hidden text-ro-muted hover:text-ro-fg md:inline">Building</a>
+          <a href="#projects" className="text-ro-muted hover:text-ro-fg">Projects</a>
+          <a href="#writing" className="hidden text-ro-muted hover:text-ro-fg md:inline">Writing</a>
+          <a href="#about" className="hidden text-ro-muted hover:text-ro-fg sm:inline">About</a>
           <button type="button" onClick={openCv} className="min-h-[40px] rounded-full border border-ro-line2 px-3.5 hover:border-ro-acc">CV</button>
           <ThemeButton />
         </nav>
@@ -143,10 +153,10 @@ const Index = () => {
       <main>
         <section id="top" className="relative isolate mx-auto flex min-h-[calc(100svh-76px)] max-w-[1240px] scroll-mt-4 flex-wrap items-center gap-12 px-4 pb-14 pt-8 sm:px-8 md:pt-10">
           <motion.div variants={stagger} initial="hidden" animate={stage} className="flex min-w-0 flex-[1_1_440px] flex-col gap-6 pt-4">
-            <motion.h1 variants={stagger} className="text-[44px] font-bold leading-[1] tracking-[-0.04em] sm:text-[60px]">
-              <Words text="Deeply curious about how agents learn." />
+            <motion.h1 variants={stagger} className="text-[40px] font-bold leading-[1] tracking-[-0.04em] sm:text-[60px]">
+              <Words text="Text taught language models." />
               <span className="relative mt-2 block w-fit text-ro-acc-text">
-                <Words text={"I work on RL tasks and\u00A0post\u2011training."} />
+                <Words text="What will teach agents?" />
                 <motion.span
                   aria-hidden
                   variants={{ hidden: { scaleX: 0 }, show: { scaleX: 1, transition: { duration: 0.7, delay: 0.5, ease: EASE } } }}
@@ -154,13 +164,46 @@ const Index = () => {
                 />
               </span>
             </motion.h1>
+            <motion.div variants={rise} className="flex flex-wrap gap-2">
+              {[...ventures].reverse().map((v) => {
+                // VideoVoice jumps to its section on this page; Feedhire opens its own site.
+                const internal = v.id === "videovoice";
+                return (
+                  <a
+                    key={v.id}
+                    href={internal ? "#building" : v.url}
+                    {...(internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                    className="group inline-flex min-h-[38px] items-center gap-2 rounded-full border border-ro-line2 bg-ro-surface px-3.5 text-sm hover:border-ro-acc"
+                  >
+                    <span className="text-ro-muted">{internal ? "Building" : "Co-founded"}</span>
+                    <span className="font-semibold">{v.name}</span>
+                    {v.id === "feedhire" && <span className="font-mono text-xs text-ro-pass">200+ users</span>}
+                    {internal ? (
+                      <ArrowDown className="h-3.5 w-3.5 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />
+                    ) : (
+                      <ArrowUpRight className="h-3.5 w-3.5 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />
+                    )}
+                  </a>
+                );
+              })}
+            </motion.div>
+            <motion.p variants={rise} className="max-w-[52ch] text-lg leading-relaxed text-ro-fg">
+              The internet was full of text, so language models had plenty to learn from. Agents learn from environments:
+              web pages, phones and computers they can act in. Those interactions were never on the internet, so they have
+              to be built. <span className="text-ro-acc-text">That's what I'm primarily interested in.</span>
+            </motion.p>
             <motion.p variants={rise} className="max-w-[50ch] text-lg leading-relaxed text-ro-body">
-              <span className="text-ro-fg">I'm Raafi Riyaz.</span> I study, build and research scaling laws of agents at{" "}
+              I study, build and research scaling laws of agents at{" "}
               <a href={currentStatus.link} target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
                 Eigent AI
               </a>{" "}
-              in London. Previously I led RL environment engineering at Tensium and worked on MLE-bench with Meta AI as
-              an ML engineer at Mercor. Offered an RL fellowship at General Reasoning. MSc in AI.
+              in London. Previously I led RL environment engineering at Tensium. As a contractor at Mercor, I
+              extended OpenAI's MLE-bench, built coding environments for Anthropic's Claude, created human-feedback data
+              with OpenAI and browser-use data for Gemini. Offered an RL fellowship at{" "}
+              <a href="https://gr.inc" target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
+                General Reasoning
+              </a>
+              . MSc in AI.
             </motion.p>
             <motion.div variants={rise} className="flex flex-wrap gap-2.5">
               <button type="button" onClick={openCv} className="inline-flex min-h-[44px] items-center rounded-full bg-ro-acc px-[22px] text-[15px] font-semibold text-ro-acc-ink hover:opacity-90">
@@ -187,27 +230,17 @@ const Index = () => {
         </section>
 
         <div ref={trackRef} className="relative mx-auto max-w-[1240px]">
-        <Reveal id="why" className="relative scroll-mt-20 border-t border-ro-line px-4 py-20 sm:px-8 md:py-28">
-          <Observed label="read(why.md)" className="max-w-[900px]">
-            <p className="mb-6 font-mono text-xs text-ro-acc-text">why.md</p>
-            <p className="text-[28px] font-semibold leading-[1.2] tracking-[-0.02em] sm:text-[40px]">
-              <span className="text-ro-muted">Language models learned from text, and the internet was full of it.</span>{" "}
-              <span className="text-ro-fg">
-                But where do agents learn? From trajectories, and the internet was never built to save them. So who
-                builds them?
-              </span>{" "}
-              <span className="text-ro-acc-text">Can agentic RL take us to AGI?</span>
-            </p>
-            <p className="mt-6 max-w-[56ch] text-lg leading-relaxed text-ro-body">
-              That's what I research and build: the environments and tasks that produce trajectories worth learning from.
-            </p>
-          </Observed>
-        </Reveal>
-
+        <Ventures />
+        <Experience />
         <BestRollout />
+        <Projects />
+        <Writing />
 
-        <Reveal id="rewards" className="relative scroll-mt-20 border-t border-ro-line pb-20 px-4 pt-12 sm:px-8">
-          <h2 className="mb-8 text-[32px] font-bold tracking-[-0.02em]">Episodes that paid off</h2>
+        <Reveal id="rewards" className="relative scroll-mt-20 border-t border-ro-line px-4 py-20 sm:px-8">
+          <div className="mb-10 flex flex-col gap-3">
+            <p className="font-mono text-xs text-ro-acc-text">rewards/</p>
+            <h2 className="text-[32px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[42px]">Episodes that paid off</h2>
+          </div>
           <ol className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-4 gap-y-9">
             {proudFeatured.map((item, i) => {
               const body = (
@@ -248,20 +281,36 @@ const Index = () => {
           </Observed>
         </Reveal>
 
-      <footer id="contact" data-state="contact" className="relative flex flex-wrap items-center justify-between gap-5 border-t border-ro-line pb-24 px-4 pt-12 sm:px-8">
-        <Observed label="episode.end()" reward={0.5}>
-        <div className="flex flex-col gap-2">
-          <span className="font-mono text-[13px] text-ro-muted">episode.end() · terminated=True</span>
-          <span className="text-3xl font-bold tracking-[-0.02em]">Building RL environments? Let's talk.</span>
-        </div>
+        <About />
+
+      <footer id="contact" data-state="contact" className="relative border-t border-ro-line px-4 pb-28 pt-16 sm:px-8">
+        <Observed label="episode.end()" reward={0.2}>
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-3">
+              <span className="font-mono text-[13px] text-ro-muted">episode.end() · terminated=True</span>
+              <h2 className="max-w-[18ch] text-4xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-[52px]">
+                Building environments, agents or post-training data? Let's talk.
+              </h2>
+            </div>
+            <div className="flex flex-wrap gap-2.5">
+              <a href={`mailto:${contact.email}`} className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-ro-acc px-6 text-[15px] font-semibold text-ro-acc-ink hover:opacity-90">
+                <Mail className="h-4 w-4" aria-hidden />
+                {contact.email}
+              </a>
+              <button type="button" onClick={openCv} className={pill}>View CV</button>
+              <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className={pill}>LinkedIn</a>
+              <a href={contact.github} target="_blank" rel="noopener noreferrer" className={pill}>GitHub</a>
+              <a href={contact.huggingface} target="_blank" rel="noopener noreferrer" className={pill}>Hugging Face</a>
+              <a href={contact.x} target="_blank" rel="noopener noreferrer" className={pill}>X</a>
+            </div>
+            <div className="flex flex-wrap justify-between gap-3 border-t border-ro-line pt-6 font-mono text-xs text-ro-muted">
+              <span>© {new Date().getFullYear()} Raafi Riyaz · {contact.location}</span>
+              <a href={`${contact.github}/raafi_riyaz`} target="_blank" rel="noopener noreferrer" className="hover:text-ro-fg">
+                this site is open source ↗
+              </a>
+            </div>
+          </div>
         </Observed>
-        <div className="flex flex-wrap gap-2.5">
-          <button type="button" onClick={openCv} className="inline-flex min-h-[44px] items-center rounded-full bg-ro-acc px-5 text-[15px] font-semibold text-ro-acc-ink hover:opacity-90">
-            View CV
-          </button>
-          <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className={pill}>LinkedIn</a>
-          <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" className={pill}>GitHub</a>
-        </div>
       </footer>
         </div>
       </main>

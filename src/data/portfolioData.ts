@@ -429,7 +429,7 @@ export interface ProudItem {
 export const proudFeatured: ProudItem[] = [
     {
         title: "4th place, MongoDB Hackathon",
-        detail: "Placed 4th as the only solo developer among 150 people competing in teams, in an 8-hour build.",
+        detail: "Placed 4th at a $15,000 hackathon as the only solo developer among 150 people competing in teams, in an 8-hour build.",
         link: "#best",
     },
     {

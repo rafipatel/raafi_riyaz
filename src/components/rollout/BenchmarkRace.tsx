@@ -113,6 +113,7 @@ const BenchmarkRace = ({ play = true, className = "" }: { play?: boolean; classN
         hit = { from: indexOf(fromName), to: indexOf(toName) };
       }
       setScores((prev) => {
+        if (prev.length !== FIGHTERS.length) return initialScores();
         // Random swings, pulled back towards each model's usual standing.
         const next = prev.map((v, i) =>
           clamp(Math.round(v + (FIGHTERS[i].base - v) * PULL + Math.random() * 10 - 5)),

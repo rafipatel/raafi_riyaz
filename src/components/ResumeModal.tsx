@@ -12,6 +12,9 @@ const btn = "inline-flex min-h-[40px] items-center gap-2 rounded-full px-4 text-
 /** CV viewer, styled as a tool result the agent just opened. */
 const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
   const previewLink = socialLinks.cv.replace("/view?usp=sharing", "/preview");
+  // Google Drive's direct-download endpoint: the browser saves the PDF straight away.
+  const fileId = socialLinks.cv.match(/\/d\/([^/]+)/)?.[1];
+  const downloadLink = fileId ? `https://drive.google.com/uc?export=download&id=${fileId}` : socialLinks.cv;
 
   return (
     <DialogPrimitive.Root open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -33,7 +36,7 @@ const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
                 <ExternalLink className="h-4 w-4" aria-hidden />
                 <span className="hidden sm:inline">Open in new tab</span>
               </a>
-              <a href={socialLinks.cv} target="_blank" rel="noopener noreferrer" className={`${btn} bg-ro-acc text-ro-acc-ink hover:opacity-90`}>
+              <a href={downloadLink} download="raafi_riyaz_cv.pdf" className={`${btn} bg-ro-acc text-ro-acc-ink hover:opacity-90`}>
                 <Download className="h-4 w-4" aria-hidden />
                 Download
               </a>

@@ -16,9 +16,14 @@ export interface ScrollState {
 }
 
 export const SCROLL_STATES: ScrollState[] = [
-  { id: "best", action: "observe(best_rollout)", r: 0.25 },
-  { id: "rewards", action: "observe(rewards)", r: 0.25 },
-  { id: "contact", action: "episode.end()", r: 0.5 },
+  { id: "building", action: "observe(ventures)", r: 0.1 },
+  { id: "experience", action: "read(trajectory.jsonl)", r: 0.15 },
+  { id: "best", action: "observe(best_rollout)", r: 0.1 },
+  { id: "projects", action: "ls(projects/)", r: 0.15 },
+  { id: "writing", action: "read(contributions/)", r: 0.1 },
+  { id: "rewards", action: "observe(rewards)", r: 0.1 },
+  { id: "about", action: "read(about.md)", r: 0.1 },
+  { id: "contact", action: "episode.end()", r: 0.2 },
 ];
 
 const labelFor = (el: Element) => {
@@ -86,7 +91,7 @@ export const ScrollHUD = ({ t, G, event, done, visible }: { t: number; G: number
           exit={{ opacity: 0, y: 16 }}
           transition={{ duration: 0.3 }}
           aria-hidden
-          className="fixed bottom-4 left-4 z-40 flex max-w-[calc(100vw-6.5rem)] items-center gap-3 rounded-full border border-ro-line2 bg-ro-surface px-4 py-2 font-mono text-xs shadow-lg"
+          className="fixed bottom-4 left-4 z-40 flex max-w-[calc(100vw-12rem)] items-center gap-3 rounded-full border border-ro-line2 bg-ro-surface px-4 py-2 font-mono text-xs shadow-lg"
         >
           <span className={`h-2 w-2 shrink-0 rounded-full ${done ? "bg-ro-pass" : "animate-pulse bg-ro-acc"}`} />
           <span className="text-ro-muted">
