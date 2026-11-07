@@ -54,7 +54,7 @@ Co-founded Feedhire, an AI-powered global job discovery platform using NLP and o
 
 Strong in Python, PyTorch, TensorFlow, and cloud-based ML, with a research-first mindset and experience building production systems.
 
-Currently learning RL and studying scaling laws for agents at CAMEL / Eigent AI, a small research lab in London.
+Currently studying, building and researching scaling laws of agents at Eigent AI in London.
 
 While I enjoy AI broadly, my primary interests lie in Research AI and Medical AI, where I aim to create meaningful, high-impact solutions.`,
 };
@@ -406,8 +406,8 @@ export const currentTypeLabels: Record<CurrentItemType, string> = {
 
 // What Raafi is focused on right now (shown in the hero and the agent trajectory).
 export const currentStatus = {
-    focus: "Learning RL and studying scaling laws for agents",
-    org: "CAMEL / Eigent AI",
+    focus: "Studying, building and researching scaling laws of agents",
+    org: "Eigent AI",
     orgNote: "a small research lab in London",
     link: "https://www.camel-ai.org/",
 };
@@ -433,9 +433,9 @@ export const proudFeatured: ProudItem[] = [
         link: "#best",
     },
     {
-        title: "RL Fellow, General Reasoning",
+        title: "Offered RL fellowship, General Reasoning",
         date: "Mar 2026",
-        detail: "Landed the RL fellowship at General Reasoning, the startup led by Ross Taylor, working on RL research and long-horizon reasoning.",
+        detail: "Landed an offer for the RL fellowship at General Reasoning, the startup led by Ross Taylor, focused on RL research and long-horizon reasoning.",
         link: "https://gr.inc",
     },
     {

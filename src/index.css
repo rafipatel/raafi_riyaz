@@ -184,3 +184,30 @@ All colors MUST be HSL.
     background-clip: text;
   }
 }
+
+/* Quiet scrollbars that follow the theme (page and the agent panel's log). */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--ro-line2) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--ro-line2);
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--ro-muted);
+  }
+  html {
+    background-color: var(--ro-bg);
+  }
+}

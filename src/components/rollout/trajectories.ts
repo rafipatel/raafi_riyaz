@@ -11,6 +11,10 @@ export interface Step {
   video?: boolean;
   /** Partial reward for this step. */
   r: number;
+  /** Text inside the result to highlight in the accent colour. */
+  highlight?: string | string[];
+  /** Keep this step expanded when the trajectory finishes. */
+  keepOpen?: boolean;
 }
 
 export interface Trajectory {
@@ -44,7 +48,7 @@ const json = (value: unknown) => JSON.stringify(value, null, 2);
 
 const HIRE: Trajectory = {
   id: "rollout_0004",
-  task: "What is the evidence that Raafi is a good RL engineer?",
+  task: "Evaluate Raafi and return a decision.",
   model: "frontier-agent",
   pass: true,
   final: "PASS",
@@ -63,28 +67,28 @@ const HIRE: Trajectory = {
       call: 'read_file("now.json")',
       result: json({
         status: "learning",
-        focus: ["reinforcement learning", "scaling laws for agents"],
-        lab: "CAMEL / Eigent AI",
+        focus: ["studying, building and researching scaling laws of agents"],
+        lab: "Eigent AI",
         location: "London",
       }),
     },
     {
       kind: "tool",
-      r: 0.15,
+      r: 0.1,
       call: 'read_file("experience/tensium.json")',
       result: json({
         role: "RL Environment Engineer",
         work: [
-          "Builds long-horizon RL environments for frontier labs, with 70–150 causal steps per task.",
-          "Keeps a 25% pass@8 gap between weaker and frontier models so tasks actually discriminate.",
-          "Hardens tasks against oracle leakage, reward hacking, public-data overfitting and shortcuts.",
+          "Built long-horizon RL environments for frontier labs, with 70–150 causal steps per task.",
+          "Kept a 25% pass@8 gap between weaker and frontier models so tasks actually discriminate.",
+          "Hardened tasks against oracle leakage, reward hacking, public-data overfitting and shortcuts.",
           "Reviewed and delivered 4 tasks in a 20-hour sprint.",
         ],
       }),
     },
     {
       kind: "tool",
-      r: 0.15,
+      r: 0.1,
       call: 'read_file("experience/mercor.json")',
       result: json({
         role: "Machine Learning Engineer",
@@ -98,30 +102,79 @@ const HIRE: Trajectory = {
       }),
     },
     {
+      kind: "think",
+      r: 0.05,
+      call: "What's his qualification?",
+      result: json({ question: "What's his qualification?", plan: "read the education file" }),
+    },
+    {
       kind: "tool",
-      r: 0.2,
+      r: 0.05,
+      call: 'read_file("education.json")',
+      result: json({
+        degree: "MSc Artificial Intelligence",
+        university: "City, University of London",
+      }),
+    },
+    {
+      kind: "think",
+      r: 0.05,
+      call: "Any notable achievements?",
+      result: json({ question: "Any notable achievements?", plan: "read the achievements file" }),
+    },
+    {
+      kind: "tool",
+      r: 0.1,
+      call: 'read_file("achievements.json")',
+      result: json({
+        achievements: [
+          "4th place at the MongoDB Hackathon: the only solo developer among 150 people competing in teams, in an 8-hour build.",
+          "Offered an RL fellowship at General Reasoning, the startup led by Ross Taylor.",
+          "Shortlisted for the Anthropic RL Safety Research Programme.",
+          "Completed BlueDot's Technical AI Safety course on alignment and control.",
+          "Invited to AI UK 2025 by Harmony to present fine-tuning language models for their dataset.",
+          "2nd rank in the Harmony × UCL fine-tuning challenge.",
+          "Selected for an ML research internship at City, University of London.",
+        ],
+      }),
+    },
+    {
+      kind: "think",
+      r: 0.05,
+      call: "Can he explain his work and demo it live?",
+      result: json({ question: "Can he explain his work and demo it live?", plan: "watch the hackathon demo" }),
+    },
+    {
+      kind: "tool",
+      r: 0.1,
       call: 'open("youtu.be/sYy8DrTpudk")',
       result: "",
       video: true,
     },
     {
       kind: "check",
-      r: 0.15,
+      r: 0.1,
       call: "grader.check_reward_hacking(candidate)",
       result: json({ oracle_leakage: false, shortcut_solutions: false, public_data_overfitting: false, verdict: "clean" }),
     },
     {
       kind: "submit",
-      r: 0.2,
+      r: 0.15,
       call: 'submit(decision="hire")',
-      result: json({ grader: "PASS", decision: "hire" }),
+      result: json({
+        grader: "PASS",
+        decision: "hire",
+        verdict: "Builds honest RL environments, learns fast and can show his work.",
+      }),
+      highlight: '"Builds honest RL environments, learns fast and can show his work."',
+      keepOpen: true,
     },
   ],
 };
 
 const VISITOR: Trajectory = {
   id: "rollout_you",
-  task: "What is the evidence that Raafi is a good RL engineer?",
+  task: "Evaluate Raafi and return a decision.",
   model: "visitor",
   pass: false,
   final: "BLOCKED",
@@ -169,6 +222,8 @@ const VISITOR: Trajectory = {
         note: "Shortcuts earn nothing here. That's the whole job.",
         next: "Try reading the CV. It's shorter than 150 steps.",
       }),
+      highlight: '"Try reading the CV. It\'s shorter than 150 steps."',
+      keepOpen: true,
     },
   ],
 };
