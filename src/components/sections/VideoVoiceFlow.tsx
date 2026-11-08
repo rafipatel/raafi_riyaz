@@ -85,7 +85,7 @@ const VideoVoiceFlow = () => {
                 </button>
               ))}
             </div>
-            <span className="text-[14px] text-ro-body">{PRODUCTS[product].blurb}</span>
+            <span className="text-[15px] text-ro-body">{PRODUCTS[product].blurb}</span>
           </div>
           <span className="font-mono text-xs text-ro-muted">{auto && !reduce ? "playing · click a step" : "click a step"}</span>
         </div>
@@ -101,7 +101,7 @@ const VideoVoiceFlow = () => {
                   type="button"
                   onClick={() => pick(i)}
                   aria-pressed={on}
-                  className={`flex h-full w-full flex-col items-start gap-1 rounded-xl border p-2.5 text-left transition-colors ${
+                  className={`flex h-full w-full flex-col items-start gap-1 rounded-xl border p-3 text-left transition-colors ${
                     on ? "border-ro-acc bg-ro-tool-bg" : done ? "border-ro-line2 bg-ro-inset" : "border-ro-line bg-ro-inset hover:border-ro-line2"
                   }`}
                 >
@@ -115,7 +115,7 @@ const VideoVoiceFlow = () => {
                     </span>
                     <span className="font-mono text-[10px] text-ro-muted">{i + 1}</span>
                   </span>
-                  <span className={`text-[14px] font-semibold leading-tight ${on ? "text-ro-tool-fg" : ""}`}>{s.title}</span>
+                  <span className={`text-[15px] font-semibold leading-tight ${on ? "text-ro-tool-fg" : ""}`}>{s.title}</span>
                   {s.tech && <span className="font-mono text-[10px] leading-tight text-ro-muted">{s.tech}</span>}
                 </button>
                 {/* progress bar under each card */}
@@ -144,7 +144,7 @@ const VideoVoiceFlow = () => {
               initial={{ opacity: 0, x: 6 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.2 }}
-              className="text-[15px] leading-relaxed text-ro-body"
+              className="text-[16px] leading-relaxed text-ro-body"
             >
               <span className="font-semibold text-ro-fg">
                 {active + 1}. {step.title}.

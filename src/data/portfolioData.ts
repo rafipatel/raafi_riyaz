@@ -54,7 +54,7 @@ Co-founded Feedhire, an AI-powered global job discovery platform using NLP and o
 
 Strong in Python, PyTorch, TensorFlow, and cloud-based ML, with a research-first mindset and experience building production systems.
 
-Currently studying, building and researching scaling laws of agents at Eigent AI in London.
+Currently studying, building and researching scaling laws of agents at CAMEL-AI | Eigent AI in London.
 
 While I enjoy AI broadly, my primary interests lie in Research AI and Medical AI, where I aim to create meaningful, high-impact solutions.`,
 };
@@ -68,7 +68,7 @@ export const experiences = [
             "Created long-horizon reinforcement-learning environments in Harbour format with 70–150 causal steps for frontier labs, maintaining a 25% pass@8 performance gap between weaker and frontier models to ensure meaningful task discrimination.",
             "Used the HUD platform to design, debug, and analyze RL environments, engineering tasks resistant to oracle leakage, reward hacking, public-data overfitting, and shortcut-based solutions while targeting challenging long-horizon reasoning and coding behavior.",
             "Built an automated PR-triggered long-horizon RL QA pipeline with GitHub Actions and an internal harness, running isolated environment/grader checks and surfacing automated pass/block verdicts to replace manual soundness review.",
-            "Reviewed and successfully delivered 4 tasks in a 20-hour sprint.",
+            "Reviewed and successfully delivered 4 long-horizon tasks in a 20-hour sprint.",
         ],
     },
     {
@@ -407,7 +407,7 @@ export const currentTypeLabels: Record<CurrentItemType, string> = {
 // What Raafi is focused on right now (shown in the hero and the agent trajectory).
 export const currentStatus = {
     focus: "Studying, building and researching scaling laws of agents",
-    org: "Eigent AI",
+    org: "CAMEL-AI | Eigent AI",
     orgNote: "a small research lab in London",
     link: "https://www.camel-ai.org/",
 };

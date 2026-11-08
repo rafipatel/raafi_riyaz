@@ -68,7 +68,7 @@ const HIRE: Trajectory = {
       result: json({
         status: "learning",
         focus: ["studying, building and researching scaling laws of agents"],
-        lab: "Eigent AI",
+        lab: "CAMEL-AI | Eigent AI",
         location: "London",
       }),
     },
@@ -82,7 +82,7 @@ const HIRE: Trajectory = {
           "Built long-horizon RL environments for frontier labs, with 70–150 causal steps per task.",
           "Kept a 25% pass@8 gap between weaker and frontier models so tasks actually discriminate.",
           "Hardened tasks against oracle leakage, reward hacking, public-data overfitting and shortcuts.",
-          "Reviewed and delivered 4 tasks in a 20-hour sprint.",
+          "Reviewed and delivered 4 long-horizon tasks in a 20-hour sprint.",
         ],
       }),
     },

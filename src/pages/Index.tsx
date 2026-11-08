@@ -8,6 +8,7 @@ import Observed from "@/components/rollout/Observed";
 import Ventures from "@/components/sections/Ventures";
 import Experience from "@/components/sections/Experience";
 import Projects from "@/components/sections/Projects";
+import Rewards from "@/components/sections/Rewards";
 import Writing from "@/components/sections/Writing";
 import About from "@/components/sections/About";
 import { contact, ventures } from "@/data/siteContent";
@@ -15,7 +16,7 @@ import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
 import { ScrollHUD, useScrollEpisode } from "@/components/rollout/ScrollTrajectory";
 import type { Selection } from "@/components/rollout/trajectories";
 import { useTheme } from "@/components/ThemeProvider";
-import { currentStatus, hackathon, proudFeatured, proudMore, socialLinks } from "@/data/portfolioData";
+import { hackathon, socialLinks } from "@/data/portfolioData";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -194,7 +195,11 @@ const Index = () => {
             </motion.p>
             <motion.p variants={rise} className="max-w-[50ch] text-lg leading-relaxed text-ro-body">
               I study, build and research scaling laws of agents at{" "}
-              <a href={currentStatus.link} target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
+              <a href="https://www.camel-ai.org/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
+                CAMEL-AI
+              </a>{" "}
+              <span className="text-ro-muted">|</span>{" "}
+              <a href="https://www.eigent.ai/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
                 Eigent AI
               </a>{" "}
               in London. Previously I led RL environment engineering at Tensium. As a contractor at Mercor, I
@@ -236,50 +241,7 @@ const Index = () => {
         <Projects />
         <Writing />
 
-        <Reveal id="rewards" className="relative scroll-mt-20 border-t border-ro-line px-4 py-20 sm:px-8">
-          <div className="mb-10 flex flex-col gap-3">
-            <p className="font-mono text-xs text-ro-acc-text">rewards/</p>
-            <h2 className="text-[32px] font-bold leading-[1.05] tracking-[-0.03em] sm:text-[42px]">Episodes that paid off</h2>
-          </div>
-          <ol className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-x-4 gap-y-9">
-            {proudFeatured.map((item, i) => {
-              const body = (
-                <>
-                  <span className="font-mono text-xs text-ro-pass">✓ {item.date ?? "—"}</span>
-                  <span className="text-lg font-semibold leading-snug">{item.title}</span>
-                  <span className="text-sm leading-relaxed text-ro-body">{item.detail}</span>
-                </>
-              );
-              const cls = "flex h-full flex-col gap-1.5 rounded-2xl border border-ro-line p-[18px]";
-              return (
-                <li key={item.title} className="flex">
-                  <Observed label={`episode[${i}]`} reward={0.1} delay={i * 0.18} className="w-full">
-                  {item.link ? (
-                    <a
-                      href={item.link}
-                      {...(item.link.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                      className={`${cls} hover:border-ro-acc`}
-                    >
-                      {body}
-                    </a>
-                  ) : (
-                    <div className={cls}>{body}</div>
-                  )}
-                  </Observed>
-                </li>
-              );
-            })}
-          </ol>
-          <Observed label="replay_buffer.sample()" delay={0.2} className="mt-10">
-            <ul className="flex flex-wrap gap-x-7 gap-y-2 py-1 text-[15px] text-ro-body">
-              {proudMore.map((item) => (
-                <li key={item.title}>
-                  {item.title} · {item.date}
-                </li>
-              ))}
-            </ul>
-          </Observed>
-        </Reveal>
+        <Rewards />
 
         <About />
 

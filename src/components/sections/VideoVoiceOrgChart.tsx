@@ -37,11 +37,11 @@ const line = "bg-ro-line2";
 const AgentNode = ({ agent, size = "sm" }: { agent: Agent; size?: "lg" | "md" | "sm" }) => (
   <div
     className={`flex w-full flex-col items-center gap-1 rounded-xl border text-center ${
-      size === "lg" ? "border-ro-acc bg-ro-tool-bg px-4 py-2" : size === "md" ? "border-ro-line2 bg-ro-surface px-3 py-2" : "border-ro-line bg-ro-surface px-1.5 py-1.5"
+      size === "lg" ? "border-ro-acc bg-ro-tool-bg px-4 py-2.5" : size === "md" ? "border-ro-line2 bg-ro-surface px-3 py-2" : "border-ro-line bg-ro-surface px-1.5 py-2"
     }`}
   >
     <span
-      className={`font-semibold leading-tight ${size === "lg" ? "text-base text-ro-tool-fg" : size === "md" ? "text-[14px]" : "whitespace-nowrap text-[11.5px] text-ro-body"}`}
+      className={`font-semibold leading-tight ${size === "lg" ? "text-lg text-ro-tool-fg" : size === "md" ? "text-[15px]" : "whitespace-nowrap text-[13px] text-ro-body"}`}
     >
       {agent.role}
     </span>
@@ -58,6 +58,7 @@ const VideoVoiceOrgChart = () => {
     acc += w;
     return c;
   });
+  const mid = (centres[0] + centres[centres.length - 1]) / 2;
 
   return (
     <div>
@@ -65,19 +66,29 @@ const VideoVoiceOrgChart = () => {
 
       {/* Org chart (tablet and up) */}
       <div className="hidden md:block">
-        <div className="mx-auto w-[200px]">
-          <AgentNode agent={CEO} size="lg" />
+        {/* CEO centred between the CTO and CMO, with rounded elbows leaving its
+            left and right sides and dropping onto each lead. */}
+        <div className="relative h-[60px]">
+          <span
+            aria-hidden
+            className="absolute bottom-0 top-[22px] rounded-tl-xl border-l border-t "
+            style={{ left: `${centres[0]}%`, right: `calc(${100 - mid}% + 80px)`, borderColor: "var(--ro-line2)" }}
+          />
+          <span
+            aria-hidden
+            className="absolute bottom-0 top-[22px] rounded-tr-xl border-r border-t"
+            style={{ left: `calc(${mid}% + 80px)`, right: `${100 - centres[1]}%`, borderColor: "var(--ro-line2)" }}
+          />
+          <div className="absolute top-0 w-[160px] -translate-x-1/2" style={{ left: `${mid}%` }}>
+            <AgentNode agent={CEO} size="lg" />
+          </div>
         </div>
-        <div className={`mx-auto h-4 w-px ${line}`} aria-hidden />
 
         <div className="relative">
-          {/* bar joining the two leads */}
-          <span aria-hidden className={`absolute top-0 h-px ${line}`} style={{ left: `${centres[0]}%`, right: `${100 - centres[centres.length - 1]}%` }} />
           <div className="flex">
             {BRANCHES.map((b) => (
               <div key={b.lead.role} className="flex flex-col items-center" style={{ flex: b.reports.length }}>
-                <span aria-hidden className={`h-4 w-px ${line}`} />
-                <div className="w-[170px]">
+                <div className="w-[150px]">
                   <AgentNode agent={b.lead} size="md" />
                 </div>
                 <span aria-hidden className={`h-4 w-px ${line}`} />

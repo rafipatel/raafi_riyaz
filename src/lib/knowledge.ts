@@ -37,7 +37,7 @@ export const getSystemPrompt = () => {
 
 WHO HE IS
 - Raafi Riyaz, based in ${contact.location}. RL environment engineer, deeply curious about how agents learn; works on RL tasks and post-training.
-- Now: ${currentStatus.focus} at ${currentStatus.org} (CAMEL / Eigent AI), a research lab in London.
+- Now: ${currentStatus.focus} at ${currentStatus.org}, a research lab in London.
 - MSc in Artificial Intelligence, City, University of London.
 - Thesis of his work: language models learned from the internet's text, but agents learn from trajectories, which the internet never saved; so the environments and tasks that produce good trajectories have to be built. He researches and builds them.
 

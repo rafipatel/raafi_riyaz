@@ -28,7 +28,17 @@ const Experience = () => (
               <h3 className="text-xl font-semibold leading-snug sm:text-2xl">
                 {t.role}{" "}
                 <span className="text-ro-muted">·</span>{" "}
-                {t.href ? (
+                {t.links ? (
+                  t.links.map((l, i) => (
+                    <span key={l.href}>
+                      {i > 0 && <span className="text-ro-muted"> | </span>}
+                      <a href={l.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 text-ro-acc-text hover:underline">
+                        {l.label}
+                        <ArrowUpRight className="h-4 w-4" aria-hidden />
+                      </a>
+                    </span>
+                  ))
+                ) : t.href ? (
                   <a href={t.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 text-ro-acc-text hover:underline">
                     {t.org}
                     <ArrowUpRight className="h-4 w-4" aria-hidden />

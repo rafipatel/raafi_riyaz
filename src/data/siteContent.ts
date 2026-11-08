@@ -58,6 +58,8 @@ export interface TimelineEntry {
   role: string;
   org: string;
   href?: string;
+  /** Several organisations, each with its own link, shown separated by a pipe. */
+  links?: { label: string; href: string }[];
   tag?: string;
   summary: string;
   points: string[];
@@ -69,8 +71,11 @@ export const timeline: TimelineEntry[] = [
   {
     period: "Now",
     role: "Researcher, scaling laws of agents",
-    org: "Eigent AI",
-    href: "https://www.camel-ai.org/",
+    org: "CAMEL-AI | Eigent AI",
+    links: [
+      { label: "CAMEL-AI", href: "https://www.camel-ai.org/" },
+      { label: "Eigent AI", href: "https://www.eigent.ai/" },
+    ],
     tag: "current",
     summary: "Studying, building and researching how agents scale, at a small research lab in London.",
     points: [],
@@ -84,7 +89,7 @@ export const timeline: TimelineEntry[] = [
       "Built long-horizon RL environments in Harbour format with 70–150 causal steps, keeping a 25% pass@8 gap between weaker and frontier models.",
       "Used the HUD platform to design, debug and analyse environments, hardening tasks against oracle leakage, reward hacking, public-data overfitting and shortcut solutions.",
       "Built a PR-triggered QA pipeline with GitHub Actions and an internal harness that runs isolated environment and grader checks and returns pass/block verdicts.",
-      "Reviewed and delivered 4 tasks in a 20-hour sprint.",
+      "Reviewed and delivered 4 long-horizon tasks in a 20-hour sprint.",
     ],
   },
   {

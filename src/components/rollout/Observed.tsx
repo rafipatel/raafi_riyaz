@@ -1,10 +1,9 @@
 import type { ReactNode } from "react";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /*
  * As the visitor scrolls, the agent "observes" each element: a scan line sweeps
- * down it, the content is revealed behind the scan, a tracking box snaps around it
- * and a small mono tag names the observation. Decorative only; the content itself
+ * down it, the content is revealed behind the scan, and a small mono tag names the observation. Decorative only; the content itself
  * is ordinary, accessible markup.
  */
 
@@ -19,24 +18,9 @@ interface Props {
   children: ReactNode;
 }
 
-const corner = (pos: string, from: { x: number; y: number }, delay: number): { cls: string; v: Variants } => ({
-  cls: pos,
-  v: {
-    hidden: { opacity: 0, x: from.x, y: from.y },
-    show: { opacity: [0, 1, 1, 0.35], x: 0, y: 0, transition: { duration: 1.3, delay, ease: EASE, times: [0, 0.3, 0.7, 1] } },
-  },
-});
-
 const Observed = ({ label, reward, delay = 0, className = "", children }: Props) => {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;
-
-  const corners = [
-    corner("left-0 top-0 border-l-2 border-t-2 rounded-tl-md", { x: -10, y: -10 }, delay),
-    corner("right-0 top-0 border-r-2 border-t-2 rounded-tr-md", { x: 10, y: -10 }, delay),
-    corner("bottom-0 left-0 border-b-2 border-l-2 rounded-bl-md", { x: -10, y: 10 }, delay),
-    corner("bottom-0 right-0 border-b-2 border-r-2 rounded-br-md", { x: 10, y: 10 }, delay),
-  ];
 
   return (
     <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }} className={`relative ${className}`}>
@@ -60,10 +44,6 @@ const Observed = ({ label, reward, delay = 0, className = "", children }: Props)
             show: { top: ["0%", "100%"], opacity: [0, 1, 1, 0], transition: { duration: SCAN, delay, ease: "easeInOut", times: [0, 0.1, 0.85, 1] } },
           }}
         />
-        {/* Tracking box corners */}
-        {corners.map((c) => (
-          <motion.span key={c.cls} variants={c.v} className={`absolute h-3.5 w-3.5 border-ro-acc ${c.cls}`} />
-        ))}
         {/* Observation tag */}
         <motion.span
           variants={{

@@ -31,7 +31,7 @@ const About = () => (
           </p>
           <p>
             An MSc in Artificial Intelligence in London pulled me towards research: lung cancer survival models, GANs, deep RL. Since then I've
-            worked on the data and environments frontier models learn from, at Mercor and Tensium, and now on how agents scale at Eigent AI.
+            worked on the data and environments frontier models learn from, at Mercor and Tensium, and now on how agents scale at CAMEL-AI | Eigent AI.
           </p>
           <p>
             Outside work I build products (VideoVoice, Feedhire), enter hackathons solo, write, and have given a talk introducing RL to final-year students. I speak English, Urdu,
