@@ -41,7 +41,7 @@ const Card = ({ t, i }: { t: TimelineEntry; i: number }) => {
   const current = t.tag === "current";
   return (
     <Observed label={`step(${t.org.toLowerCase().replace(/[^a-z]+/g, "_").replace(/_+$/, "")})`} delay={0.05}>
-      <article className="flex flex-col gap-3 rounded-2xl border border-ro-line bg-ro-surface p-6 transition-colors hover:border-ro-line2">
+      <article className="flex flex-col gap-3 rounded-2xl border border-ro-line bg-ro-surface p-5 transition-colors hover:border-ro-line2 sm:p-6">
         <div className="flex items-baseline justify-between gap-3 font-mono text-xs">
           <span className={current ? "font-semibold text-ro-pass" : "text-ro-acc-text"}>{t.period}</span>
           <span className="text-ro-muted">step {timeline.length - i}</span>

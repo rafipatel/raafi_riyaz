@@ -136,19 +136,25 @@ const Index = () => {
         initial={{ opacity: 0, y: -10 }}
         animate={booting ? { opacity: 0, y: -10 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
-        className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-4 sm:px-8">
+        className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3 sm:px-8 md:py-4">
         <a href="#top" className="text-[17px] font-bold tracking-[-0.01em]">
           Raafi Riyaz
         </a>
-        <nav aria-label="Primary" className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[15px]">
-          <a href="#experience" className="hidden text-ro-muted hover:text-ro-fg sm:inline">Work</a>
-          <a href="#building" className="hidden text-ro-muted hover:text-ro-fg md:inline">Building</a>
-          <a href="#projects" className="text-ro-muted hover:text-ro-fg">Projects</a>
-          <a href="#writing" className="hidden text-ro-muted hover:text-ro-fg md:inline">Writing</a>
-          <a href="#about" className="hidden text-ro-muted hover:text-ro-fg sm:inline">About</a>
+        {/* Section links: a scrollable strip on its own row on phones, inline from tablet up */}
+        <nav
+          aria-label="Primary"
+          className="order-3 -mx-4 flex w-[calc(100%+2rem)] items-center gap-5 overflow-x-auto px-4 text-[14px] sm:-mx-8 sm:w-[calc(100%+4rem)] sm:px-8 [scrollbar-width:none] md:order-2 md:mx-0 md:w-auto md:gap-6 md:overflow-visible md:px-0 md:text-[15px] [&::-webkit-scrollbar]:hidden"
+        >
+          <a href="#experience" className="shrink-0 text-ro-muted hover:text-ro-fg">Work</a>
+          <a href="#building" className="shrink-0 text-ro-muted hover:text-ro-fg">Building</a>
+          <a href="#projects" className="shrink-0 text-ro-muted hover:text-ro-fg">Projects</a>
+          <a href="#writing" className="shrink-0 text-ro-muted hover:text-ro-fg">Writing</a>
+          <a href="#about" className="shrink-0 text-ro-muted hover:text-ro-fg">About</a>
+        </nav>
+        <div className="order-2 flex items-center gap-3 md:order-3">
           <button type="button" onClick={openCv} className="min-h-[40px] rounded-full border border-ro-line2 px-3.5 hover:border-ro-acc">CV</button>
           <ThemeButton />
-        </nav>
+        </div>
       </motion.header>
 
       <main>

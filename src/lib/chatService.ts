@@ -1,6 +1,5 @@
 import Groq from "groq-sdk";
 import { GROQ_CONFIG } from "./groqConfig";
-import { POLLEN_CONFIG } from "./pollenConfig";
 import { getSystemPrompt } from "./knowledge";
 
 export interface ChatMessage {
@@ -74,33 +73,6 @@ class ChatService {
         return this.groq;
     }
 
-    private async sendPollenMessage(messages: any[]): Promise<string> {
-        if (!POLLEN_CONFIG.apiKey) {
-            throw new Error("Pollinations API key not configured");
-        }
-
-        const response = await fetch(POLLEN_CONFIG.apiUrl, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${POLLEN_CONFIG.apiKey}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                model: POLLEN_CONFIG.model,
-                messages: messages,
-                temperature: POLLEN_CONFIG.temperature,
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.text();
-            throw new Error(`Pollinations API error: ${response.status} ${error}`);
-        }
-
-        const data = await response.json();
-        return data.choices[0]?.message?.content || "";
-    }
-
     async sendMessage(userMessage: string): Promise<ChatResponse> {
         try {
             // Add user message to history
@@ -126,59 +98,48 @@ class ChatService {
             ];
 
             let assistantMessage = "";
-            let provider = "Pollinations AI";
-            let model = POLLEN_CONFIG.model;
+            const provider = "Groq";
+            let model = GROQ_CONFIG.model;
 
-            try {
-                // Try Pollinations AI first
-                assistantMessage = await this.sendPollenMessage(messages);
-                this.lastProvider = provider;
-                this.lastModel = model;
-            } catch (pollenError) {
-                console.error("Pollinations AI failed, falling back to Groq:", pollenError);
-
-                // Fallback to Groq
-                const groqClient = await this.getGroqClient();
-                let lastError: unknown = null;
-                // Two passes: if every model is rate-limited, wait as long as Groq
-                // asks (capped) and try once more.
-                for (let pass = 0; pass < 2 && !assistantMessage; pass++) {
-                    let waitMs = 0;
-                    for (const candidate of GROQ_CONFIG.models) {
-                        try {
-                            const chatCompletion = await groqClient.chat.completions.create({
-                                messages: messages as any,
-                                model: candidate,
-                                temperature: GROQ_CONFIG.temperature,
-                                max_tokens: GROQ_CONFIG.maxTokens,
-                                top_p: GROQ_CONFIG.topP,
-                            });
-                            // Some models wrap their reasoning in <think> tags; keep only the answer.
-                            assistantMessage = (chatCompletion.choices[0]?.message?.content || "")
-                                .replace(/<think>[\s\S]*?<\/think>/g, "")
-                                .trim();
-                            if (assistantMessage) {
-                                model = candidate;
-                                break;
-                            }
-                        } catch (err) {
-                            lastError = err;
-                            const retryIn = /try again in ([\d.]+)s/.exec(String((err as Error)?.message))?.[1];
-                            if (retryIn) waitMs = Math.max(waitMs, Math.ceil(parseFloat(retryIn) * 1000));
-                            console.warn(`Groq model ${candidate} failed, trying the next one:`, err);
+            const groqClient = await this.getGroqClient();
+            let lastError: unknown = null;
+            // Two passes: if every model is rate-limited, wait as long as Groq
+            // asks (capped) and try once more.
+            for (let pass = 0; pass < 2 && !assistantMessage; pass++) {
+                let waitMs = 0;
+                for (const candidate of GROQ_CONFIG.models) {
+                    try {
+                        const chatCompletion = await groqClient.chat.completions.create({
+                            messages: messages as Groq.Chat.ChatCompletionMessageParam[],
+                            model: candidate,
+                            temperature: GROQ_CONFIG.temperature,
+                            max_tokens: GROQ_CONFIG.maxTokens,
+                            top_p: GROQ_CONFIG.topP,
+                        });
+                        // Some models wrap their reasoning in <think> tags; keep only the answer.
+                        assistantMessage = (chatCompletion.choices[0]?.message?.content || "")
+                            .replace(/<think>[\s\S]*?<\/think>/g, "")
+                            .trim();
+                        if (assistantMessage) {
+                            model = candidate;
+                            break;
                         }
-                    }
-                    if (!assistantMessage && pass === 0 && waitMs > 0) {
-                        await new Promise((r) => setTimeout(r, Math.min(waitMs, 20000)));
-                    } else {
-                        break;
+                    } catch (err) {
+                        lastError = err;
+                        const retryIn = /try again in ([\d.]+)s/.exec(String((err as Error)?.message))?.[1];
+                        if (retryIn) waitMs = Math.max(waitMs, Math.ceil(parseFloat(retryIn) * 1000));
+                        console.warn(`Groq model ${candidate} failed, trying the next one:`, err);
                     }
                 }
-                if (!assistantMessage && lastError) throw lastError;
-                provider = "Groq";
-                this.lastProvider = provider;
-                this.lastModel = model;
+                if (!assistantMessage && pass === 0 && waitMs > 0) {
+                    await new Promise((r) => setTimeout(r, Math.min(waitMs, 20000)));
+                } else {
+                    break;
+                }
             }
+            if (!assistantMessage && lastError) throw lastError;
+            this.lastProvider = provider;
+            this.lastModel = model;
 
             if (!assistantMessage) {
                 throw new Error("No response generated from any provider");
@@ -199,7 +160,7 @@ class ChatService {
                 model
             };
         } catch (error) {
-            console.error("All AI providers failed:", error);
+            console.error("Groq failed:", error);
             const msg = error instanceof Error ? error.message : "Unknown error";
             throw new Error(`Failed to get response from AI: ${msg}`);
         }

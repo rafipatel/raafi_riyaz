@@ -153,10 +153,13 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
+    /* Nothing should ever make the page scroll sideways on a phone. */
+    overflow-x: clip;
   }
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 }
 

@@ -9,8 +9,9 @@ const About = () => (
     <SectionHeading kicker="about.md" title="A bit more about me" />
 
     <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)]">
-      <div className="flex flex-col gap-10 self-start">
-      <Observed label="observe(photo)">
+      {/* Desktop: photo and toolbox on the left. Phones: photo, story, then toolbox. */}
+      <div className="contents lg:flex lg:flex-col lg:gap-10 lg:self-start">
+      <Observed label="observe(photo)" className="order-1 lg:order-none">
         <figure className="flex flex-col gap-3">
           <img
             src={aiukPhoto}
@@ -24,7 +25,7 @@ const About = () => (
         </figure>
       </Observed>
 
-        <div className="flex flex-col gap-4">
+        <div className="order-3 flex flex-col gap-4 lg:order-none">
           <h3 className="font-mono text-xs text-ro-acc-text">toolbox</h3>
           <div className="flex flex-col gap-3">
             {toolbox.map((t) => (
@@ -41,7 +42,7 @@ const About = () => (
         </div>
       </div>
 
-      <div className="flex flex-col gap-10">
+      <div className="order-2 flex flex-col gap-10 lg:order-none">
         <div className="flex flex-col gap-4 text-[17px] leading-relaxed text-ro-body">
           {about.paragraphs.map((p) => (
             <p key={p}>{richText(p, { strong: "text-ro-fg" })}</p>

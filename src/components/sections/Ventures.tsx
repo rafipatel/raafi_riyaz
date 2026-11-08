@@ -117,14 +117,15 @@ const Ventures = () => {
   const reduce = useReducedMotion();
   const [open, setOpen] = useState(false);
   return (
-    <section id="building" data-state="building" className="mx-auto flex min-h-[100svh] max-w-[1240px] scroll-mt-0 flex-col justify-center border-t border-ro-line px-4 py-6 sm:px-8">
+    <section id="building" data-state="building" className="mx-auto flex min-h-[100svh] max-w-[1240px] scroll-mt-0 flex-col justify-center overflow-x-clip border-t border-ro-line px-4 py-6 sm:px-8">
       <Observed label="open(videovoice)">
         <LayoutGroup>
           {/* Before the click the heading is one line across the top; after it,
               it slides into the left column and wraps to two lines. */}
           {!open && <Heading className="mb-4" />}
           <div className="relative">
-          <div className="grid gap-10 lg:grid-cols-[340px_minmax(0,1fr)]">
+          {/* On phones the diagram only appears after the click; on desktop it shows blurred behind */}
+          <div className={`${open ? "grid" : "hidden lg:grid"} gap-10 lg:grid-cols-[340px_minmax(0,1fr)]`}>
             <div className="flex flex-col gap-4">
               {open && (
                 <>
@@ -142,7 +143,7 @@ const Ventures = () => {
 
           {/* Before the click: the story and the button, centred across the section */}
           {!open && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-7 bg-[radial-gradient(ellipse_at_center,var(--ro-bg)_35%,transparent_72%)]">
+            <div className="flex flex-col items-center gap-7 py-4 lg:absolute lg:inset-0 lg:justify-center lg:bg-[radial-gradient(ellipse_at_center,var(--ro-bg)_35%,transparent_72%)] lg:py-0">
               <Story centred />
               <ul className="flex flex-wrap justify-center gap-2">
                 {STATS.map((st) => (
