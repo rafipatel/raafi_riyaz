@@ -1,7 +1,7 @@
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Observed from "@/components/rollout/Observed";
 import SectionHeading from "./SectionHeading";
-import { timeline, type TimelineEntry } from "@/data/portfolioData";
+import { experienceSection, timeline, type TimelineEntry } from "@/data/portfolioData";
 
 const Bullet = ({ children }: { children: string }) => (
   <li className="flex gap-3 text-[15px] leading-relaxed text-ro-body">
@@ -104,8 +104,8 @@ const Experience = () => (
   <section id="experience" data-state="experience" className="mx-auto max-w-[1240px] scroll-mt-20 border-t border-ro-line px-4 py-20 sm:px-8">
     <SectionHeading
       kicker="trajectory.jsonl"
-      title="Experience"
-      sub="From computer vision on factory floors to RL environments for frontier labs, newest first."
+      title={experienceSection.title}
+      sub={experienceSection.sub}
     />
 
     <div className="relative pl-8 md:pl-0">

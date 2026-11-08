@@ -114,6 +114,11 @@ export const videoVoice = ventures[0];
 // 4. EXPERIENCE (timeline)
 // ---------------------------------------------------------------------------
 
+export const experienceSection = {
+    title: "Experience",
+    sub: "From computer vision and NLP to RL environments for frontier labs, newest first.",
+};
+
 export interface TimelineEntry {
   period: string;
   role: string;
@@ -475,7 +480,7 @@ export const about = {
     photoCaption: "AI UK 2025, The Alan Turing Institute, presenting fine-tuned language models for Harmony.",
     /** rich: **words** show in the brighter text colour */
     paragraphs: [
-        "**I came to AI through engineering.** A diploma in mechanical engineering, a BSc in IT in Mumbai, then computer vision on factory floors and AI for software testing in production, where I was promoted three months into an internship.",
+        "**I came to AI through engineering.** A diploma in mechanical engineering, a BSc in IT in Mumbai, then computer vision for detecting fabric defects and AI for software testing in production, where I was offered a full-time role three months into an internship.",
         "An MSc in Artificial Intelligence in London pulled me towards research: lung cancer survival models, GANs, deep RL. Since then I've worked on the data and environments frontier models learn from, at Mercor and Tensium, and now on how agents scale at CAMEL-AI | Eigent AI.",
         "Outside work I build products (VideoVoice, Feedhire), enter hackathons solo, write, and have given a talk introducing RL to final-year students. I speak English, Urdu, Hindi and Marathi.",
     ],
