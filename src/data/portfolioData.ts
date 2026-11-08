@@ -1,8 +1,642 @@
-// Used by both UI components and AI chatbot knowledge base
+// ============================================================================
+// EVERYTHING THE SITE SAYS ABOUT RAAFI LIVES IN THIS FILE.
+// Edit text here and the page, the agent panel and the chatbot all update.
+// Sections follow the page from top to bottom.
+//
+// Formatting you can use inside text marked "rich":
+//   **words**          highlighted (bold or brighter, depending on the spot)
+//   [label](url)       a link
+//   ==words==          blue accent colour
+//
+// The VideoVoice diagram (AI team, pipeline steps, models) is in videoVoice.ts.
+// The browser tab title and Google/link-preview descriptions are in index.html.
+// ============================================================================
+
 import videoTransImg from "@/components/photos/videoTrans.png";
 import aiuk2025Img from "@/components/photos/aiuk2025.png";
 import nlpchallengeImg from "@/components/photos/nlpchallenge.png";
 import srganImg from "@/components/photos/SRGAN.png";
+
+// ---------------------------------------------------------------------------
+// 1. CONTACT & LINKS
+// ---------------------------------------------------------------------------
+
+export const socialLinks = {
+    linkedin: "https://www.linkedin.com/in/raafi-riyaz-bb2954202/",
+    github: "https://github.com/rafipatel",
+    repoUrl: "https://github.com/rafipatel/rafi",
+    huggingface: "https://huggingface.co/Rafii",
+    cv: "https://drive.google.com/file/d/14RZDtNFdu91xZHUsfjDPN7rgwSZjOTuG/view?usp=sharing"
+};
+
+export const contact = {
+    email: "rafa.works313@gmail.com",
+    linkedin: socialLinks.linkedin,
+    github: socialLinks.github,
+    huggingface: socialLinks.huggingface,
+    x: "https://x.com/rafipatel_rafi",
+    location: "London, United Kingdom",
+};
+
+// ---------------------------------------------------------------------------
+// 2. HERO (top of the page)
+// ---------------------------------------------------------------------------
+
+export const hero = {
+    headline: "Text taught language models.",
+    headlineAccent: "What will teach agents?",
+    /** The two pills under the headline. */
+    pills: {
+        videovoice: "Building",
+        feedhire: "Co-founded",
+        feedhireStat: "200+ users",
+    },
+    /** rich */
+    curiosity:
+        "The internet was full of text, so language models had plenty to learn from. Agents learn from environments: web pages, phones and computers they can act in. Those interactions were never on the internet, so they have to be built. ==That's what I'm primarily interested in.==",
+    /** rich */
+    intro:
+        "I study, build and research scaling laws of agents at [CAMEL-AI](https://www.camel-ai.org/) | [Eigent AI](https://www.eigent.ai/) in London. Previously I led RL environment engineering at **Tensium**. As a contractor at [Mercor](https://www.mercor.com/), I built coding environments for Anthropic's Claude, extended OpenAI's MLE-bench, created human-feedback data with OpenAI and browser-use data for Gemini. Offered an RL fellowship at [General Reasoning](https://gr.inc). In the pre-ChatGPT era, I worked for around 2 years in computer vision with [ResoluteAI Software](https://resoluteaisoftware.in/) and natural language processing with [Webomates](https://www.webomates.com/). I have a Master's degree in AI from City, University of London.",
+};
+
+// What Raafi is focused on right now (used by the chatbot).
+export const currentStatus = {
+    focus: "Studying, building and researching scaling laws of agents",
+    org: "CAMEL-AI | Eigent AI",
+    orgNote: "a research lab in London",
+    link: "https://www.camel-ai.org/",
+};
+
+
+// ---------------------------------------------------------------------------
+// 3. WHAT I'M BUILDING (ventures)
+// ---------------------------------------------------------------------------
+
+export const ventures = [
+    {
+        id: "videovoice",
+        name: "VideoVoice",
+        role: "Building",
+        since: "2025",
+        url: "https://videovoice.pages.dev",
+        teamUrl: "https://videovoice.pages.dev/team/",
+        tagline: "Research engineering the limits of open source in short-form video creation.",
+        taglineAccent: "How far can we go?",
+        description: "The company itself is run by a team of AI agents, led by an AI CEO.",
+        teamLinkLabel: "See the team log",
+        points: [] as string[],
+        links: [{ label: "videovoice.pages.dev", href: "https://videovoice.pages.dev" }],
+    },
+    {
+        id: "feedhire",
+        name: "Feedhire",
+        role: "Co-founder",
+        since: "Sep 2025",
+        url: "https://feedhire.me/",
+        teamUrl: "",
+        tagline: "AI-powered global job discovery.",
+        taglineAccent: "",
+        description:
+            "A job discovery platform that uses NLP and open-source LLMs to extract and structure job posts automatically. Dockerised backend on Oracle Cloud with logging and monitoring.",
+        teamLinkLabel: "",
+        points: [
+            "200+ users across the US, UK and India",
+            "Automated job-post extraction with open-source LLMs",
+            "Approved for $1,000 in AWS startup credits",
+        ],
+        links: [{ label: "feedhire.me", href: "https://feedhire.me/" }],
+    },
+];
+
+export const videoVoice = ventures[0];
+
+// ---------------------------------------------------------------------------
+// 4. EXPERIENCE (timeline)
+// ---------------------------------------------------------------------------
+
+export interface TimelineEntry {
+  period: string;
+  role: string;
+  org: string;
+  href?: string;
+  /** Several organisations, each with its own link, shown separated by a pipe. */
+  links?: { label: string; href: string }[];
+  tag?: string;
+  summary: string;
+  points: string[];
+  /** Grouped sub-projects, shown collapsed. */
+  projects?: { name: string; points: string[] }[];
+}
+
+export const timeline: TimelineEntry[] = [
+  {
+    period: "Nov 2026 – Present",
+    role: "RL Environment Engineer/Researcher",
+    org: "CAMEL-AI | Eigent AI",
+    links: [
+      { label: "CAMEL-AI", href: "https://www.camel-ai.org/" },
+      { label: "Eigent AI", href: "https://www.eigent.ai/" },
+    ],
+    tag: "current",
+    summary: "Studying, building and researching how agents scale, at a research lab in London.",
+    points: [],
+  },
+  {
+    period: "Apr – Oct 2026",
+    role: "RL Environment Engineer",
+    org: "Tensium",
+    summary: "Led RL environment engineering: long-horizon environments for frontier labs.",
+    points: [
+      "Built long-horizon RL environments in Harbour format with 70–150 causal steps, keeping a 25% pass@8 gap between weaker and frontier models.",
+      "Used the HUD platform to design, debug and analyse environments, hardening tasks against oracle leakage, reward hacking, public-data overfitting and shortcut solutions.",
+      "Built a PR-triggered QA pipeline with GitHub Actions and an internal harness that runs isolated environment and grader checks and returns pass/block verdicts.",
+      "Reviewed and delivered 4 long-horizon tasks in a 20-hour sprint.",
+    ],
+  },
+  {
+    period: "Oct 2025 – Present",
+    role: "Machine Learning Engineer",
+    org: "Mercor",
+    href: "https://www.mercor.com/",
+    summary: "Environments, benchmarks and training data for frontier labs: OpenAI, Anthropic, Google and Meta AI. I have worked on over 10 projects across a wide range of domains, ranging from 200 to 100,000+ people.",
+    points: [],
+    projects: [
+      {
+        name: "Coding environments for Anthropic (Claude)",
+        points: ["Built coding environments used to train and evaluate Claude."],
+      },
+      {
+        name: "Human feedback data with OpenAI · 7 months",
+        points: ["Created human-feedback data for OpenAI models over seven months."],
+      },
+      {
+        name: "Browser-use data for Gemini",
+        points: ["Created browser-use data for Google's Gemini."],
+      },
+      {
+        name: "Project Launchpad · extending OpenAI's MLE-bench (Meta AI)",
+        points: [
+          "Fixed bugs in LLM-generated solutions for complex ML tasks to extend OpenAI's MLE-bench.",
+          "Worked in the AIRA-dojo environment on a 6× H100 cluster on AWS.",
+          "Produced plan-and-code pairs for post-training and merged 30+ pull requests.",
+        ],
+      },
+      {
+        name: "Project Vulcan",
+        points: [
+          "Turned Kaggle competitions and recent NeurIPS, ICML and ICLR datasets into reproducible, Docker-based evaluation tasks.",
+        ],
+      },
+      {
+        name: "Terminal efficiency & SWE benchmarks",
+        points: [
+          "Solved real software engineering tasks with official documentation only, recreating pre-GPT workflows to build human baselines for model training and evaluation.",
+        ],
+      },
+      {
+        name: "Rubrics Academy Fellow",
+        points: ["First-principles reasoning and architecture design under a strict no-AI-tools constraint."],
+      },
+    ],
+  },
+  {
+    period: "Sep 2025 – Present",
+    role: "Co-founder",
+    org: "Feedhire",
+    href: "https://feedhire.me/",
+    summary: "AI-powered global job discovery platform.",
+    points: [
+      "Built and dockerised the backend on Oracle Cloud with logging and monitoring.",
+      "Grew to 200+ users across the US, UK and India.",
+    ],
+  },
+  {
+    period: "Mar – Nov 2025",
+    role: "Founding ML Research Engineer",
+    org: "Curify-AI",
+    href: "https://www.curify-ai.com/en/about",
+    summary: "End-to-end video translation: transcription, translation, voice cloning and lip-sync.",
+    points: [
+      "Built and deployed FastAPI microservices (Chatterbox multilingual TTS, WhisperX, PaddleOCR) with Docker on Azure.",
+      "Integrated ElevenLabs and XTTS for voice cloning.",
+    ],
+  },
+  {
+    period: "Jul – Oct 2024",
+    role: "AI/ML Research Intern",
+    org: "City, University of London",
+    href: "https://www.city.ac.uk/",
+    summary: "Lung cancer survival prediction with clinical and phylogenetic data (TracerX), with Oxford and City researchers.",
+    points: [
+      "Integrated evolutionary cancer trees with clinical data and compared five modelling approaches.",
+      "Presented findings at weekly research meetings; publication in progress.",
+    ],
+  },
+  {
+    period: "Sep 2022 – Sep 2023",
+    role: "AI Engineer",
+    org: "Webomates",
+    href: "https://www.webomates.com",
+    summary: "AI for software testing, in production.",
+    points: [
+      "Worked on the AI Defect Predictor: 11× faster releases, 73% fewer production defects and 50% lower costs.",
+      "Built a multi-modal pipeline that detects feature changes in web pages from HTML, console logs and screenshots, combining XGBoost, a CNN and a random forest to improve accuracy by 25%.",
+      "Replaced Flask-based request handling with AWS SQS, raising efficiency by 30–50%; the approach was adopted across the team.",
+      "Deployed and monitored NLP and computer vision models on AWS EC2, and built a Flask app on the OpenAI API to generate and improve test cases.",
+      "Offered a full-time role in month 3 of a 6-month internship.",
+    ],
+  },
+  {
+    period: "Oct 2021 – Jan 2022",
+    role: "ML Engineer Intern",
+    org: "ResoluteAI Software",
+    href: "https://resoluteaisoftware.in/",
+    summary: "Computer vision for manufacturing.",
+    points: [
+      "Built a U-Net to detect defects in fabric videos, handling video-to-frame conversion, image augmentation, and model training and testing.",
+      "Extracted regions of interest and labelled objects using Canny edge detection.",
+      "Led a team of 4 interns on image annotation with OpenCV.",
+    ],
+  },
+];
+
+
+// ---------------------------------------------------------------------------
+// 5. HACKATHON VIDEO ("best rollout")
+// ---------------------------------------------------------------------------
+
+export const hackathon = {
+    title: "4th place at the MongoDB Hackathon",
+    caption:
+        "A $15,000 hackathon, and I was the only solo developer among 150 people competing in teams. One shot, 8 hours hard clock, a working demo at the end. Watch the full build.",
+    videoTitle: "Raafi Riyaz — MongoDB Hackathon, 4th place",
+    youtubeId: "sYy8DrTpudk",
+    url: "https://youtu.be/sYy8DrTpudk",
+};
+
+// ---------------------------------------------------------------------------
+// 6. PROJECTS ("Things I've built")
+// ---------------------------------------------------------------------------
+
+export const projectsSection = {
+    title: "Things I've built",
+    sub: "Hackathon builds, research, tools and experiments.",
+};
+
+export interface FeaturedProject {
+  title: string;
+  kind: string;
+  year: string;
+  description: string;
+  stack: string[];
+  links: { label: string; href: string }[];
+}
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    title: "Image Super Resolution using GANs",
+    kind: "Research · MSc",
+    year: "2024",
+    description:
+      "Implemented advanced GAN architectures (SRResNet and SRGAN) for image super-resolution, achieving high-quality upscaling of low-resolution images with remarkable detail preservation and also presented the first baselines for the Frechet Inception Distance (FID).",
+    stack: ["Computer Vision", "GANs", "Deep Learning"],
+    links: [{ label: "Code", href: "https://github.com/rafipatel/Image-Super-Resolution-using-GANs" }],
+  },
+  {
+    title: "Chatbot using Seq2Seq & Transformer",
+    kind: "NLP",
+    year: "2024",
+    description:
+      "Employs Seq2Seq and Transformer architectures with attention mechanisms to enable coherent and contextually relevant conversations. Applications span customer service, healthcare, and education sectors.",
+    stack: ["NLP", "Transformer", "PyTorch"],
+    links: [{ label: "Code", href: "https://github.com/rafipatel/transformer-pytorch-chatbot" }],
+  },
+  {
+    title: "Neural Network from Scratch",
+    kind: "Deep learning",
+    year: "2024",
+    description:
+      "Implemented feedforward neural network from scratch using NumPy, exploring architectures, regularization, and optimizers. Built LSTM in PyTorch for temperature forecasting, gaining deeper intuition on neural network behavior and training.",
+    stack: ["Deep Learning", "NumPy", "PyTorch"],
+    links: [{ label: "Code", href: "https://github.com/yasirbarlas/neural-network-from-scratch" }],
+  },
+  {
+    title: "ConstitutionWatch (prototype for BlueDot's AI Safety Course)",
+    kind: "AI safety tooling",
+    year: "2026",
+    description:
+      "Tracks every change to frontier AI lab constitutions and model specs, starting with Anthropic's, and delivers diffs and analysis to AI safety researchers. Inspired by the BlueDot community.",
+    stack: ["Next.js", "Prisma", "NextAuth"],
+    links: [
+      { label: "Live", href: "https://ai-constitution-watch.vercel.app" },
+      { label: "Code", href: "https://github.com/rafipatel/Ai_constitution_watch" },
+    ],
+  },
+  {
+    title: "Lung cancer survival prediction",
+    kind: "Research · City, University of London",
+    year: "2024",
+    description:
+      "Integrated evolutionary cancer trees with clinical data from UK Cancer Research's TracerX study to improve survival prediction, with researchers from Oxford and City.",
+    stack: ["Survival analysis", "Medical AI", "Python"],
+    links: [{ label: "Paper draft", href: "https://drive.google.com/file/d/1cTheOGj38NBJrVf2i9XaaAm81jER86iy/view?usp=sharing" }],
+  },
+  {
+    title: "F1llama",
+    kind: "LLM fine-tuning",
+    year: "2024",
+    description: "Meta-Llama-3-8B fine-tuned with LoRA for Formula 1 knowledge, with 200+ downloads on Hugging Face and a Streamlit chat app.",
+    stack: ["Llama 3", "LoRA", "Hugging Face"],
+    links: [
+      { label: "Model", href: "https://huggingface.co/Rafii/f1llama/" },
+      { label: "App code", href: "https://github.com/rafipatel/f1chat" },
+    ],
+  },
+  {
+    title: "Free Live Translator",
+    kind: "Side project",
+    year: "2026",
+    description: "A free, real-time Arabic and Turkish voice translator I built so I could follow the talks I attend. No sign-up, just speak.",
+    stack: ["Whisper v3", "Web Audio"],
+    links: [{ label: "Live", href: "https://rafipatel.github.io/realtime_voice_translator_free/" }],
+  },
+];
+
+
+// ---------------------------------------------------------------------------
+// 7. OPEN SOURCE, WRITING & TALKS
+// ---------------------------------------------------------------------------
+
+export const openSourceContributions = [
+    {
+        title: "Exo (40k+ stars)",
+        role: "Contributor",
+        date: "Jan 2026",
+        description: "Architected multimodal support by integrating **Vision-Language Models**.",
+        link: "https://github.com/exo-explore/exo/pull/1080",
+    },
+    {
+        title: "MuseTalk (5k+ stars)",
+        role: "Contributor",
+        date: "Nov 2025",
+        description: "Added **Docker support** deployment support and **FastAPI** serving.",
+        link: "https://github.com/TMElyralab/MuseTalk/pull/394",
+    },
+    {
+        title: "Medium Technical Blog",
+        role: "Author",
+        date: "Feb 2026",
+        description: "Published a technical article on **recovering model architecture and fine-tuning PyTorch models from weights alone**",
+        link: "https://medium.com/@rafipatel3562/recovering-model-architecture-and-fine-tuning-a-pytorch-model-from-weights-alone-ca3f653f3b8a",
+    },
+    {
+        title: "Guest Speaker at JMI University",
+        role: "Guest Speaker",
+        date: "Jan 2025",
+        description: "**Introduction to RL** session for final-year BTech students in collaboration with Bytes Classes.",
+        link: "https://www.linkedin.com/posts/raafi-riyaz-bb2954202_grateful-to-have-recently-delivered-a-activity-7262204530212106243-eMVD",
+    },
+    {
+        title: "Technical Author",
+        role: "Author",
+        date: "Mar 2023",
+        description: "Authored articles for AI in the software testing domain for Webomates, USA.",
+        link: "https://www.webomates.com/author/rafi/",
+    },
+];
+
+
+// ---------------------------------------------------------------------------
+// 8. ACHIEVEMENTS ("Episodes that paid off")
+// ---------------------------------------------------------------------------
+
+export interface ProudItem {
+    title: string;
+    date?: string;
+    detail: string;
+    link?: string;
+}
+
+// The achievements Raafi is proudest of, in his own order.
+export const proudFeatured: ProudItem[] = [
+    {
+        title: "4th place, MongoDB Hackathon",
+        detail: "Placed 4th at a $15,000 hackathon as the only solo developer among 150 people competing in teams, in an 8-hour build.",
+        link: "#best",
+    },
+    {
+        title: "Offered RL fellowship, General Reasoning",
+        date: "Mar 2026",
+        detail: "Landed an offer for the RL fellowship at General Reasoning, the startup led by Ross Taylor, focused on RL research and long-horizon reasoning.",
+        link: "https://gr.inc",
+    },
+    {
+        title: "Shortlisted, Anthropic RL Safety Research Programme",
+        detail: "Shortlisted for Anthropic's research programme on reinforcement-learning safety.",
+    },
+    {
+        title: "Technical AI Safety, BlueDot Impact",
+        date: "May 2026",
+        detail: "Completed BlueDot's application-based course on alignment and control.",
+    },
+];
+
+export const proudMore: ProudItem[] = [
+    {
+        title: "Invited to AI UK 2025 by Harmony",
+        date: "Mar 2025",
+        detail: "Presented how I fine-tuned language models for Harmony's psychology-survey dataset at The Alan Turing Institute's national showcase. Compensated £1,250 for contributing to mental-health AI research.",
+        link: "https://www.turing.ac.uk/ai-uk",
+    },
+    {
+        title: "NLP Challenge Winner",
+        date: "Jan 2025",
+        detail: "Won the Harmony NLP Challenge with a £250 prize by improving the algorithm for psychology survey question similarity ratings, reducing MAE from 24 to 20.544. Organised by researchers from UCL, Ulster University and Fast Data Science.",
+        link: "https://harmonydata.ac.uk/matching-challenge-winner-announcement/",
+    },
+    {
+        title: "Selected for ML research internship, City, University of London",
+        date: "Jul 2024",
+        detail: "Selected for an AI/ML research internship at City, University of London, using UK Cancer Research and TracerX datasets (publication in progress).",
+    },
+    {
+        title: "Early career offer",
+        date: "Jan 2023",
+        detail: "Offered a full-time role in the 3rd month of a 6-month internship, based on performance and contributions at Webomates, Stamford, USA (remote).",
+    },
+];
+
+// ---------------------------------------------------------------------------
+// 9. ABOUT
+// ---------------------------------------------------------------------------
+
+export const about = {
+    photoAlt: "Raafi at the Harmony stand at AI UK 2025, The Alan Turing Institute",
+    photoCaption: "AI UK 2025, The Alan Turing Institute, presenting fine-tuned language models for Harmony.",
+    /** rich: **words** show in the brighter text colour */
+    paragraphs: [
+        "**I came to AI through engineering.** A diploma in mechanical engineering, a BSc in IT in Mumbai, then computer vision on factory floors and AI for software testing in production, where I was promoted three months into an internship.",
+        "An MSc in Artificial Intelligence in London pulled me towards research: lung cancer survival models, GANs, deep RL. Since then I've worked on the data and environments frontier models learn from, at Mercor and Tensium, and now on how agents scale at CAMEL-AI | Eigent AI.",
+        "Outside work I build products (VideoVoice, Feedhire), enter hackathons solo, write, and have given a talk introducing RL to final-year students. I speak English, Urdu, Hindi and Marathi.",
+    ],
+    spokenLanguages: ["English", "Urdu", "Hindi", "Marathi"],
+};
+
+export const education = [
+    {
+        date: "2023-2024",
+        title: "Master of Science in Artificial Intelligence (MSc AI)",
+        institution: "City, University of London",
+        grade: "Grade: Merit",
+    },
+    {
+        date: "2019-2021",
+        title: "Bachelor of Science in Information Technology (BSc IT)",
+        institution: "University of Mumbai",
+        grade: "Grade: Distinction",
+    },
+    {
+        date: "2016-2019",
+        title: "Diploma in Mechanical Engineering",
+        institution: "Maharashtra State Board",
+        grade: "Grade: Distinction",
+    },
+];
+
+export const certifications = [
+    {
+        date: "May 2026",
+        title: "Technical AI Safety",
+        organization: "BlueDot Impact",
+        description: "Application-based course on alignment and control.",
+    },
+    {
+        date: "May 2025 - Present",
+        title: "AI Agents Course",
+        organization: "HuggingFace",
+        description: "Advanced training in building autonomous AI agents, learning cutting-edge techniques in agent design, tool use, and multi-agent systems.",
+    },
+    {
+        date: "Aug 2023",
+        title: "Langchain for LLM Application Development",
+        organization: "DeepLearning.ai",
+        description: "Specialized course on building LLM-powered applications using Langchain framework, covering chains, agents, and memory systems.",
+    },
+    {
+        date: "Oct 2022",
+        title: "Neural Networks and Deep Learning",
+        organization: "DeepLearning.ai, Coursera",
+        description: "Comprehensive deep learning specialization covering neural network architectures, backpropagation, and optimization techniques.",
+    },
+    {
+        date: "Jun 2022",
+        title: "Machine Learning",
+        organization: "Stanford Online (Andrew Ng), Coursera",
+        description: "Foundational machine learning course covering supervised learning, unsupervised learning, and best practices in ML.",
+    },
+    {
+        date: "Sep 2022",
+        title: "Python Master Certification Course",
+        organization: "Perfect E-Learning",
+        description: "Advanced Python programming certification covering data structures, OOP, and software development best practices.",
+    },
+    {
+        date: "Jan 2021",
+        title: "Python and ML for Data Science",
+        organization: "Kaggle",
+        description: "Practical course on applying Python and machine learning techniques to data science problems and competitions.",
+    },
+];
+
+export const toolbox: { group: string; items: string[] }[] = [
+  { group: "RL & evaluation", items: ["RL environment design", "Graders & rubrics", "Harbour", "HUD", "MLE-bench", "Reward-hacking defences"] },
+  { group: "Models", items: ["PyTorch", "TensorFlow", "Hugging Face", "LoRA fine-tuning", "LangGraph", "Whisper", "Voice cloning / TTS"] },
+  { group: "Engineering", items: ["Python", "TypeScript", "FastAPI", "Docker", "GitHub Actions", "MongoDB", "SQL"] },
+  { group: "Cloud", items: ["AWS", "Azure", "Oracle Cloud", "H100 clusters"] },
+];
+
+
+// ---------------------------------------------------------------------------
+// 10. FOOTER
+// ---------------------------------------------------------------------------
+
+export const footer = {
+    heading: "Building environments, agents or post-training data? Let's talk.",
+};
+
+// ---------------------------------------------------------------------------
+// 11. AGENT PANEL (the hero's "Evaluate Raafi" rollout)
+// Each object below is shown as the JSON the agent reads.
+// ---------------------------------------------------------------------------
+
+export const agentPanel = {
+    task: "Evaluate Raafi and return a decision.",
+    now: {
+        status: "learning",
+        focus: ["studying, building and researching scaling laws of agents"],
+        lab: "CAMEL-AI | Eigent AI",
+        location: "London",
+    },
+    tensium: {
+        role: "RL Environment Engineer",
+        work: [
+            "Built long-horizon RL environments for frontier labs, with 70–150 causal steps per task.",
+            "Kept a 25% pass@8 gap between weaker and frontier models so tasks actually discriminate.",
+            "Hardened tasks against oracle leakage, reward hacking, public-data overfitting and shortcuts.",
+            "Reviewed and delivered 4 long-horizon tasks in a 20-hour sprint.",
+        ],
+    },
+    mercor: {
+        role: "Machine Learning Engineer",
+        company: "Mercor",
+        since: "Oct 2025",
+        work: [
+            "Extended OpenAI's MLE-bench, merging 30+ pull requests.",
+            "Built terminal-efficiency and SWE benchmarks.",
+            "Made coding environments for Anthropic's Claude.",
+            "Created human-feedback data with OpenAI for 7 months.",
+            "Created browser-use data for Google's Gemini.",
+        ],
+    },
+    education: {
+        degree: "MSc Artificial Intelligence",
+        university: "City, University of London",
+    },
+    achievements: [
+        "4th place at the MongoDB Hackathon: the only solo developer among 150 people competing in teams, in an 8-hour build.",
+        "Offered an RL fellowship at General Reasoning, the startup led by Ross Taylor.",
+        "Shortlisted for the Anthropic RL Safety Research Programme.",
+        "Completed BlueDot's Technical AI Safety course on alignment and control.",
+        "Invited to AI UK 2025 by Harmony to present fine-tuning language models for their dataset.",
+        "Won the Harmony NLP Challenge (£250 prize), cutting MAE from 24 to 20.544.",
+        "Offered a full-time role in month 3 of a 6-month internship at Webomates.",
+        "Selected for an ML research internship at City, University of London.",
+    ],
+    verdict: "Builds honest RL environments, learns fast and can show his work.",
+};
+
+// ---------------------------------------------------------------------------
+// 12. CHATBOT ("Ask my agent")
+// Its knowledge is built from everything above; these are its own words.
+// ---------------------------------------------------------------------------
+
+export const chatbot = {
+    greeting:
+        "Hi, I'm Raafi's agent. Ask me about his RL environment work, VideoVoice, his projects or his background. You can also paste a job description and I'll tell you how he fits.",
+    /** Shown while the first reply loads (the agent's server may be waking up). */
+    firstReplyNote: "Waking up the agent. The first reply can take up to 20 seconds; after that it's quick.",
+    /** Shown if a later reply takes longer than a few seconds. */
+    slowReplyNote: "Still working on it. The model is busy, so this one is taking a little longer.",
+    /** One-line summary of what he works on, used in the chatbot's instructions. */
+    thesis:
+        "Language models learned from the internet's text, but agents learn from trajectories, which the internet never saved; so the environments and tasks that produce good trajectories have to be built. He researches and builds them.",
+};
+
+// ============================================================================
+// NOT SHOWN ON THE SITE: data from the previous version of the site.
+// Nothing reads it any more; kept only for reference. Some of it is out of
+// date (for example Feedhire's user count), so don't copy from it.
+// ============================================================================
 
 export const personalInfo = {
     name: "Raafi Riyaz",
@@ -54,6 +688,8 @@ Co-founded Feedhire, an AI-powered global job discovery platform using NLP and o
 
 Strong in Python, PyTorch, TensorFlow, and cloud-based ML, with a research-first mindset and experience building production systems.
 
+Currently studying, building and researching scaling laws of agents at CAMEL-AI | Eigent AI in London.
+
 While I enjoy AI broadly, my primary interests lie in Research AI and Medical AI, where I aim to create meaningful, high-impact solutions.`,
 };
 
@@ -66,7 +702,7 @@ export const experiences = [
             "Created long-horizon reinforcement-learning environments in Harbour format with 70–150 causal steps for frontier labs, maintaining a 25% pass@8 performance gap between weaker and frontier models to ensure meaningful task discrimination.",
             "Used the HUD platform to design, debug, and analyze RL environments, engineering tasks resistant to oracle leakage, reward hacking, public-data overfitting, and shortcut-based solutions while targeting challenging long-horizon reasoning and coding behavior.",
             "Built an automated PR-triggered long-horizon RL QA pipeline with GitHub Actions and an internal harness, running isolated environment/grader checks and surfacing automated pass/block verdicts to replace manual soundness review.",
-            "Reviewed and successfully delivered 4 tasks in a 20-hour sprint.",
+            "Reviewed and successfully delivered 4 long-horizon tasks in a 20-hour sprint.",
         ],
     },
     {
@@ -153,27 +789,6 @@ export const experiences = [
     },
 ];
 
-export const education = [
-    {
-        date: "2023-2024",
-        title: "Master of Science in Artificial Intelligence (MSc AI)",
-        institution: "City, University of London",
-        grade: "Grade: Merit",
-    },
-    {
-        date: "2019-2021",
-        title: "Bachelor of Science in Information Technology (BSc IT)",
-        institution: "University of Mumbai",
-        grade: "Grade: Distinction",
-    },
-    {
-        date: "2016-2019",
-        title: "Diploma in Mechanical Engineering",
-        institution: "Maharashtra State Board",
-        grade: "Grade: Distinction",
-    },
-];
-
 export const projects = [
     {
         title: "VideoVoice Cloning & Translation",
@@ -246,91 +861,6 @@ export const projects = [
         badges: ["Reinforcement Learning", "Deep Learning", "Q-Learning"],
         link: "https://github.com/rafipatel/Deep-Reinforcement-Learning/tree/main",
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-    },
-];
-
-export const socialLinks = {
-    linkedin: "https://www.linkedin.com/in/raafi-riyaz-bb2954202/",
-    github: "https://github.com/rafipatel",
-    repoUrl: "https://github.com/rafipatel/rafi",
-    huggingface: "https://huggingface.co/Rafii",
-    cv: "https://drive.google.com/file/d/14RZDtNFdu91xZHUsfjDPN7rgwSZjOTuG/view?usp=sharing"
-};
-
-export const certifications = [
-    {
-        date: "May 2025 - Present",
-        title: "AI Agents Course",
-        organization: "HuggingFace",
-        description: "Advanced training in building autonomous AI agents, learning cutting-edge techniques in agent design, tool use, and multi-agent systems.",
-    },
-    {
-        date: "Aug 2023",
-        title: "Langchain for LLM Application Development",
-        organization: "DeepLearning.ai",
-        description: "Specialized course on building LLM-powered applications using Langchain framework, covering chains, agents, and memory systems.",
-    },
-    {
-        date: "Oct 2022",
-        title: "Neural Networks and Deep Learning",
-        organization: "DeepLearning.ai, Coursera",
-        description: "Comprehensive deep learning specialization covering neural network architectures, backpropagation, and optimization techniques.",
-    },
-    {
-        date: "Jun 2022",
-        title: "Machine Learning",
-        organization: "Stanford Online (Andrew Ng), Coursera",
-        description: "Foundational machine learning course covering supervised learning, unsupervised learning, and best practices in ML.",
-    },
-    {
-        date: "Sep 2022",
-        title: "Python Master Certification Course",
-        organization: "Perfect E-Learning",
-        description: "Advanced Python programming certification covering data structures, OOP, and software development best practices.",
-    },
-    {
-        date: "Jan 2021",
-        title: "Python and ML for Data Science",
-        organization: "Kaggle",
-        description: "Practical course on applying Python and machine learning techniques to data science problems and competitions.",
-    },
-];
-
-export const openSourceContributions = [
-    {
-        title: "Exo (40k+ stars)",
-        role: "Contributor",
-        date: "Jan 2026",
-        description: "Architected multimodal support by integrating **Vision-Language Models**.",
-        link: "https://github.com/exo-explore/exo/pull/1080",
-    },
-    {
-        title: "MuseTalk (5k+ stars)",
-        role: "Contributor",
-        date: "Nov 2025",
-        description: "Added **Docker support** deployment support and **FastAPI** serving.",
-        link: "https://github.com/TMElyralab/MuseTalk/pull/394",
-    },
-    {
-        title: "Medium Technical Blog",
-        role: "Author",
-        date: "Feb 2026",
-        description: "Published a technical article on **recovering model architecture and fine-tuning PyTorch models from weights alone**",
-        link: "https://medium.com/@rafipatel3562/recovering-model-architecture-and-fine-tuning-a-pytorch-model-from-weights-alone-ca3f653f3b8a",
-    },
-    {
-        title: "Guest Speaker at JMI University",
-        role: "Guest Speaker",
-        date: "Jan 2025",
-        description: "**Introduction to RL** session for final-year BTech students in collaboration with Bytes Classes.",
-        link: "https://www.linkedin.com/posts/raafi-riyaz-bb2954202_grateful-to-have-recently-delivered-a-activity-7262204530212106243-eMVD",
-    },
-    {
-        title: "Technical Author",
-        role: "Author",
-        date: "Mar 2023",
-        description: "Authored articles for AI in the software testing domain for Webomates, USA.",
-        link: "https://www.webomates.com/author/rafi/",
     },
 ];
 

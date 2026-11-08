@@ -1,23 +1,22 @@
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
+/** 404, framed as a step outside the environment's state space. */
 const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-  }, [location.pathname]);
+  const { pathname } = useLocation();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
+    <main className="flex min-h-screen items-center justify-center bg-ro-bg px-6 font-sans text-ro-fg">
+      <div className="flex max-w-[520px] flex-col gap-5">
+        <p className="font-mono text-sm text-ro-fail">404 · state not found</p>
+        <h1 className="text-4xl font-bold tracking-[-0.03em] sm:text-5xl">This page isn't in the environment.</h1>
+        <pre className="overflow-x-auto rounded-xl border border-ro-line bg-ro-surface px-4 py-3 font-mono text-[13px] text-ro-body">
+          {`step(goto("${pathname}"))\n→ invalid action · reward = 0`}
+        </pre>
+        <a href="/" className="inline-flex min-h-[44px] w-fit items-center rounded-full bg-ro-acc px-5 font-semibold text-ro-acc-ink hover:opacity-90">
+          env.reset() · back home
         </a>
       </div>
-    </div>
+    </main>
   );
 };
 

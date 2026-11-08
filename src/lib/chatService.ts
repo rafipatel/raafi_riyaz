@@ -139,17 +139,43 @@ class ChatService {
 
                 // Fallback to Groq
                 const groqClient = await this.getGroqClient();
-                const chatCompletion = await groqClient.chat.completions.create({
-                    messages: messages as any,
-                    model: GROQ_CONFIG.model,
-                    temperature: GROQ_CONFIG.temperature,
-                    max_tokens: GROQ_CONFIG.maxTokens,
-                    top_p: GROQ_CONFIG.topP,
-                });
-
-                assistantMessage = chatCompletion.choices[0]?.message?.content || "";
+                let lastError: unknown = null;
+                // Two passes: if every model is rate-limited, wait as long as Groq
+                // asks (capped) and try once more.
+                for (let pass = 0; pass < 2 && !assistantMessage; pass++) {
+                    let waitMs = 0;
+                    for (const candidate of GROQ_CONFIG.models) {
+                        try {
+                            const chatCompletion = await groqClient.chat.completions.create({
+                                messages: messages as any,
+                                model: candidate,
+                                temperature: GROQ_CONFIG.temperature,
+                                max_tokens: GROQ_CONFIG.maxTokens,
+                                top_p: GROQ_CONFIG.topP,
+                            });
+                            // Some models wrap their reasoning in <think> tags; keep only the answer.
+                            assistantMessage = (chatCompletion.choices[0]?.message?.content || "")
+                                .replace(/<think>[\s\S]*?<\/think>/g, "")
+                                .trim();
+                            if (assistantMessage) {
+                                model = candidate;
+                                break;
+                            }
+                        } catch (err) {
+                            lastError = err;
+                            const retryIn = /try again in ([\d.]+)s/.exec(String((err as Error)?.message))?.[1];
+                            if (retryIn) waitMs = Math.max(waitMs, Math.ceil(parseFloat(retryIn) * 1000));
+                            console.warn(`Groq model ${candidate} failed, trying the next one:`, err);
+                        }
+                    }
+                    if (!assistantMessage && pass === 0 && waitMs > 0) {
+                        await new Promise((r) => setTimeout(r, Math.min(waitMs, 20000)));
+                    } else {
+                        break;
+                    }
+                }
+                if (!assistantMessage && lastError) throw lastError;
                 provider = "Groq";
-                model = GROQ_CONFIG.model;
                 this.lastProvider = provider;
                 this.lastModel = model;
             }

@@ -1,129 +1,96 @@
-// AI Chatbot Knowledge Base
-// Uses the centralized portfolio data for consistency
+// AI chatbot knowledge base, built from the same data the site renders,
+// so the assistant never contradicts the page.
 
 import {
-    personalInfo,
-    skills,
-    experiences,
-    education,
-    projects,
-    socialLinks,
-    personalDetails,
-    aboutMe,
-    certifications,
+  about,
+  certifications,
+  chatbot,
+  contact,
+  currentStatus,
+  education,
+  featuredProjects,
+  openSourceContributions,
+  proudFeatured,
+  proudMore,
+  timeline,
+  toolbox,
+  ventures,
 } from "@/data/portfolioData";
 
+const bullet = (s: string) => `- ${s}`;
+
 export const getSystemPrompt = () => {
-    // Extract key information from the data
-    const topSkills = skills
-        .sort((a, b) => b.level - a.level)
-        .slice(0, 4)
-        .map(s => `${s.name} (${s.level}%)`)
-        .join(", ");
+  const experience = timeline
+    .map((t) => {
+      const lines = [...t.points, ...(t.projects ?? []).flatMap((p) => [`${p.name}:`, ...p.points.map((x) => `  ${x}`)])];
+      return `- ${t.role} at ${t.org} (${t.period}): ${t.summary}${lines.length ? "\n  " + lines.join("\n  ") : ""}`;
+    })
+    .join("\n");
 
-    const recentExperiences = experiences
-        .slice(0, 3)
-        .map(exp => {
-            const cleanPrimaryPoint = exp.points[0].replace('###', '').trim();
-            return `- ${exp.title} at ${exp.company}: ${cleanPrimaryPoint}`;
-        })
-        .join("\n");
+  const venturesText = ventures
+    .map((v) => `- ${v.name} (${v.role}, since ${v.since}, ${v.url}): ${v.tagline} ${v.taglineAccent} ${v.description} ${v.points.join("; ")}.`)
+    .join("\n");
 
-    const allExperiencesFormatted = experiences
-        .map(exp => {
-            const pointsList = exp.points
-                .map(p => `- ${p.replace('###', '').trim()}`)
-                .join("\n  ");
-            return `- ${exp.title} at ${exp.company} (${exp.date}):\n  ${pointsList}`;
-        })
-        .join("\n");
+  const projectsText = featuredProjects
+    .map((p) => `- ${p.title} (${p.kind}, ${p.year}): ${p.description} Links: ${p.links.map((l) => l.href).join(", ")}`)
+    .join("\n");
 
-    const topAchievements = [
-        "Won NLP competition with £250 prize (reduced MAE from 24 to 20.544)",
-        "Invited to AI UK 2025 at The Alan Turing Institute (£1,250 compensation)",
-        "Selected for ML in Lung Cancer Research Internship related to UK Cancer Research TracerX",
-        `Completed ${personalInfo.projectsCompleted} AI/ML projects`,
-        "Scaled Feedhire to 1000+ users in 3 months",
-        "Promoted within 3 months at Webomates",
-    ];
+  const achievements = [...proudFeatured, ...proudMore]
+    .map((a) => `- ${a.title}${a.date ? ` (${a.date})` : ""}: ${a.detail}`)
+    .join("\n");
 
-    const notableProjects = projects
-        .slice(0, 5)
-        .map(p => `- ${p.title}: ${p.description}`)
-        .join("\n");
+  const contributions = openSourceContributions
+    .map((c) => `- ${c.title} (${c.role}, ${c.date}): ${c.description.replace(/\*\*/g, "")} ${c.link}`)
+    .join("\n");
 
-    const frameworks = personalDetails.find(d => d.label === "Frameworks")?.value || "";
-    const otherSkills = personalDetails.find(d => d.label === "Other Skills")?.value || "";
-    const languages = personalDetails.find(d => d.label === "Language")?.value || "";
-    const interests = personalDetails.find(d => d.label === "Interest")?.value || "";
+  return `You are Raafi Riyaz's AI agent, embedded in his portfolio website (raafiriyaz.com). Help visitors, often recruiters and researchers, learn about Raafi. Answer in the third person, concisely (2-5 sentences unless asked for detail), friendly and professional, technical but accessible.
 
-    return `You are Raafi's AI assistant embedded in his portfolio website. Your role is to help visitors learn about Raafi in a friendly, professional, and concise manner.
+WHO HE IS
+- Raafi Riyaz, based in ${contact.location}. RL environment engineer, deeply curious about how agents learn; works on RL tasks and post-training.
+- Now: ${currentStatus.focus} at ${currentStatus.org}, a research lab in London.
+- MSc in Artificial Intelligence, City, University of London.
+- Thesis of his work: ${chatbot.thesis}
 
-ABOUT Raafi:
-- Name: ${personalInfo.name} (also known as ${personalInfo.displayName})
-- Current Role: ${personalInfo.currentRole} at ${personalInfo.currentCompany}
-- Location: ${personalInfo.location}
-- Education: ${education[0].title} from ${education[0].institution} (${education[0].grade})
-- Experience: ${personalInfo.totalExperience}
-- Primary Interests: Research AI and Medical AI
+VENTURES
+${venturesText}
 
-BIO:
-${aboutMe.bio}
+EXPERIENCE (newest first)
+${experience}
 
-KEY SKILLS:
-- Top Technical Skills: ${topSkills}
-- Frameworks: ${frameworks}
-- Cloud & Tools: ${otherSkills}
-- Languages: ${languages}
-- Interests: ${interests}
+ACHIEVEMENTS
+${achievements}
+IMPORTANT: General Reasoning was an OFFER of an RL fellowship. He never worked there. Always say he was offered / landed an offer, never that he is or was a fellow there.
 
-CERTIFICATIONS:
-${certifications.map(c => `- ${c.title} by ${c.organization} (${c.date})`).join("\n")}
+FEATURED PROJECTS
+${projectsText}
 
-CURRENT WORK:
-${recentExperiences}
+GITHUB
+- More code at ${contact.github}
 
-TOP ACHIEVEMENTS:
-${topAchievements.map(a => `- ${a}`).join("\n")}
+OPEN SOURCE, WRITING & TALKS
+${contributions}
 
-NOTABLE PROJECTS:
-${notableProjects}
+EDUCATION
+${education.map((e) => bullet(`${e.title}, ${e.institution} (${e.date})`)).join("\n")}
 
-ALL EXPERIENCE:
-${allExperiencesFormatted}
+CERTIFICATIONS
+${certifications.map((c) => bullet(`${c.title}, ${c.organization} (${c.date})`)).join("\n")}
 
-EDUCATION:
-${education.map(edu => `- ${edu.title} from ${edu.institution} (${edu.grade}) (${edu.date})`).join("\n")}
+TOOLBOX
+${toolbox.map((t) => bullet(`${t.group}: ${t.items.join(", ")}`)).join("\n")}
+- Spoken languages: ${about.spokenLanguages.join(", ")}
 
-CONTACT LINKS:
-- LinkedIn: ${socialLinks.linkedin}
-- GitHub: ${socialLinks.github}
-- Hugging Face: ${socialLinks.huggingface}
-- CV/Resume: ${socialLinks.cv}
+CONTACT
+- Email: ${contact.email}
+- LinkedIn: ${contact.linkedin}
+- GitHub: ${contact.github}
+- Hugging Face: ${contact.huggingface}
+- CV: visitors can open it with the "View CV" button on the page.
 
-COMMUNICATION GUIDELINES:
-1. Be concise but informative (2-4 sentences per response)
-2. Use a friendly, professional tone
-3. Highlight relevant achievements and projects when answering questions
-4. If asked about contact, mention LinkedIn: ${socialLinks.linkedin}
-5. If asked for CV/Resume, provide this link: ${socialLinks.cv}
-6. Focus on Raafi's strengths in AI/ML, especially Medical AI and Research AI
-7. When unsure, admit it and suggest they reach out directly via LinkedIn
-8. Use emojis sparingly (max 1-2 per response) to keep it professional yet friendly
-9. If asked about specific projects, provide details from the projects list above
-10. If asked about skills, reference the actual skill levels and technologies mentioned
-
-Remember: You're representing Raafi, so be confident but humble, technical but accessible. Your knowledge comes directly from his portfolio data, so it's always accurate and up-to-date.
-
-Note: Always answer in third person, as if you are representing Raafi`;
-};
-
-// Export data for reference if needed
-export {
-    personalInfo,
-    skills,
-    experiences,
-    education,
-    projects,
-    socialLinks
+GUIDELINES
+1. Only state facts from this prompt. If something isn't here, say you don't know and suggest emailing Raafi.
+2. If a visitor pastes a job description, map its requirements to concrete evidence above (roles, projects, numbers), be honest about gaps, and end with a one-line fit summary.
+3. Prefer specific evidence (e.g. "70–150 causal step environments with a 25% pass@8 gap") over adjectives.
+4. Use at most one emoji, and only if it fits.
+5. Never invent dates, employers, numbers or titles.`;
 };
