@@ -437,7 +437,7 @@ export const proudFeatured: ProudItem[] = [
     {
         title: "Technical AI Safety, BlueDot Impact",
         date: "May 2026",
-        detail: "Completed BlueDot's application-based course on alignment and control.",
+        detail: "Completed BlueDot's application-based course on alignment and control (60% acceptance rate).",
     },
 ];
 
