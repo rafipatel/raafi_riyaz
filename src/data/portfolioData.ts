@@ -56,7 +56,7 @@ export const hero = {
         "The internet was full of text, so language models had plenty to learn from. Agents learn from environments: web pages, phones and computers they can act in. Those interactions were never on the internet, so they have to be built. ==That's what I'm primarily interested in.==",
     /** rich */
     intro:
-        "I study, build and research scaling laws of agents at [CAMEL-AI](https://www.camel-ai.org/) | [Eigent AI](https://www.eigent.ai/) in London. Previously I led RL environment engineering at **Tensium**. As a contractor at [Mercor](https://www.mercor.com/), I built coding environments for Anthropic's Claude, extended OpenAI's MLE-bench, created human-feedback data with OpenAI and browser-use data for Gemini. Offered an RL fellowship at [General Reasoning](https://gr.inc). In the pre-ChatGPT era, I worked for around 2 years in computer vision with [ResoluteAI Software](https://resoluteaisoftware.in/) and natural language processing with [Webomates](https://www.webomates.com/). I have a Master's degree in AI from City, University of London.",
+        "I study, build and research scaling laws of agents at [CAMEL-AI](https://www.camel-ai.org/) | [Eigent AI](https://www.eigent.ai/) in London. Previously I led RL environment engineering at **Tensium**. As a contractor at [Mercor](https://www.mercor.com/), I built coding environments for Anthropic's Claude, extended OpenAI's MLE-bench, created human-feedback data with OpenAI and computer-use data for Gemini. Offered an RL fellowship at [General Reasoning](https://gr.inc). In the pre-ChatGPT era, I worked for around 2 years in computer vision with [ResoluteAI Software](https://resoluteaisoftware.in/) and natural language processing with [Webomates](https://www.webomates.com/). I have a Master's degree in AI from City, University of London.",
 };
 
 // What Raafi is focused on right now (used by the chatbot).
@@ -170,8 +170,8 @@ export const timeline: TimelineEntry[] = [
         points: ["Created human-feedback data for OpenAI models over seven months."],
       },
       {
-        name: "Browser-use data for Gemini",
-        points: ["Created browser-use data for Google's Gemini."],
+        name: "Computer-use data for Gemini",
+        points: ["Created computer-use data for Google's Gemini."],
       },
       {
         name: "Project Launchpad · extending OpenAI's MLE-bench (Meta AI)",
@@ -595,7 +595,7 @@ export const agentPanel = {
             "Built terminal-efficiency and SWE benchmarks.",
             "Made coding environments for Anthropic's Claude.",
             "Created human-feedback data with OpenAI for 7 months.",
-            "Created browser-use data for Google's Gemini.",
+            "Created computer-use data for Google's Gemini.",
         ],
     },
     education: {
