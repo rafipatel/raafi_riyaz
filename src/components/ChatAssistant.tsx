@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp, Loader2, Sparkles, X } from "lucide-react";
 import { chatService, type ChatMessage } from "@/lib/chatService";
+import { chatbot, contact } from "@/data/portfolioData";
 
 const QUICK_QUESTIONS = [
   "What is Raafi working on right now?",
@@ -29,6 +30,19 @@ const ChatAssistant = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  // Whether a real reply has arrived yet: the first one is slow while the agent's server wakes up.
+  const [hasReplied, setHasReplied] = useState(false);
+  const [slow, setSlow] = useState(false);
+
+  // For later replies, only mention the wait if it runs past a few seconds.
+  useEffect(() => {
+    if (!isLoading) {
+      setSlow(false);
+      return;
+    }
+    const id = window.setTimeout(() => setSlow(true), 5000);
+    return () => window.clearTimeout(id);
+  }, [isLoading]);
   const endRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -55,7 +69,7 @@ const ChatAssistant = () => {
         {
           role: "assistant",
           content:
-            "Hi, I'm Raafi's agent. Ask me about his RL environment work, VideoVoice, his projects or his background. You can also paste a job description and I'll tell you how he fits.",
+            chatbot.greeting,
           timestamp: new Date(),
         },
       ]);
@@ -77,12 +91,13 @@ const ChatAssistant = () => {
         ...prev,
         { role: "assistant", content: res.content, timestamp: new Date(), provider: res.provider, model: res.model },
       ]);
+      setHasReplied(true);
     } catch {
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: "Sorry, I couldn't reach the model just now. Please try again, or contact Raafi directly at rafa.works313@gmail.com.",
+          content: `Sorry, I couldn't reach the model just now. Please try again, or contact Raafi directly at ${contact.email}.`,
           timestamp: new Date(),
         },
       ]);
@@ -214,9 +229,20 @@ const ChatAssistant = () => {
               )}
 
               {isLoading && (
-                <div className="flex items-center gap-2 font-mono text-xs text-ro-muted">
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
-                  agent is thinking…
+                <div className="flex flex-col gap-1.5" aria-live="polite">
+                  <div className="flex items-center gap-2 font-mono text-xs text-ro-muted">
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
+                    agent is thinking…
+                  </div>
+                  {(!hasReplied || slow) && (
+                    <motion.p
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="w-fit max-w-[90%] rounded-lg bg-ro-inset px-3 py-2 text-[13px] leading-snug text-ro-body"
+                    >
+                      {hasReplied ? chatbot.slowReplyNote : chatbot.firstReplyNote}
+                    </motion.p>
+                  )}
                 </div>
               )}
               <div ref={endRef} />

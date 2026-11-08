@@ -98,7 +98,7 @@ export const ScrollHUD = ({ t, G, event, done, visible }: { t: number; G: number
             t=<span className="tabular-nums text-ro-fg">{t}</span>/{HORIZON}
           </span>
           <motion.span key={G} initial={bumped ? { scale: 1.4 } : false} animate={{ scale: 1 }} className="tabular-nums text-ro-pass">
-            G={G.toFixed(2)}
+            reward={G.toFixed(2)}
           </motion.span>
           <span className="hidden min-w-0 truncate text-ro-body sm:inline">{done ? "terminated=True" : event}</span>
         </motion.div>

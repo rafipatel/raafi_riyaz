@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { AudioLines, Captions, Clapperboard, Film, Languages, Mic, ScanEye, Send, Sparkles, Type, Upload } from "lucide-react";
+import { Sparkles } from "lucide-react";
+import { PRODUCTS } from "@/data/videoVoice";
 
 /*
  * How VideoVoice works, as one picture:
@@ -8,31 +9,6 @@ import { AudioLines, Captions, Clapperboard, Film, Languages, Mic, ScanEye, Send
  * The pipeline plays itself until the visitor clicks a step.
  */
 
-const PRODUCTS = {
-  dubbing: {
-    name: "Dubbing",
-    blurb: "Your video, in 600+ languages, in your own voice.",
-    steps: [
-      { icon: Upload, title: "Your video", tech: "TikTok · Reel · YouTube", detail: "Upload a short, single-speaker video. That's all VideoVoice needs." },
-      { icon: Mic, title: "Speech-to-text", tech: "", detail: "An open-source speech model transcribes what you say, with timestamps." },
-      { icon: Languages, title: "Translate", tech: "", detail: "A language model translates idioms and sentence flow, not word for word, into 600+ languages." },
-      { icon: AudioLines, title: "Your voice", tech: "", detail: "Voice cloning speaks the translation in your own voice: same pitch, pace and energy." },
-      { icon: ScanEye, title: "Vision & subtitles", tech: "", detail: "Vision models work on the frames, and subtitles are burned in, timed to the dubbed audio." },
-      { icon: Film, title: "Dubbed video", tech: "", detail: "A downloadable MP4 in the new language, in your voice, with the background music kept." },
-    ],
-  },
-  dramabox: {
-    name: "Dramabox",
-    blurb: "Paste any text, get a short video with the most expressive speech.",
-    steps: [
-      { icon: Type, title: "Your text", tech: "", detail: "Paste any text: a script, a story or a post." },
-      { icon: AudioLines, title: "Directed voice", tech: "", detail: "Dramabox performs it with directable, highly expressive speech, not a flat read." },
-      { icon: Clapperboard, title: "Generate video", tech: "", detail: "An image model draws the frames and a video model animates them to go with the voice." },
-      { icon: Captions, title: "Captions", tech: "", detail: "Captions are added, timed to the performance." },
-      { icon: Send, title: "Ready to post", tech: "", detail: "A short-form video, voiced, captioned and ready to post, in seconds." },
-    ],
-  },
-} as const;
 type ProductId = keyof typeof PRODUCTS;
 
 const STEP_MS = 1800;
@@ -68,7 +44,6 @@ const VideoVoiceFlow = () => {
       <div>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="font-mono text-xs text-ro-muted">two products</span>
             <div role="tablist" aria-label="VideoVoice products" className="inline-flex rounded-full border border-ro-line2 p-1">
               {(Object.keys(PRODUCTS) as ProductId[]).map((id) => (
                 <button

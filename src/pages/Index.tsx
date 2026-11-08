@@ -11,12 +11,12 @@ import Projects from "@/components/sections/Projects";
 import Rewards from "@/components/sections/Rewards";
 import Writing from "@/components/sections/Writing";
 import About from "@/components/sections/About";
-import { contact, ventures } from "@/data/siteContent";
 import { ArrowDown, ArrowUpRight, Mail } from "lucide-react";
 import { ScrollHUD, useScrollEpisode } from "@/components/rollout/ScrollTrajectory";
 import type { Selection } from "@/components/rollout/trajectories";
 import { useTheme } from "@/components/ThemeProvider";
-import { hackathon, socialLinks } from "@/data/portfolioData";
+import { contact, footer, hackathon, hero, socialLinks, ventures } from "@/data/portfolioData";
+import { richText } from "@/lib/richText";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -96,7 +96,7 @@ const BestRollout = () => {
         <iframe
             className="absolute inset-0 h-full w-full"
             src={`https://www.youtube-nocookie.com/embed/${hackathon.youtubeId}?rel=0`}
-            title="Raafi Riyaz — MongoDB Hackathon, 4th place"
+            title={hackathon.videoTitle}
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
@@ -108,7 +108,7 @@ const BestRollout = () => {
       <div className="flex flex-col gap-3">
         <span className="font-mono text-xs text-ro-acc-text">best rollout</span>
         <h2 className="text-4xl font-bold leading-none tracking-[-0.03em] sm:text-[44px]">{hackathon.title}</h2>
-        <p className="text-[17px] leading-relaxed text-ro-body">A $15,000 hackathon, and I was the only solo developer among 150 people competing in teams. One shot, 8 hours hard clock, a working demo at the end. Watch the full build.</p>
+        <p className="text-[17px] leading-relaxed text-ro-body">{hackathon.caption}</p>
         <a href={hackathon.url} target="_blank" rel="noopener noreferrer" className="font-mono text-[13px] text-ro-muted hover:text-ro-fg">
           open on youtube ↗
         </a>
@@ -153,11 +153,11 @@ const Index = () => {
 
       <main>
         <section id="top" className="relative isolate mx-auto flex min-h-[calc(100svh-76px)] max-w-[1240px] scroll-mt-4 flex-wrap items-center gap-12 px-4 pb-14 pt-8 sm:px-8 md:pt-10">
-          <motion.div variants={stagger} initial="hidden" animate={stage} className="flex min-w-0 flex-[1_1_440px] flex-col gap-6 pt-4">
-            <motion.h1 variants={stagger} className="text-[40px] font-bold leading-[1] tracking-[-0.04em] sm:text-[60px]">
-              <Words text="Text taught language models." />
+          <motion.div variants={stagger} initial="hidden" animate={stage} className="flex min-w-0 flex-[1_1_520px] flex-col gap-4">
+            <motion.h1 variants={stagger} className="text-[40px] font-bold leading-[1] tracking-[-0.04em] sm:text-[50px]">
+              <Words text={hero.headline} />
               <span className="relative mt-2 block w-fit text-ro-acc-text">
-                <Words text="What will teach agents?" />
+                <Words text={hero.headlineAccent} />
                 <motion.span
                   aria-hidden
                   variants={{ hidden: { scaleX: 0 }, show: { scaleX: 1, transition: { duration: 0.7, delay: 0.5, ease: EASE } } }}
@@ -176,9 +176,9 @@ const Index = () => {
                     {...(internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                     className="group inline-flex min-h-[38px] items-center gap-2 rounded-full border border-ro-line2 bg-ro-surface px-3.5 text-sm hover:border-ro-acc"
                   >
-                    <span className="text-ro-muted">{internal ? "Building" : "Co-founded"}</span>
+                    <span className="text-ro-muted">{internal ? hero.pills.videovoice : hero.pills.feedhire}</span>
                     <span className="font-semibold">{v.name}</span>
-                    {v.id === "feedhire" && <span className="font-mono text-xs text-ro-pass">200+ users</span>}
+                    {v.id === "feedhire" && <span className="font-mono text-xs text-ro-pass">{hero.pills.feedhireStat}</span>}
                     {internal ? (
                       <ArrowDown className="h-3.5 w-3.5 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />
                     ) : (
@@ -189,26 +189,10 @@ const Index = () => {
               })}
             </motion.div>
             <motion.p variants={rise} className="max-w-[52ch] text-lg leading-relaxed text-ro-fg">
-              The internet was full of text, so language models had plenty to learn from. Agents learn from environments:
-              web pages, phones and computers they can act in. Those interactions were never on the internet, so they have
-              to be built. <span className="text-ro-acc-text">That's what I'm primarily interested in.</span>
+              {richText(hero.curiosity)}
             </motion.p>
-            <motion.p variants={rise} className="max-w-[50ch] text-lg leading-relaxed text-ro-body">
-              I study, build and research scaling laws of agents at{" "}
-              <a href="https://www.camel-ai.org/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
-                CAMEL-AI
-              </a>{" "}
-              <span className="text-ro-muted">|</span>{" "}
-              <a href="https://www.eigent.ai/" target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
-                Eigent AI
-              </a>{" "}
-              in London. Previously I led RL environment engineering at Tensium. As a contractor at Mercor, I
-              extended OpenAI's MLE-bench, built coding environments for Anthropic's Claude, created human-feedback data
-              with OpenAI and browser-use data for Gemini. Offered an RL fellowship at{" "}
-              <a href="https://gr.inc" target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
-                General Reasoning
-              </a>
-              . MSc in AI.
+            <motion.p variants={rise} className="max-w-[58ch] text-[16px] leading-relaxed text-ro-body">
+              {richText(hero.intro, { strong: "font-semibold text-ro-acc-text" })}
             </motion.p>
             <motion.div variants={rise} className="flex flex-wrap gap-2.5">
               <button type="button" onClick={openCv} className="inline-flex min-h-[44px] items-center rounded-full bg-ro-acc px-[22px] text-[15px] font-semibold text-ro-acc-ink hover:opacity-90">
@@ -223,7 +207,7 @@ const Index = () => {
             initial={{ opacity: 0, x: 40, scale: 0.98 }}
             animate={booting ? { opacity: 0, x: 40, scale: 0.98 } : { opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.45, ease: EASE }}
-            className="flex min-w-0 flex-[1_1_580px]"
+            className="flex min-w-0 flex-[1_1_520px]"
           >
             <AgentPanel
               selection={selection}
@@ -251,7 +235,7 @@ const Index = () => {
             <div className="flex flex-col gap-3">
               <span className="font-mono text-[13px] text-ro-muted">episode.end() · terminated=True</span>
               <h2 className="max-w-[18ch] text-4xl font-bold leading-[1.05] tracking-[-0.03em] sm:text-[52px]">
-                Building environments, agents or post-training data? Let's talk.
+                {footer.heading}
               </h2>
             </div>
             <div className="flex flex-wrap gap-2.5">
@@ -267,7 +251,12 @@ const Index = () => {
             </div>
             <div className="flex flex-wrap justify-between gap-3 border-t border-ro-line pt-6 font-mono text-xs text-ro-muted">
               <span>© {new Date().getFullYear()} Raafi Riyaz · {contact.location}</span>
-              <a href={`${contact.github}/raafi_riyaz`} target="_blank" rel="noopener noreferrer" className="hover:text-ro-fg">
+              <a
+                href={`${contact.github}/raafi_riyaz`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full bg-ro-tool-bg px-3 py-1 font-semibold text-ro-acc-text underline-offset-4 transition-colors hover:bg-ro-acc hover:text-ro-acc-ink"
+              >
                 this site is open source ↗
               </a>
             </div>

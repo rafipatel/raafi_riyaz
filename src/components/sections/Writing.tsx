@@ -19,7 +19,7 @@ type Contribution = (typeof openSourceContributions)[number];
 
 const host = (url: string) => new URL(url).hostname.replace(/^www\./, "");
 
-// Open-source PRs: pull the repo, PR number and star count out of the data.
+// Open-source pull requests: pull the repo, PR number and star count out of the data.
 const openSource = openSourceContributions
   .filter((c) => c.link.includes("github.com") && c.link.includes("/pull/"))
   .map((c) => {
@@ -42,9 +42,9 @@ const Writing = () => (
     <SectionHeading kicker="contributions/" title="Open source, writing & talks" />
 
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-14">
-      {/* Open source: merged PRs into large repos, led by the star count */}
+      {/* Open source: pull requests to large repos, led by the star count */}
       <div className="flex flex-col gap-8">
-        <p className="font-mono text-xs text-ro-muted">open source · merged pull requests</p>
+        <p className="font-mono text-xs text-ro-muted">open source · pull requests</p>
         {openSource.map((c, i) => (
           <Observed key={c.link} label={`pr[${i}]`} delay={i * 0.12}>
             <a
@@ -70,7 +70,7 @@ const Writing = () => (
               </div>
               <p className="max-w-[46ch] text-[15px] leading-relaxed text-ro-body">{withBold(c.description)}</p>
               <div className="flex items-center justify-between gap-3 border-t border-ro-line pt-3 font-mono text-xs">
-                <span className="flex items-center gap-1.5 text-ro-pass">
+                <span className="flex items-center gap-1.5 text-ro-acc-text">
                   <GitPullRequest className="h-3.5 w-3.5" aria-hidden />
                   PR #{c.pr}
                 </span>

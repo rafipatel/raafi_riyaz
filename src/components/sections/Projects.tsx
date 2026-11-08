@@ -1,14 +1,14 @@
 import { ArrowUpRight } from "lucide-react";
 import Observed from "@/components/rollout/Observed";
 import SectionHeading from "./SectionHeading";
-import { featuredProjects } from "@/data/siteContent";
+import { featuredProjects, projectsSection } from "@/data/portfolioData";
 
 const Projects = () => (
   <section id="projects" data-state="projects" className="mx-auto max-w-[1240px] scroll-mt-20 border-t border-ro-line px-4 py-20 sm:px-8">
     <SectionHeading
       kicker="projects/"
-      title="Things I've built"
-      sub="Hackathon builds, research, tools and experiments."
+      title={projectsSection.title}
+      sub={projectsSection.sub}
     />
 
     <div className="grid gap-x-5 gap-y-10 md:grid-cols-2">

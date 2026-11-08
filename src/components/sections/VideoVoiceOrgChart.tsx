@@ -1,4 +1,4 @@
-
+import { ORG } from "@/data/videoVoice";
 /*
  * VideoVoice's AI team as an org chart: an AI CEO on top, a CTO and a CMO under
  * it, and the specialist agents under each.
@@ -8,29 +8,13 @@ interface Agent {
   role: string;
 }
 
-const CEO: Agent = { role: "CEO" };
+const CEO: Agent = { role: ORG.ceo };
 
-const BRANCHES: { lead: Agent; reports: Agent[] }[] = [
-  {
-    lead: { role: "CTO" },
-    reports: [
-      { role: "ML Eng" },
-      { role: "Growth Eng" },
-    ],
-  },
-  {
-    lead: { role: "CMO" },
-    reports: [
-      { role: "SEO Lead" },
-      { role: "Editor" },
-      { role: "Producer" },
-      { role: "Social Lead" },
-      { role: "Partnerships" },
-    ],
-  },
-];
+const BRANCHES: { lead: Agent; reports: Agent[] }[] = ORG.branches.map((b) => ({
+  lead: { role: b.lead },
+  reports: b.reports.map((role) => ({ role })),
+}));
 
-const ALL = [CEO, ...BRANCHES.flatMap((b) => [b.lead, ...b.reports])];
 
 const line = "bg-ro-line2";
 
@@ -62,7 +46,7 @@ const VideoVoiceOrgChart = () => {
 
   return (
     <div>
-      <p className="mb-3 text-center font-mono text-xs text-ro-muted">the company · run by {ALL.length} AI agents</p>
+      <p className="mb-3 text-center font-mono text-xs text-ro-muted">{ORG.label}</p>
 
       {/* Org chart (tablet and up) */}
       <div className="hidden md:block">

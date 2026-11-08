@@ -158,7 +158,7 @@ const AgentPanel = ({ selection, onSelect, replayKey, onReplay }: Props) => {
             style={{ width: `${Math.min(Math.abs(G), 1) * 100}%` }}
           />
         </span>
-        <span className={`w-16 shrink-0 text-right tabular-nums ${rewardTone(G)}`}>G={G < 0 ? "−" : ""}{Math.abs(G).toFixed(2)}</span>
+        <span className={`w-24 shrink-0 text-right tabular-nums ${rewardTone(G)}`}>reward={G < 0 ? "−" : ""}{Math.abs(G).toFixed(2)}</span>
       </div>
 
 
@@ -193,7 +193,7 @@ const AgentPanel = ({ selection, onSelect, replayKey, onReplay }: Props) => {
                       <iframe
                           className="absolute inset-0 h-full w-full"
                           src={`https://www.youtube-nocookie.com/embed/${hackathon.youtubeId}?rel=0`}
-                          title="Raafi Riyaz — MongoDB Hackathon, 4th place"
+                          title={hackathon.videoTitle}
                           loading="lazy"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           referrerPolicy="strict-origin-when-cross-origin"

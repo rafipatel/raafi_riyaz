@@ -1,6 +1,9 @@
 // Trajectories shown in the hero's agent panel. Every step carries a partial reward.
 // The hire_rl_engineer rollout is built from Raafi's real résumé facts; the
 // refactor_service rollouts are illustrative examples of the tasks he builds.
+// The facts the agent reads (now.json, tensium.json, ...) are in portfolioData.ts.
+
+import { agentPanel, hackathon } from "@/data/portfolioData";
 
 export type StepKind = "think" | "tool" | "check" | "submit" | "fail";
 
@@ -48,7 +51,7 @@ const json = (value: unknown) => JSON.stringify(value, null, 2);
 
 const HIRE: Trajectory = {
   id: "rollout_0004",
-  task: "Evaluate Raafi and return a decision.",
+  task: agentPanel.task,
   model: "frontier-agent",
   pass: true,
   final: "PASS",
@@ -65,43 +68,19 @@ const HIRE: Trajectory = {
       kind: "tool",
       r: 0.1,
       call: 'read_file("now.json")',
-      result: json({
-        status: "learning",
-        focus: ["studying, building and researching scaling laws of agents"],
-        lab: "CAMEL-AI | Eigent AI",
-        location: "London",
-      }),
+      result: json(agentPanel.now),
     },
     {
       kind: "tool",
       r: 0.1,
       call: 'read_file("experience/tensium.json")',
-      result: json({
-        role: "RL Environment Engineer",
-        work: [
-          "Built long-horizon RL environments for frontier labs, with 70–150 causal steps per task.",
-          "Kept a 25% pass@8 gap between weaker and frontier models so tasks actually discriminate.",
-          "Hardened tasks against oracle leakage, reward hacking, public-data overfitting and shortcuts.",
-          "Reviewed and delivered 4 long-horizon tasks in a 20-hour sprint.",
-        ],
-      }),
+      result: json(agentPanel.tensium),
     },
     {
       kind: "tool",
       r: 0.1,
       call: 'read_file("experience/mercor.json")',
-      result: json({
-        role: "Machine Learning Engineer",
-        company: "Mercor",
-        since: "Oct 2025",
-        work: [
-          "Extended OpenAI's MLE-bench, merging 30+ pull requests.",
-          "Built terminal-efficiency and SWE benchmarks.",
-          "Made coding environments for Anthropic's Claude.",
-          "Created human-feedback data with OpenAI for 7 months.",
-          "Created browser-use data for Google's Gemini.",
-        ],
-      }),
+      result: json(agentPanel.mercor),
     },
     {
       kind: "think",
@@ -113,10 +92,7 @@ const HIRE: Trajectory = {
       kind: "tool",
       r: 0.05,
       call: 'read_file("education.json")',
-      result: json({
-        degree: "MSc Artificial Intelligence",
-        university: "City, University of London",
-      }),
+      result: json(agentPanel.education),
     },
     {
       kind: "think",
@@ -128,17 +104,7 @@ const HIRE: Trajectory = {
       kind: "tool",
       r: 0.1,
       call: 'read_file("achievements.json")',
-      result: json({
-        achievements: [
-          "4th place at the MongoDB Hackathon: the only solo developer among 150 people competing in teams, in an 8-hour build.",
-          "Offered an RL fellowship at General Reasoning, the startup led by Ross Taylor.",
-          "Shortlisted for the Anthropic RL Safety Research Programme.",
-          "Completed BlueDot's Technical AI Safety course on alignment and control.",
-          "Invited to AI UK 2025 by Harmony to present fine-tuning language models for their dataset.",
-          "2nd rank in the Harmony × UCL fine-tuning challenge.",
-          "Selected for an ML research internship at City, University of London.",
-        ],
-      }),
+      result: json({ achievements: agentPanel.achievements }),
     },
     {
       kind: "think",
@@ -149,7 +115,7 @@ const HIRE: Trajectory = {
     {
       kind: "tool",
       r: 0.1,
-      call: 'open("youtu.be/sYy8DrTpudk")',
+      call: `open("youtu.be/${hackathon.youtubeId}")`,
       result: "",
       video: true,
     },
@@ -166,9 +132,9 @@ const HIRE: Trajectory = {
       result: json({
         grader: "PASS",
         decision: "hire",
-        verdict: "Builds honest RL environments, learns fast and can show his work.",
+        verdict: agentPanel.verdict,
       }),
-      highlight: '"Builds honest RL environments, learns fast and can show his work."',
+      highlight: `"${agentPanel.verdict}"`,
       keepOpen: true,
     },
   ],
@@ -176,7 +142,7 @@ const HIRE: Trajectory = {
 
 const VISITOR: Trajectory = {
   id: "rollout_you",
-  task: "Evaluate Raafi and return a decision.",
+  task: agentPanel.task,
   model: "visitor",
   pass: false,
   final: "BLOCKED",

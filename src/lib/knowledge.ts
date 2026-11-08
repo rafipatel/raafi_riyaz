@@ -1,9 +1,21 @@
 // AI chatbot knowledge base, built from the same data the site renders,
 // so the assistant never contradicts the page.
 
-import { certifications, currentStatus, education, openSourceContributions, proudFeatured, proudMore } from "@/data/portfolioData";
-import { contact, featuredProjects, timeline, toolbox, ventures } from "@/data/siteContent";
-import { repos } from "@/data/repos";
+import {
+  about,
+  certifications,
+  chatbot,
+  contact,
+  currentStatus,
+  education,
+  featuredProjects,
+  openSourceContributions,
+  proudFeatured,
+  proudMore,
+  timeline,
+  toolbox,
+  ventures,
+} from "@/data/portfolioData";
 
 const bullet = (s: string) => `- ${s}`;
 
@@ -16,14 +28,12 @@ export const getSystemPrompt = () => {
     .join("\n");
 
   const venturesText = ventures
-    .map((v) => `- ${v.name} (${v.role}, since ${v.since}, ${v.url}): ${v.tagline} ${v.description} ${v.points.join("; ")}.`)
+    .map((v) => `- ${v.name} (${v.role}, since ${v.since}, ${v.url}): ${v.tagline} ${v.taglineAccent} ${v.description} ${v.points.join("; ")}.`)
     .join("\n");
 
   const projectsText = featuredProjects
     .map((p) => `- ${p.title} (${p.kind}, ${p.year}): ${p.description} Links: ${p.links.map((l) => l.href).join(", ")}`)
     .join("\n");
-
-  const reposText = repos.map((r) => `- ${r.title} [${r.name}] (${r.year}, ${r.language || "n/a"}): ${r.description}`).join("\n");
 
   const achievements = [...proudFeatured, ...proudMore]
     .map((a) => `- ${a.title}${a.date ? ` (${a.date})` : ""}: ${a.detail}`)
@@ -39,7 +49,7 @@ WHO HE IS
 - Raafi Riyaz, based in ${contact.location}. RL environment engineer, deeply curious about how agents learn; works on RL tasks and post-training.
 - Now: ${currentStatus.focus} at ${currentStatus.org}, a research lab in London.
 - MSc in Artificial Intelligence, City, University of London.
-- Thesis of his work: language models learned from the internet's text, but agents learn from trajectories, which the internet never saved; so the environments and tasks that produce good trajectories have to be built. He researches and builds them.
+- Thesis of his work: ${chatbot.thesis}
 
 VENTURES
 ${venturesText}
@@ -54,8 +64,8 @@ IMPORTANT: General Reasoning was an OFFER of an RL fellowship. He never worked t
 FEATURED PROJECTS
 ${projectsText}
 
-ALL PUBLIC REPOSITORIES (github.com/rafipatel)
-${reposText}
+GITHUB
+- More code at ${contact.github}
 
 OPEN SOURCE, WRITING & TALKS
 ${contributions}
@@ -64,12 +74,11 @@ EDUCATION
 ${education.map((e) => bullet(`${e.title}, ${e.institution} (${e.date})`)).join("\n")}
 
 CERTIFICATIONS
-- Technical AI Safety, BlueDot Impact (May 2026)
 ${certifications.map((c) => bullet(`${c.title}, ${c.organization} (${c.date})`)).join("\n")}
 
 TOOLBOX
 ${toolbox.map((t) => bullet(`${t.group}: ${t.items.join(", ")}`)).join("\n")}
-- Spoken languages: English, Urdu, Hindi, Marathi
+- Spoken languages: ${about.spokenLanguages.join(", ")}
 
 CONTACT
 - Email: ${contact.email}

@@ -2,31 +2,23 @@ import { useState } from "react";
 import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Network } from "lucide-react";
 import Observed from "@/components/rollout/Observed";
-import { videoVoice } from "@/data/siteContent";
+import { videoVoice } from "@/data/portfolioData";
+import { EXPLORE, GPU, STATS } from "@/data/videoVoice";
 import VideoVoiceFlow from "./VideoVoiceFlow";
 import VideoVoiceOrgChart from "./VideoVoiceOrgChart";
 
-// The open-source models VideoVoice runs, all on Hugging Face ZeroGPU
-// (from the model cards linked to its Hugging Face Spaces).
 // The blue dashed outline that marks each of the three parts (team, pipeline, GPUs).
 const PART_BOX = "rounded-xl border border-dashed border-ro-acc px-4 py-2.5";
-
-const MODELS = [
-  { kind: "Language model", names: "Gemma 3 12B" },
-  { kind: "Video model", names: "Wan 2.2" },
-  { kind: "Image model", names: "Z-Image-Turbo" },
-  { kind: "Text-to-speech", names: "Chatterbox · OmniVoice · Qwen3-TTS · Dramabox" },
-];
 
 /** The base layer: open-source models on Hugging Face's GPU infrastructure. */
 const GpuInfra = () => (
   <div className={PART_BOX}>
     <div className="mb-2.5 flex flex-wrap items-baseline justify-between gap-2">
-      <span className="text-sm font-semibold">Open-source models on Hugging Face GPU infrastructure</span>
-      <span className="font-mono text-xs text-ro-muted">ZeroGPU</span>
+      <span className="text-sm font-semibold">{GPU.heading}</span>
+      <span className="font-mono text-xs text-ro-muted">{GPU.badge}</span>
     </div>
     <ul className="grid grid-cols-2 gap-2 lg:grid-cols-[1fr_1.2fr_1fr_2fr]">
-      {MODELS.map((m) => (
+      {GPU.models.map((m) => (
         <li key={m.kind} className="flex min-w-0 flex-col gap-0.5 rounded-lg bg-ro-inset px-3 py-2">
           <span className="font-mono text-[11px] text-ro-muted">{m.kind}</span>
           <span className="text-[15px] font-semibold leading-snug text-ro-acc-text">{m.names}</span>
@@ -75,12 +67,12 @@ const Story = ({ centred = false }: { centred?: boolean }) => (
       <ArrowUpRight className="h-4 w-4" aria-hidden />
     </a>
     <p className={`font-medium leading-snug ${centred ? "text-2xl" : "text-xl"}`}>
-      {videoVoice.tagline} <span className="text-ro-acc-text">How far can we go?</span>
+      {videoVoice.tagline} <span className="text-ro-acc-text">{videoVoice.taglineAccent}</span>
     </p>
     <p className="text-[17px] leading-relaxed text-ro-body">
       {videoVoice.description}{" "}
       <a href={videoVoice.teamUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-ro-acc-text underline-offset-4 hover:underline">
-        See the team log ↗
+        {videoVoice.teamLinkLabel} ↗
       </a>
     </p>
   </motion.div>
@@ -113,14 +105,6 @@ const InfraReveal = ({ open }: { open: boolean }) => {
     </div>
   );
 };
-
-// VideoVoice at a glance, shown before the infrastructure is opened.
-const STATS = [
-  { value: "10", label: "AI agents run it" },
-  { value: "2", label: "products" },
-  { value: "600+", label: "languages" },
-  { value: "7", label: "open-source models" },
-];
 
 const Heading = ({ className = "" }: { className?: string }) => (
   <motion.div layoutId="vv-heading" layout="position" transition={{ type: "spring", stiffness: 120, damping: 20 }} className={className}>
@@ -177,8 +161,8 @@ const Ventures = () => {
                   <Network className="h-5 w-5" aria-hidden />
                 </span>
                 <span className="flex flex-col gap-0.5">
-                  <span className="text-lg font-bold text-ro-tool-fg">Click to explore VideoVoice's infrastructure</span>
-                  <span className="font-mono text-xs text-ro-muted">the AI team · the pipeline · the GPUs</span>
+                  <span className="text-lg font-bold text-ro-tool-fg">{EXPLORE.label}</span>
+                  <span className="font-mono text-xs text-ro-muted">{EXPLORE.sub}</span>
                 </span>
               </button>
             </div>

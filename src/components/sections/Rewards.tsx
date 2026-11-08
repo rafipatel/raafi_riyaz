@@ -24,7 +24,7 @@ const Rewards = () => {
         title="Episodes that paid off"
         right={
           <div className="flex items-baseline gap-2 font-mono">
-            <span className="text-xs text-ro-muted">return G =</span>
+            <span className="text-xs text-ro-muted">total reward =</span>
             <span className="text-3xl font-bold text-ro-pass">+{total.toFixed(2)}</span>
           </div>
         }
@@ -71,7 +71,7 @@ const Rewards = () => {
                         transition={{ duration: 0.8, delay: 0.2 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
                       />
                     </span>
-                    <span className="text-ro-muted">G = +{g.toFixed(2)}</span>
+                    <span className="text-ro-muted">total = +{g.toFixed(2)}</span>
                   </span>
                 </Row>
               </li>
@@ -82,15 +82,19 @@ const Rewards = () => {
 
       {/* Smaller wins */}
       <Observed label="replay_buffer.sample()" delay={0.2} className="mt-10">
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {proudMore.map((item) => {
             const inner = (
               <>
                 <span className="font-mono text-[11px] text-ro-muted">{item.date}</span>
-                <span className="font-semibold leading-snug group-hover:text-ro-acc-text">{item.title}</span>
+                <span className="flex items-start gap-1 font-semibold leading-snug group-hover:text-ro-acc-text">
+                  {item.title}
+                  {item.link && <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />}
+                </span>
+                <span className="text-sm leading-relaxed text-ro-body">{item.detail}</span>
               </>
             );
-            const cls = "group flex flex-col gap-1 rounded-xl bg-ro-inset px-4 py-3 transition-colors";
+            const cls = "group flex flex-col gap-1.5 rounded-xl bg-ro-inset px-4 py-4 transition-colors";
             return item.link ? (
               <a key={item.title} href={item.link} {...external(item.link)} className={`${cls} hover:bg-ro-tool-bg`}>
                 {inner}
