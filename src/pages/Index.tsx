@@ -146,7 +146,7 @@ const Index = () => {
           className="order-3 -mx-4 flex w-[calc(100%+2rem)] items-center gap-5 overflow-x-auto px-4 text-[14px] sm:-mx-8 sm:w-[calc(100%+4rem)] sm:px-8 [scrollbar-width:none] md:order-2 md:mx-0 md:w-auto md:gap-6 md:overflow-visible md:px-0 md:text-[15px] [&::-webkit-scrollbar]:hidden"
         >
           <a href="#experience" className="shrink-0 text-ro-muted hover:text-ro-fg">Work</a>
-          <a href="#building" className="shrink-0 text-ro-muted hover:text-ro-fg">Building</a>
+          <a href="#building" className="shrink-0 text-ro-muted hover:text-ro-fg">Ventures</a>
           <a href="#projects" className="shrink-0 text-ro-muted hover:text-ro-fg">Projects</a>
           <a href="#writing" className="shrink-0 text-ro-muted hover:text-ro-fg">Writing</a>
           <a href="#about" className="shrink-0 text-ro-muted hover:text-ro-fg">About</a>

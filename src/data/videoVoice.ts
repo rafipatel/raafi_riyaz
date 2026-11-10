@@ -1,5 +1,5 @@
 // ============================================================================
-// THE VIDEOVOICE DIAGRAM ("What I'm building", after "Click to explore").
+// THE VIDEOVOICE DIAGRAM ("What I've built", after "Click to explore").
 // The VideoVoice name, link, tagline and description are in portfolioData.ts.
 // ============================================================================
 

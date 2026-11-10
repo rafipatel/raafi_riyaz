@@ -47,7 +47,7 @@ export const hero = {
     headlineAccent: "What will teach agents?",
     /** The two pills under the headline. */
     pills: {
-        videovoice: "Building",
+        videovoice: "Built",
         feedhire: "Co-founded",
         feedhireStat: "200+ users",
     },
@@ -69,14 +69,18 @@ export const currentStatus = {
 
 
 // ---------------------------------------------------------------------------
-// 3. WHAT I'M BUILDING (ventures)
+// 3. WHAT I'VE BUILT (ventures)
 // ---------------------------------------------------------------------------
+
+export const venturesSection = {
+    title: "What I've built",
+};
 
 export const ventures = [
     {
         id: "videovoice",
         name: "VideoVoice",
-        role: "Building",
+        role: "Built",
         since: "2025",
         url: "https://videovoice.pages.dev",
         teamUrl: "https://videovoice.pages.dev/team/",
@@ -482,7 +486,7 @@ export const about = {
     paragraphs: [
         "**I came to AI through engineering.** A diploma in mechanical engineering, a BSc in IT in Mumbai, then computer vision for detecting fabric defects and AI for software testing in production, where I was offered a full-time role three months into an internship.",
         "An MSc in Artificial Intelligence in London pulled me towards research: lung cancer survival models, GANs, deep RL. Since then I've worked on the data and environments frontier models learn from, at Mercor and Tensium, and now on how agents scale at CAMEL-AI | Eigent AI.",
-        "Outside work I build products (VideoVoice, Feedhire), enter hackathons solo, write, and have given a talk introducing RL to final-year students. I speak English, Urdu, Hindi and Marathi.",
+        "Outside work I've built products (VideoVoice, Feedhire), enter hackathons solo, write, and have given a talk introducing RL to final-year students. I speak English, Urdu, Hindi and Marathi.",
     ],
     spokenLanguages: ["English", "Urdu", "Hindi", "Marathi"],
 };

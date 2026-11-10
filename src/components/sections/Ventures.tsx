@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LayoutGroup, motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Network } from "lucide-react";
 import Observed from "@/components/rollout/Observed";
-import { videoVoice } from "@/data/portfolioData";
+import { venturesSection, videoVoice } from "@/data/portfolioData";
 import { EXPLORE, GPU, STATS } from "@/data/videoVoice";
 import VideoVoiceFlow from "./VideoVoiceFlow";
 import VideoVoiceOrgChart from "./VideoVoiceOrgChart";
@@ -29,10 +29,10 @@ const GpuInfra = () => (
 );
 
 /**
- * What Raafi is building: VideoVoice. Two columns that start and end together:
+ * What Raafi has built: VideoVoice. Two columns that start and end together:
  * the story on the left, and how it works on the right (the AI team that runs it,
  * then the product pipeline), so the whole section fits on one screen when the
- * hero's "Building VideoVoice" link jumps here.
+ * hero's "Built VideoVoice" link jumps here.
  */
 // Particles that fly out of the button when it bursts.
 const BURST = Array.from({ length: 18 }, (_, i) => {
@@ -109,7 +109,7 @@ const InfraReveal = ({ open }: { open: boolean }) => {
 const Heading = ({ className = "" }: { className?: string }) => (
   <motion.div layoutId="vv-heading" layout="position" transition={{ type: "spring", stiffness: 120, damping: 20 }} className={className}>
     <p className="font-mono text-xs text-ro-acc-text">ventures/</p>
-    <h2 className="mt-1 text-[44px] font-bold leading-[0.98] tracking-[-0.04em] sm:text-[60px]">What I'm building</h2>
+    <h2 className="mt-1 text-[44px] font-bold leading-[0.98] tracking-[-0.04em] sm:text-[60px]">{venturesSection.title}</h2>
   </motion.div>
 );
 
