@@ -136,7 +136,7 @@ export interface TimelineEntry {
 export const timeline: TimelineEntry[] = [
   {
     period: "Nov 2026 – Present",
-    role: "RL Environment Engineer/Researcher",
+    role: "RL Environment Engineer/Researcher (contract)",
     org: "CAMEL-AI | Eigent AI",
     links: [
       { label: "CAMEL-AI", href: "https://www.camel-ai.org/" },
