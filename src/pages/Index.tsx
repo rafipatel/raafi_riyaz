@@ -158,7 +158,7 @@ const Index = () => {
       </motion.header>
 
       <main>
-        <section id="top" className="relative isolate mx-auto flex min-h-[calc(100svh-76px)] max-w-[1240px] scroll-mt-4 flex-wrap items-center gap-12 px-4 pb-14 pt-8 sm:px-8 md:pt-10">
+        <section id="top" className="relative isolate mx-auto flex min-h-[calc(100svh-76px)] max-w-[1240px] scroll-mt-4 flex-wrap items-center gap-12 px-4 pb-14 pt-6 sm:px-8 md:pt-6">
           <motion.div variants={stagger} initial="hidden" animate={stage} className="flex min-w-0 flex-[1_1_520px] flex-col gap-4">
             <motion.h1 variants={stagger} className="text-[40px] font-bold leading-[1] tracking-[-0.04em] sm:text-[50px]">
               <Words text={hero.headline} />
@@ -194,7 +194,7 @@ const Index = () => {
                 );
               })}
             </motion.div>
-            <motion.p variants={rise} className="max-w-[52ch] text-lg leading-relaxed text-ro-fg">
+            <motion.p variants={rise} className="max-w-[56ch] text-[17px] leading-relaxed text-ro-fg">
               {richText(hero.curiosity)}
             </motion.p>
             <motion.p variants={rise} className="max-w-[58ch] text-[16px] leading-relaxed text-ro-body">

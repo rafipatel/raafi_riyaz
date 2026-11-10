@@ -56,7 +56,7 @@ export const hero = {
         "The internet was full of text, so language models had plenty to learn from. Agents learn from environments: web pages, phones and computers they can act in. Those interactions were never on the internet, so they have to be built. ==That's what I'm primarily interested in at the moment.==",
     /** rich */
     intro:
-        "Currently I'm a contractor at [Eigent AI](https://www.eigent.ai/) | [CAMEL-AI](https://www.camel-ai.org/) in London, where I study, build and research scaling laws of agents. Previously I led RL environment engineering at **Tensium**. As a contractor at [Mercor](https://www.mercor.com/), I built coding environments for Anthropic's Claude, extended OpenAI's MLE-bench, created human-feedback data with OpenAI and computer-use data for Gemini. Offered an RL fellowship at [General Reasoning](https://gr.inc). In the pre-ChatGPT era, I worked for around 2 years in computer vision with [ResoluteAI Software](https://resoluteaisoftware.in/) and natural language processing with [Webomates](https://www.webomates.com/). I have a Master's degree in AI from City, University of London.",
+        "Currently I'm a contractor at [Eigent AI](https://www.eigent.ai/) | [CAMEL-AI](https://www.camel-ai.org/) in London, where I study, build and research scaling laws of agents. Previously I led RL environment engineering at **Tensium**. As a contractor at [Mercor](https://www.mercor.com/), I built coding environments for a top frontier coding company, extended MLE-bench, and created human-feedback and computer-use data for frontier labs. Offered an RL fellowship at [General Reasoning](https://gr.inc). In the pre-ChatGPT era, I worked for around 2 years in computer vision with [ResoluteAI Software](https://resoluteaisoftware.in/) and natural language processing with [Webomates](https://www.webomates.com/). I have a Master's degree in AI from City, University of London.",
 };
 
 // What Raafi is focused on right now (used by the chatbot).
@@ -163,31 +163,31 @@ export const timeline: TimelineEntry[] = [
     role: "Machine Learning Engineer",
     org: "Mercor",
     href: "https://www.mercor.com/",
-    summary: "Environments, benchmarks and training data for frontier labs: OpenAI, Anthropic, Google and Meta AI. I have worked on over 10 projects across a wide range of domains, ranging from 200 to 100,000+ people.",
+    summary: "Environments, benchmarks and training data for frontier AI labs. I have worked on over 10 projects across a wide range of domains, ranging from 200 to 100,000+ people.",
     points: [],
     projects: [
       {
-        name: "Coding environments for Anthropic (Claude)",
-        points: ["Built coding environments used to train and evaluate Claude."],
+        name: "Coding environments for a top frontier coding company",
+        points: ["Built coding environments used to train and evaluate a frontier coding model."],
       },
       {
-        name: "Human feedback data with OpenAI · 7 months",
-        points: ["Created human-feedback data for OpenAI models over seven months."],
+        name: "Human feedback data for a frontier lab · 7 months",
+        points: ["Created human-feedback data for frontier models over seven months."],
       },
       {
-        name: "Computer-use data for Gemini",
-        points: ["Created computer-use data for Google's Gemini."],
+        name: "Computer-use data for a frontier lab",
+        points: ["Created computer-use data for a frontier model."],
       },
       {
-        name: "Project Launchpad · extending OpenAI's MLE-bench (Meta AI)",
+        name: "Extending MLE-bench for a frontier lab",
         points: [
-          "Fixed bugs in LLM-generated solutions for complex ML tasks to extend OpenAI's MLE-bench.",
-          "Worked in the AIRA-dojo environment on a 6× H100 cluster on AWS.",
+          "Fixed bugs in LLM-generated solutions for complex ML tasks to extend MLE-bench, the public ML-engineering benchmark.",
+          "Ran large-scale experiments on a 6× H100 cluster on AWS.",
           "Produced plan-and-code pairs for post-training and merged 30+ pull requests.",
         ],
       },
       {
-        name: "Project Vulcan",
+        name: "Benchmark tasks from Kaggle and recent research",
         points: [
           "Turned Kaggle competitions and recent NeurIPS, ICML and ICLR datasets into reproducible, Docker-based evaluation tasks.",
         ],
@@ -596,11 +596,11 @@ export const agentPanel = {
         company: "Mercor",
         since: "Oct 2025",
         work: [
-            "Extended OpenAI's MLE-bench, merging 30+ pull requests.",
+            "Extended MLE-bench, merging 30+ pull requests.",
             "Built terminal-efficiency and SWE benchmarks.",
-            "Made coding environments for Anthropic's Claude.",
-            "Created human-feedback data with OpenAI for 7 months.",
-            "Created computer-use data for Google's Gemini.",
+            "Made coding environments for a top frontier coding company.",
+            "Created human-feedback data for a frontier lab for 7 months.",
+            "Created computer-use data for a frontier lab.",
         ],
     },
     education: {
@@ -725,13 +725,13 @@ export const experiences = [
             "### Rubrics Academy Fellow (Project Rubric)",
             "Focused on complex prompt reasoning and technical problem-solving through first-principles architectural design with strict constraint on using AI tools.",
             "Engaged in rigorous technical challenges focused on first-principles reasoning and human-led architectural design with strict constraint on using AI tools.",
-            "### Machine Learning Engineer (Project Launchpad)",
-            "Contributed to Meta AI Research’s expansion of OpenAI’s MLE-bench by analyzing buggy code blocks and implementing fixes in LLM-generated solutions for complex ML tasks.",
-            "Utilized the AIRA-dojo development environment and Jupiter mega-cluster powered by 6× NVIDIA H100 GPUs on AWS for rapid large-scale experimentation.",
+            "### Machine Learning Engineer (MLE-bench extension)",
+            "Contributed to a frontier lab's expansion of MLE-bench by analyzing buggy code blocks and implementing fixes in LLM-generated solutions for complex ML tasks.",
+            "Used a cluster of 6× NVIDIA H100 GPUs on AWS for rapid large-scale experimentation.",
             "Developed high-quality plan-and-code pairs for post-training data and supported collection of debugging traces from fixing LLM-generated Python code.",
             "Merged 30+ pull requests covering task conversions, dataset integrations, bug fixes, and evaluation improvements.",
-            "### Machine Learning Engineer (Project Vulcan)",
-            "Collaborated with Meta to extend OpenAI’s MLE-bench into a more comprehensive benchmark by transforming Kaggle competitions into reproducible, Docker-based evaluation tasks.",
+            "### Machine Learning Engineer (benchmark tasks)",
+            "Helped extend MLE-bench into a more comprehensive benchmark by transforming Kaggle competitions into reproducible, Docker-based evaluation tasks.",
             "Extended MLE-bench with recent NeurIPS, ICML, and ICLR datasets across computer vision, NLP, time-series, and tabular domains to reflect modern ML challenges.",
 
         ],
@@ -888,7 +888,7 @@ export const currentlyWorkingOn: CurrentItemData[] = [
         title: "Mercor & Tensium — ML/RL Engineer",
         subtitle: "Frontier-model benchmarks and long-horizon RL environments",
         description:
-            "At Tensium, creating long-horizon reinforcement-learning environments with 70–150 causal steps, engineered against reward hacking and shortcut solutions, with an automated PR-triggered QA pipeline. At Mercor, contributing to Meta AI's expansion of OpenAI's MLE-bench, building high-quality ML benchmarks across computer vision, NLP, and time-series domains.",
+            "At Tensium, creating long-horizon reinforcement-learning environments with 70–150 causal steps, engineered against reward hacking and shortcut solutions, with an automated PR-triggered QA pipeline. At Mercor, contributing to a frontier lab's expansion of MLE-bench, building high-quality ML benchmarks across computer vision, NLP, and time-series domains.",
         badges: ["Reinforcement Learning", "RL Environments", "MLE-bench", "Benchmarks", "H100 GPUs"],
         link: "https://www.mercor.com/",
         accentColor: "217 91% 60%",
