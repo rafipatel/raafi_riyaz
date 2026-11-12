@@ -226,8 +226,8 @@ const BenchmarkRace = ({ play = true, className = "" }: { play?: boolean; classN
                       className="h-4 w-4"
                       style={{
                         backgroundColor: f.ink,
-                        WebkitMask: `url(${f.logo}) center / contain no-repeat`,
-                        mask: `url(${f.logo}) center / contain no-repeat`,
+                        WebkitMask: `url("${f.logo}") center / contain no-repeat`,
+                        mask: `url("${f.logo}") center / contain no-repeat`,
                       }}
                     />
                   )}
