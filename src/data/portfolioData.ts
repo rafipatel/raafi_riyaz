@@ -443,8 +443,8 @@ export const proudFeatured: ProudItem[] = [
         link: "https://gr.inc",
     },
     {
-        title: "Shortlisted, Anthropic RL Safety Research Programme",
-        detail: "Shortlisted for Anthropic's research programme on reinforcement-learning safety.",
+        title: "Shortlisted, Anthropic Safety Research Programme",
+        detail: "Shortlisted for Anthropic's safety research programme.",
     },
     {
         title: "Technical AI Safety, BlueDot Impact",
@@ -617,7 +617,7 @@ export const agentPanel = {
     achievements: [
         "4th place at the MongoDB Hackathon: the only solo developer among 150 people competing in teams, in an 8-hour build.",
         "Offered an RL fellowship at General Reasoning, the startup led by Ross Taylor.",
-        "Shortlisted for the Anthropic RL Safety Research Programme.",
+        "Shortlisted for the Anthropic Safety Research Programme.",
         "Completed BlueDot's Technical AI Safety course on alignment and control.",
         "Invited to AI UK 2025 by Harmony to present fine-tuning language models for their dataset.",
         "Won the Harmony NLP Challenge (£250 prize), cutting MAE from 24 to 20.544.",
