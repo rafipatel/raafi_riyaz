@@ -94,14 +94,16 @@ export const ventures = [
     {
         id: "feedhire",
         name: "Feedhire",
-        role: "Co-founder",
+        role: "Co-founded",
         since: "Sep 2025",
         url: "https://feedhire.me/",
         teamUrl: "",
         tagline: "AI-powered global job discovery.",
-        taglineAccent: "",
+        taglineAccent: "Jobs from everywhere, in one place.",
         description:
-            "A job discovery platform that uses NLP and open-source LLMs to extract and structure job posts automatically. Dockerised backend on Oracle Cloud with logging and monitoring.",
+            "Job posts are scattered across Telegram channels, Reddit threads and GitHub repos. Feedhire watches them, uses LLMs to turn each post into a structured listing, and puts them all in one place.",
+        /** Shown under the description; Feedhire's code is private. */
+        note: "Closed source, so this is a high-level view.",
         teamLinkLabel: "",
         points: [
             "200+ users across the US, UK and India",
@@ -113,6 +115,7 @@ export const ventures = [
 ];
 
 export const videoVoice = ventures[0];
+export const feedhire = ventures[1];
 
 // ---------------------------------------------------------------------------
 // 4. EXPERIENCE (timeline)
