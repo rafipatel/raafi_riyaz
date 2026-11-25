@@ -56,6 +56,8 @@ All colors MUST be HSL.
     --ro-inset: #07080A;
     --ro-line: #1E2127;
     --ro-line2: #2A2E36;
+    /* Outline for the black Grok bar in the benchmark race: white on dark. */
+    --ro-race-dark-outline: #FFFFFF;
     --ro-fg: #F2F3F5;
     --ro-body: #B7BBC3;
     --ro-muted: #8C919A;
@@ -123,6 +125,7 @@ All colors MUST be HSL.
     --ro-inset: #F4F4F5;
     --ro-line: #E4E4E7;
     --ro-line2: #D4D4D8;
+    --ro-race-dark-outline: var(--ro-line2);
     --ro-fg: #0B0B0F;
     --ro-body: #3F3F46;
     --ro-muted: #52525B;

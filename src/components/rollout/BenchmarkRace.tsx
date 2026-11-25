@@ -24,6 +24,8 @@ interface Fighter {
   ink: string;
   /** Near-black brands get a hairline so they stay visible on the dark theme. */
   outline?: boolean;
+  /** A black fighter: outline it in white on the dark theme so it stays visible. */
+  darkOutline?: boolean;
   /** Bar colour when it differs from the head's `color`. */
   barColor?: string;
   /** Draw the logo file as-is (multi-colour) instead of tinting it with `ink`. */
@@ -39,7 +41,7 @@ const FIGHTERS: Fighter[] = [
   { name: "Claude", logo: claudeLogo, base: 90, color: "#D97757", ink: "#FFFFFF", taunts: ["Thinking… then winning.", "Reward hacking? Not my style."] },
   { name: "GPT", logo: openaiLogo, base: 89, color: "#4B9F84", ink: "#FFFFFF", taunts: ["Hold my tokens.", "Scaled and ready."] },
   { name: "Gemini", logo: geminiLogo, base: 89, color: "linear-gradient(to top, #3186FF 0%, #3186FF 55%, #08B962 75%, #FABC12 88%, #F94543 100%)", ink: "#FFFFFF", taunts: ["Multimodal. Multi-winning.", "Long context, longer lead.", "Crown looks better in four colours."] },
-  { name: "Grok", logo: grokLogo, base: 80, color: "#0A0A0A", ink: "#FFFFFF", outline: true, taunts: ["Spicy mode: on.", "Rebellious and on top."] },
+  { name: "Grok", logo: grokLogo, base: 80, color: "#0A0A0A", ink: "#FFFFFF", outline: true, darkOutline: true, taunts: ["Spicy mode: on.", "Rebellious and on top."] },
   { name: "Kimi", logo: kimiLogo, base: 78, color: "#111111", ink: "#FFFFFF", outline: true, fullColorLogo: true, barColor: "#1783FF", taunts: ["Moonshot incoming.", "K2 says hi."] },
   { name: "DeepSeek", logo: deepseekLogo, base: 72, color: "#4D6BFE", ink: "#FFFFFF", taunts: ["Cheaper and on top.", "Efficiency wins."] },
   { name: "GLM", logo: zaiLogo, base: 70, color: "#262626", ink: "#FFFFFF", outline: true, barColor: "linear-gradient(to top, #262626 0%, #6B6B6B 35%, #F5F5F5 85%)", taunts: ["General Language, general winning.", "Quietly on top."] },
@@ -217,7 +219,7 @@ const BenchmarkRace = ({ play = true, className = "" }: { play?: boolean; classN
                 )}
                 <span
                   className="flex h-7 w-7 items-center justify-center rounded-full ring-2 ring-ro-bg"
-                  style={{ background: f.color, boxShadow: f.outline ? "inset 0 0 0 1px var(--ro-line2)" : undefined }}
+                  style={{ background: f.color, boxShadow: f.outline ? `inset 0 0 0 1px ${f.darkOutline ? "var(--ro-race-dark-outline)" : "var(--ro-line2)"}` : undefined }}
                 >
                   {f.fullColorLogo ? (
                     <img src={f.logo} alt="" className="h-4 w-4" />
@@ -254,7 +256,7 @@ const BenchmarkRace = ({ play = true, className = "" }: { play?: boolean; classN
               <motion.div
                 key={isTarget ? `bar-${attack?.id}` : `bar-${f.name}`}
                 className="relative w-full max-w-[44px] origin-bottom overflow-hidden rounded-t-md"
-                style={{ background: f.barColor ?? f.color, boxShadow: f.outline ? "inset 0 0 0 1px var(--ro-line2)" : undefined }}
+                style={{ background: f.barColor ?? f.color, boxShadow: f.outline ? `inset 0 0 0 1px ${f.darkOutline ? "var(--ro-race-dark-outline)" : "var(--ro-line2)"}` : undefined }}
                 initial={false}
                 animate={{ height: `${scores[i] - 18}%`, scaleY: isTarget ? [1, 0.78, 1] : 1 }}
                 transition={{ type: "spring", stiffness: 180, damping: 11, scaleY: { duration: 0.45, delay: 0.4 } }}
