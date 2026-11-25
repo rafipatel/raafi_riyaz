@@ -3,7 +3,7 @@
 // The VideoVoice name, link, tagline and description are in portfolioData.ts.
 // ============================================================================
 
-import type { LucideIcon } from "lucide-react";
+import type { PipelineProduct } from "@/components/sections/PipelineFlow";
 import { AudioLines, Captions, Clapperboard, Film, Languages, Mic, ScanEye, Send, Type, Upload } from "lucide-react";
 
 /** The four numbers shown before the diagram is opened. */
@@ -31,16 +31,7 @@ export const ORG = {
 // 2. The two products, step by step (the pipeline plays itself).
 // ---------------------------------------------------------------------------
 
-export interface PipelineStep {
-  icon: LucideIcon;
-  title: string;
-  /** Small grey line under the title; leave "" for none. */
-  tech: string;
-  /** Shown under the steps when this one is active. */
-  detail: string;
-}
-
-export const PRODUCTS: Record<"dubbing" | "dramabox", { name: string; blurb: string; steps: PipelineStep[] }> = {
+export const PRODUCTS: Record<"dubbing" | "dramabox", PipelineProduct> = {
   dubbing: {
     name: "Dubbing",
     blurb: "Your video, in 600+ languages, in your own voice.",

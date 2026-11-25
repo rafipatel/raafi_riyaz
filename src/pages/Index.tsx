@@ -173,23 +173,18 @@ const Index = () => {
             </motion.h1>
             <motion.div variants={rise} className="flex flex-wrap gap-2">
               {[...ventures].reverse().map((v) => {
-                // VideoVoice jumps to its section on this page; Feedhire opens its own site.
+                // Both jump to their part of "What I've built" on this page.
                 const internal = v.id === "videovoice";
                 return (
                   <a
                     key={v.id}
-                    href={internal ? "#building" : v.url}
-                    {...(internal ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+                    href={internal ? "#building" : "#feedhire"}
                     className="group inline-flex min-h-[38px] items-center gap-2 rounded-full border border-ro-line2 bg-ro-surface px-3.5 text-sm hover:border-ro-acc"
                   >
                     <span className="text-ro-muted">{internal ? hero.pills.videovoice : hero.pills.feedhire}</span>
                     <span className="font-semibold">{v.name}</span>
                     {v.id === "feedhire" && <span className="font-mono text-xs text-ro-pass">{hero.pills.feedhireStat}</span>}
-                    {internal ? (
-                      <ArrowDown className="h-3.5 w-3.5 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />
-                    ) : (
-                      <ArrowUpRight className="h-3.5 w-3.5 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />
-                    )}
+                    <ArrowDown className="h-3.5 w-3.5 text-ro-muted group-hover:text-ro-acc-text" aria-hidden />
                   </a>
                 );
               })}

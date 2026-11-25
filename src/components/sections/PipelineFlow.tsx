@@ -1,21 +1,36 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { PRODUCTS } from "@/data/videoVoice";
+import type { LucideIcon } from "lucide-react";
 
 /*
- * How VideoVoice works, as one picture:
- *   middle → the two products on videovoice.pages.dev (Dubbing, Dramabox), step by step
- * The pipeline plays itself until the visitor clicks a step.
+ * A product pipeline, step by step (VideoVoice's two products, Feedhire's job
+ * pipeline). It plays itself until the visitor clicks a step. With more than one
+ * product there are tabs to switch between them.
  */
 
-type ProductId = keyof typeof PRODUCTS;
+export interface PipelineStep {
+  icon: LucideIcon;
+  title: string;
+  /** Small grey line under the title; leave "" for none. */
+  tech: string;
+  /** Shown under the steps when this one is active. */
+  detail: string;
+}
+
+export interface PipelineProduct {
+  name: string;
+  blurb: string;
+  steps: PipelineStep[];
+}
 
 const STEP_MS = 1800;
 
-const VideoVoiceFlow = () => {
+const PipelineFlow = <K extends string>({ products, label }: { products: Record<K, PipelineProduct>; label: string }) => {
+  const PRODUCTS = products;
+  type ProductId = K;
   const reduce = useReducedMotion();
-  const [product, setProduct] = useState<ProductId>("dubbing");
+  const [product, setProduct] = useState<ProductId>(Object.keys(products)[0] as K);
   const [active, setActive] = useState(0);
   const [auto, setAuto] = useState(true);
   const STEPS = PRODUCTS[product].steps;
@@ -44,7 +59,8 @@ const VideoVoiceFlow = () => {
       <div>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-3">
-            <div role="tablist" aria-label="VideoVoice products" className="inline-flex rounded-full border border-ro-line2 p-1">
+            {Object.keys(PRODUCTS).length > 1 && (
+            <div role="tablist" aria-label={label} className="inline-flex rounded-full border border-ro-line2 p-1">
               {(Object.keys(PRODUCTS) as ProductId[]).map((id) => (
                 <button
                   key={id}
@@ -60,6 +76,7 @@ const VideoVoiceFlow = () => {
                 </button>
               ))}
             </div>
+            )}
             <span className="text-[15px] text-ro-body">{PRODUCTS[product].blurb}</span>
           </div>
           <span className="font-mono text-xs text-ro-muted">{auto && !reduce ? "playing · click a step" : "click a step"}</span>
@@ -134,4 +151,4 @@ const VideoVoiceFlow = () => {
   );
 };
 
-export default VideoVoiceFlow;
+export default PipelineFlow;
