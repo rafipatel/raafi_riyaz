@@ -11,8 +11,8 @@ import zaiLogo from "@/assets/logos/zai.svg";
 /*
  * A playful race to AGI under the "Run the agent" button. Each frontier model family
  * is a vertical bar in its own colour, climbing towards an "AGI" finish line. Every
- * tick the scores swing, rivals jump on each other, the leader (only ever Claude or
- * GPT) wears the crown and throws trash talk, and whoever gets knocked down shakes.
+ * tick the scores swing, rivals jump on each other, the leader (only ever Claude,
+ * GPT or Gemini) wears the crown and throws trash talk, and whoever gets knocked down shakes.
  * Scores are random and decorative.
  */
 
@@ -36,9 +36,9 @@ interface Fighter {
 }
 
 const FIGHTERS: Fighter[] = [
-  { name: "Claude", logo: claudeLogo, base: 91, color: "#D97757", ink: "#FFFFFF", taunts: ["Thinking… then winning.", "Reward hacking? Not my style."] },
+  { name: "Claude", logo: claudeLogo, base: 90, color: "#D97757", ink: "#FFFFFF", taunts: ["Thinking… then winning.", "Reward hacking? Not my style."] },
   { name: "GPT", logo: openaiLogo, base: 89, color: "#4B9F84", ink: "#FFFFFF", taunts: ["Hold my tokens.", "Scaled and ready."] },
-  { name: "Gemini", logo: geminiLogo, base: 82, color: "linear-gradient(to top, #3186FF 0%, #3186FF 55%, #08B962 75%, #FABC12 88%, #F94543 100%)", ink: "#FFFFFF", taunts: ["Multimodal. Multi-winning.", "Long context, longer lead."] },
+  { name: "Gemini", logo: geminiLogo, base: 89, color: "linear-gradient(to top, #3186FF 0%, #3186FF 55%, #08B962 75%, #FABC12 88%, #F94543 100%)", ink: "#FFFFFF", taunts: ["Multimodal. Multi-winning.", "Long context, longer lead.", "Crown looks better in four colours."] },
   { name: "Grok", logo: grokLogo, base: 80, color: "#0A0A0A", ink: "#FFFFFF", outline: true, taunts: ["Spicy mode: on.", "Rebellious and on top."] },
   { name: "Kimi", logo: kimiLogo, base: 78, color: "#111111", ink: "#FFFFFF", outline: true, fullColorLogo: true, barColor: "#1783FF", taunts: ["Moonshot incoming.", "K2 says hi."] },
   { name: "DeepSeek", logo: deepseekLogo, base: 72, color: "#4D6BFE", ink: "#FFFFFF", taunts: ["Cheaper and on top.", "Efficiency wins."] },
@@ -47,8 +47,8 @@ const FIGHTERS: Fighter[] = [
 
 // Rival groups: members of a group jump on each other.
 const RIVALS: string[][] = [
-  ["Claude", "GPT"],
-  ["Gemini", "Grok", "Kimi"],
+  ["Claude", "GPT", "Gemini"],
+  ["Grok", "Kimi", "DeepSeek"],
 ];
 const indexOf = (name: string) => FIGHTERS.findIndex((f) => f.name === name);
 
@@ -61,8 +61,8 @@ const MAX = 96;
 const clamp = (v: number) => Math.max(MIN, Math.min(MAX, v));
 const pick = <T,>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)];
 
-/** Only Claude and GPT ever hold the crown: everyone else is capped just below the better of the two. */
-const CROWN_HOLDERS = ["Claude", "GPT"];
+/** Only Claude, GPT and Gemini fight for the crown: everyone else is capped just below the best of the three. */
+const CROWN_HOLDERS = ["Claude", "GPT", "Gemini"];
 const capChallengers = (scores: number[]) => {
   const top = Math.max(...FIGHTERS.map((f, i) => (CROWN_HOLDERS.includes(f.name) ? scores[i] : 0)));
   return scores.map((v, i) => (CROWN_HOLDERS.includes(FIGHTERS[i].name) ? v : Math.min(v, top - 3)));
