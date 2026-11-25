@@ -82,7 +82,7 @@ const Rewards = () => {
 
       {/* Smaller wins */}
       <Observed label="replay_buffer.sample()" delay={0.2} className="mt-10">
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 md:grid-cols-3">
           {proudMore.map((item) => {
             const inner = (
               <>

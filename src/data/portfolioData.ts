@@ -451,6 +451,12 @@ export const proudFeatured: ProudItem[] = [
         date: "May 2026",
         detail: "Completed BlueDot's application-based course on alignment and control (60% acceptance rate).",
     },
+    {
+        title: "NLP Challenge Winner",
+        date: "Jan 2025",
+        detail: "Won the Harmony NLP Challenge with a £250 prize by improving the algorithm for psychology survey question similarity ratings, reducing MAE from 24 to 20.544. Organised by researchers from UCL, Ulster University and Fast Data Science.",
+        link: "https://harmonydata.ac.uk/matching-challenge-winner-announcement/",
+    },
 ];
 
 export const proudMore: ProudItem[] = [
@@ -459,12 +465,6 @@ export const proudMore: ProudItem[] = [
         date: "Mar 2025",
         detail: "Presented how I fine-tuned language models for Harmony's psychology-survey dataset at The Alan Turing Institute's national showcase. Compensated £1,250 for contributing to mental-health AI research.",
         link: "https://www.turing.ac.uk/ai-uk",
-    },
-    {
-        title: "NLP Challenge Winner",
-        date: "Jan 2025",
-        detail: "Won the Harmony NLP Challenge with a £250 prize by improving the algorithm for psychology survey question similarity ratings, reducing MAE from 24 to 20.544. Organised by researchers from UCL, Ulster University and Fast Data Science.",
-        link: "https://harmonydata.ac.uk/matching-challenge-winner-announcement/",
     },
     {
         title: "Selected for ML research internship, City, University of London",
